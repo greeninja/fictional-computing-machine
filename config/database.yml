@@ -5,6 +5,6 @@ development:
   database: fictional_computing_machine
   host: localhost
   pool: 5
-  username: fictinoal
+  username: fictional
   password: Password1
 

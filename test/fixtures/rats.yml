@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  users: one
+  longbreak: false
+  latebreak: false
+  offtask: false
+  other: MyString
+
+two:
+  users: two
+  longbreak: false
+  latebreak: false
+  offtask: false
+  other: MyString
