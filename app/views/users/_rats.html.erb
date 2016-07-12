@@ -1,11 +1,6 @@
 <%= f.fields_for :rats, @user.rats.new do |u| %>
 
   <div class="field">
-    <%= u.label :user_id %>
-    <%= u.text_field :user_id %>
-  </div>
-
-  <div class="field">
     <%= u.label :longbreak %>
     <%= u.check_box :longbreak %>
   </div>

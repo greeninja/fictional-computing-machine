@@ -13,22 +13,10 @@
 
   <div class="field">
     <%= f.label :name %>
-    <%= f.text_field :name %>
+    <%= f.text_field :name, :disabled => true %>
   </div>
 
-  <div class="field">
-    <%= f.label :last_name %>
-    <%= f.text_field :last_name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :team %>
-    <%= f.text_field :team %>
-  </div>
-
-  <%# if(params.has_key?(:id)) %>
-    <%# render(:partial => "rats", :locals => {:f => f}) %>
-  <%# end %>
+  <%= render(:partial => "ticks", :locals => {:f => f}) %>
 
   <div class="actions">
     <%= f.submit %>

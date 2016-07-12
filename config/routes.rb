@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
  
-  resources :rats
   resources :users
   
   match ':controller(/:action(/:id(.:format)))', :via => [:get, :post]

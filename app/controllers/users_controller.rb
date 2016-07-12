@@ -56,6 +56,16 @@ class UsersController < ApplicationController
     end
   end
 
+  def rat
+    @user = User.find(params[:id])
+    @user.rats.new
+  end
+
+  def tick
+    @user = User.find(params[:id])
+    @user.rats.new
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
@@ -64,6 +74,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :team, :rats_attributes => [:user_id, :longbreak, :latebreak, :offtask, :other])
+      params.require(:user).permit(:name, :last_name, :team, :rats_attributes => [:user_id, :longbreak, :latebreak, :offtask, :other], :ticks_attributes => [:ab, :late, :dynamic, :initiative, :void, :notes])
     end
 end

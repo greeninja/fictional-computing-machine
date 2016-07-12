@@ -6,8 +6,10 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th>Last Name</th>
       <th>Team</th>
       <th>RaTS</th>
+      <th>TiCK</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,10 +18,12 @@
     <% @users.each do |user| %>
       <tr>
         <td><%= user.name %></td>
+        <td><%= user.last_name %></td>
         <td><%= user.team %></td>
         <td><%= link_to user.rats.count, user %></td>
-        <!-- <td><%# link_to 'Show', user %></td>-->
-        <td><%= link_to("New Rat", {:action => 'newrat', :id => user.id}) %>
+        <td><%= link_to user.ticks.count, user %></td>
+        <td><%= link_to("New Rat", {:action => 'rat', :id => user.id}) %></td>
+        <td><%= link_to("New TiCK", {:action => 'tick', :id => user.id}) %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td><%= link_to 'Delete User', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>

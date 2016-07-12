@@ -13,21 +13,42 @@
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
 
+<h3>RaTs</h3>
+<table>
+  <th>Long Break</th>
+  <th>Late Break</th>
+  <th>Off Task</th>
+  <th>Other</th>
+  <th>Date</th>
+
 <% @user.rats.sorted.each do |rat| %>
-  <p>
-    <strong>Longbreak:</strong>
-    <%= rat.longbreak %>
-  </p>
-  <p>
-    <strong>Latebreak:</strong>
-    <%= rat.latebreak %>
-  </p>
-  <p>
-    <strong>Offtask:</strong>
-    <%= rat.offtask %>
-  </p>
-  <p>
-    <strong>Other:</strong>
-    <%= rat.other %>
-  </p>
+  <tr>
+    <td><%= rat.longbreak %></td>
+    <td><%= rat.latebreak %></td>
+    <td><%= rat.offtask %></td>
+    <td><%= rat.other %></td>
+    <td><%= rat.created_at %></td>
+  </tr>
 <% end %>
+</table>
+
+<h3>TiCKs</h3>
+<table>
+  <th>Above and Beyond</th>
+  <th>Stayed Late</th>
+  <th>Dynamic</th>
+  <th>Initiative</th>
+  <th>Void</th>
+  <th>Notes</th>
+
+<% @user.ticks.sorted.each do |tick| %>
+  <tr>
+    <td><%= tick.ab %></td>
+    <td><%= tick.late %></td>
+    <td><%= tick.dynamic %></td>
+    <td><%= tick.initiative %></td>
+    <td><%= tick.void %></td>
+    <td><%= tick.notes %></td>
+  </tr>
+<% end %>
+</table>
