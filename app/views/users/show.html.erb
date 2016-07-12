@@ -12,3 +12,22 @@
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>
+
+<% @user.rats.sorted.each do |rat| %>
+  <p>
+    <strong>Longbreak:</strong>
+    <%= rat.longbreak %>
+  </p>
+  <p>
+    <strong>Latebreak:</strong>
+    <%= rat.latebreak %>
+  </p>
+  <p>
+    <strong>Offtask:</strong>
+    <%= rat.offtask %>
+  </p>
+  <p>
+    <strong>Other:</strong>
+    <%= rat.other %>
+  </p>
+<% end %>

@@ -21,6 +21,8 @@
     <%= f.text_field :team %>
   </div>
 
+  <%= render(:partial => "rats", :locals => {:f => f}) %>
+
   <div class="actions">
     <%= f.submit %>
   </div>

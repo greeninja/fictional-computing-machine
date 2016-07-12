@@ -13,14 +13,13 @@
 ActiveRecord::Schema.define(version: 20160704195849) do
 
   create_table "rats", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.integer  "users_id"
+    t.integer  "user_id"
     t.boolean  "longbreak"
     t.boolean  "latebreak"
     t.boolean  "offtask"
     t.string   "other"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["users_id"], name: "index_rats_on_users_id", using: :btree
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -30,5 +29,4 @@ ActiveRecord::Schema.define(version: 20160704195849) do
     t.datetime "updated_at", null: false
   end
 
-  add_foreign_key "rats", "users", column: "users_id"
 end

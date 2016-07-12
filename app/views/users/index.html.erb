@@ -1,12 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Users</h1>
+<h1>Users</h1> 
 
 <table>
   <thead>
     <tr>
       <th>Name</th>
       <th>Team</th>
+      <th>RaTS</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,9 +17,11 @@
       <tr>
         <td><%= user.name %></td>
         <td><%= user.team %></td>
-        <td><%= link_to 'Show', user %></td>
+        <td><%= link_to user.rats.count, user %></td>
+        <!-- <td><%# link_to 'Show', user %></td>-->
+        <td><%= link_to("New Rat", {:action => 'newrat', :id => user.id}) %>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Delete User', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
