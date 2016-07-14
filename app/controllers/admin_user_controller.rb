@@ -1,5 +1,5 @@
 class AdminUserController < ApplicationController
-  # before_action :confirm_logged_in
+  before_action :confirm_logged_in
     
   def index
     @users = AdminUser.sorted
