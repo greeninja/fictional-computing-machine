@@ -1,0 +1,9 @@
+<%# link_to 'Edit', edit_user_path(@user) %>
+<%# link_to 'Back', users_path %>
+
+<h3>Delete Admin User</h3>
+<%= form_for(:user, :url => {:action => 'destroy', :id => @user.id}) do |f| %>
+  <p>Are you sure you want to remove "<%= @user.name %>"? </p>
+  <p>With username "<%= @user.username %>"? </p>
+  <%= submit_tag("Delete User") %>
+<% end %>

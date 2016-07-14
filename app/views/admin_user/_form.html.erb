@@ -1,0 +1,28 @@
+<%# error_messages_for(@user) %>
+<table summary="User form Fields">
+    <tr>
+        <th><%= f.label(:first_name, "Name") %></th>
+      <td><%= f.text_field(:first_name) %></td>
+    </tr>
+    <tr>
+        <th><%= f.label(:last_name, "Last Name") %></th>
+        <td><%= f.text_field(:last_name) %></td>
+    </tr>
+    <tr>
+        <th><%= f.label(:username, "Username") %></th>
+        <td><%= f.text_field(:username) %></td>
+    </tr>
+    <tr>
+        <th><%= f.label(:email, "Email") %></th>
+        <td><%= f.email_field(:email) %></td>
+    </tr>
+  <!--  <tr>
+        <th><%# f.label(:email_confirmation, "Confirm Email") %></th>
+        <th><%# f.email_field(:email_confimation) %></th></tr>
+    <tr>
+-->
+        <th><%= f.label(:password, "Password") %></th>
+    <td><%= f.password_field(:password) %></td>
+    </tr>
+</table>
+

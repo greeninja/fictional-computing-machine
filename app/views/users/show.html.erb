@@ -38,7 +38,6 @@
   <th>Stayed Late</th>
   <th>Dynamic</th>
   <th>Initiative</th>
-  <th>Void</th>
   <th>Notes</th>
 
 <% @user.ticks.sorted.each do |tick| %>
@@ -47,7 +46,6 @@
     <td><%= tick.late %></td>
     <td><%= tick.dynamic %></td>
     <td><%= tick.initiative %></td>
-    <td><%= tick.void %></td>
     <td><%= tick.notes %></td>
   </tr>
 <% end %>
