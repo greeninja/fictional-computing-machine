@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
- 
+  
+  root :to => "users#index"
+  # ideally:
+  # root :to => welcome#index
+  # once built
+   
   resources :users
   
   match ':controller(/:action(/:id(.:format)))', :via => [:get, :post]
