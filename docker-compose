@@ -2,6 +2,10 @@ version: '2'
 services:
   db:
     image: mariadb
+    environment:
+      MYSQL_DATABASE=fictional_computing_machine
+      MYSQL_USER=fictional
+      MYSQL_PASSWORD=Password1
   web:
     build: .
     command: bundle exec rails s -p 3000 -b '0.0.0.0'
