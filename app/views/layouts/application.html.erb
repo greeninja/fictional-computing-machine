@@ -9,6 +9,9 @@
   </head>
 
   <body>
+  <% if session[:user_id] %>
+    <%= render(:partial => "application/nav_bar") %>
+  <% end %>
     <%= yield %>
   </body>
 </html>
