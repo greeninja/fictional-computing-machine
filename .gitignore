@@ -1,3 +1,4 @@
 *.cache
 development.log
 tmp/*
+database.yaml
