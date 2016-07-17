@@ -1,32 +1,27 @@
 <%= f.fields_for :ticks, @user.ticks.new do |u| %>
 
   <div class="field">
-    <%= u.label :ab %>
+    <%= u.label "Above and Beyond" %>
     <%= u.check_box :ab %>
   </div>
 
   <div class="field">
-    <%= u.label :late %>
+    <%= u.label "Stayed Late" %>
     <%= u.check_box :late %>
   </div>
 
   <div class="field">
-    <%= u.label :dynamic %>
+    <%= u.label "Dynamic" %>
     <%= u.check_box :dynamic %>
   </div>
 
   <div class="field">
-    <%= u.label :initiative %>
+    <%= u.label "Used Initiative" %>
     <%= u.check_box :initiative %>
   </div>
 
   <div class="field">
-    <%= u.label :void %>
-    <%= u.check_box :void %>
-  </div>
-
-  <div class="field">
-    <%= u.label :notes %>
+    <%= u.label "Notes" %>
     <%= u.text_field :notes %>
   </div>
 
