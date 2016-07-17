@@ -74,6 +74,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :last_name, :team, :rats_attributes => [:user_id, :longbreak, :latebreak, :offtask, :other], :ticks_attributes => [:ab, :late, :dynamic, :initiative, :void, :notes])
+      params.require(:user).permit(:name, :last_name, :team, :rats_attributes => [:user_id, :longbreak, :latebreak, :offtask, :other, :_destroy], :ticks_attributes => [:ab, :late, :dynamic, :initiative, :void, :notes, :_destroy])
     end
 end

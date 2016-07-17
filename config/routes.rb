@@ -6,6 +6,14 @@ Rails.application.routes.draw do
   # once built
    
   resources :users
+
+  resources :users do
+    resources :rats
+  end
+
+  resources :users do
+    resources :ticks
+  end
   
   match ':controller(/:action(/:id(.:format)))', :via => [:get, :post]
   
