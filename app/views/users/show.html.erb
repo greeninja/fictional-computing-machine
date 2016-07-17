@@ -20,6 +20,7 @@
   <th>Off Task</th>
   <th>Other</th>
   <th>Date</th>
+  <th>Actions</th>
 
 <% @user.rats.sorted.each do |rat| %>
   <tr>
@@ -28,6 +29,7 @@
     <td><%= rat.offtask %></td>
     <td><%= rat.other %></td>
     <td><%= rat.created_at %></td>
+    <td><%= link_to "Delete", user_rat_path(@user, rat), :method => :delete %></th>
   </tr>
 <% end %>
 </table>
@@ -39,6 +41,8 @@
   <th>Dynamic</th>
   <th>Initiative</th>
   <th>Notes</th>
+  <th>Date</th>
+  <th>Actions</th>
 
 <% @user.ticks.sorted.each do |tick| %>
   <tr>
@@ -47,6 +51,8 @@
     <td><%= tick.dynamic %></td>
     <td><%= tick.initiative %></td>
     <td><%= tick.notes %></td>
+    <td><%= tick.created_at %></td>
+    <td><%= link_to "Delete", user_tick_path(@user, tick), :method => "delete" %></th>
   </tr>
 <% end %>
 </table>
