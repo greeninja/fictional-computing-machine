@@ -29,7 +29,7 @@
     <td><%= rat.offtask %></td>
     <td><%= rat.other %></td>
     <td><%= rat.created_at %></td>
-    <td><%= link_to "Delete", user_rat_path(@user, rat), :method => :delete %></th>
+    <td><%= link_to "Delete", user_rat_path(@user, rat), data: {:confirm => "Are you sure?"}, :method => :delete %></th>
   </tr>
 <% end %>
 </table>
@@ -52,7 +52,7 @@
     <td><%= tick.initiative %></td>
     <td><%= tick.notes %></td>
     <td><%= tick.created_at %></td>
-    <td><%= link_to "Delete", user_tick_path(@user, tick), :method => "delete" %></th>
+    <td><%= link_to "Delete", user_tick_path(@user, tick), data: {:confirm => "Are you sure?"}, :method => "delete" %></th>
   </tr>
 <% end %>
 </table>
