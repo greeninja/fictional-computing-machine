@@ -55,8 +55,9 @@ class TicksController < ApplicationController
   # DELETE /ticks/1.json
   def destroy
     @tick.destroy
+    @user = User.find(params[:user_id])
     respond_to do |format|
-      format.html { redirect_to root_path, notice: 'Tick was successfully destroyed.' }
+      format.html { redirect_to user_path(@user), notice: 'Tick was successfully deleted' }
       format.json { head :no_content }
     end
   end

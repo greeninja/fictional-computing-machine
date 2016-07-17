@@ -61,8 +61,9 @@ class RatsController < ApplicationController
   # DELETE /rats/1.json
   def destroy
     @rat.destroy
+    @user = User.find(params[:user_id])
     respond_to do |format|
-      format.html { redirect_to root_path, notice: 'Rat was successfully destroyed.' }
+      format.html { redirect_to user_path(@user), notice: 'Rat was successfully deleted' }
       format.json { head :no_content }
     end
   end
