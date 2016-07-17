@@ -17,8 +17,8 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
-        <td><%= user.name %></td>
-        <td><%= user.last_name %></td>
+        <td><%= link_to user.name, user %></td>
+        <td><%= link_to user.last_name, user %></td>
         <td><%= user.team %></td>
         <td><%= link_to user.rats.count, user %></td>
         <td><%= link_to user.ticks.count, user %></td>
