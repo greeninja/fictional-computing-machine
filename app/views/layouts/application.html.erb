@@ -12,16 +12,21 @@
   <div class="container-fluid">
   <% if session[:user_id] %>
     <%= render(:partial => "application/nav_bar") %>
+    <% if notice.blank? %>
+      <%= puts "Notice var is blank: NOTICE => #{notice}" %>
+    <% else %>
+    <%= puts "NOTICE: #{notice}" %>
     <div class="row">
       <div class="col-md-12">
         <div class="alert alert-dismissable alert-success">
           <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
             ×
           </button>
-          <strong>Success:</strong><%= notice %>
+          <strong>Success: </strong><%= notice %>
         </div>
       </div>
     </div>
+    <% end %>
     <div class="row">
       <div class="col-md-1">
       </div>
