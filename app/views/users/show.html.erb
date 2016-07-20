@@ -7,6 +7,15 @@
 <%# link_to 'Edit', edit_user_path(@user) %>
 <%# link_to 'Back', users_path %>
 
+<% if @user.rats.count < 1 and @user.ticks.count < 1 %>
+  <div class="alert alert-success alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+      ×
+    </button>
+    User - <strong><%= @user.name %> <%= @user.last_name %></strong> has No TiCKs or RaTs
+  </div>
+<% else %>
+
   <% if @user.rats.count >= 1 %>
 
   <h3 class="text-center text-muted">RaTs</h3>
@@ -96,4 +105,6 @@
   <% end %>
   </div>
 </div>
+<% end %>
 <%= button_to("Back", {action: 'index'}, method: "get", class: "btn btn-default pull-right") %>
+

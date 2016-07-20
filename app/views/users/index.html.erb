@@ -7,6 +7,7 @@
       <th data-field="Name"data-sortable="true">Name</th>
       <th data-field="Last Name" data-sortable="true">Last Name</th>
       <th data-field="Team" data-sortable="true">Team</th>
+      <th data-field="Team NEW" data-sortable="true">Team NEW</th>
       <th data-field="Rats" data-sortable="true">RaTs</th>
       <th data-field="Tick" data-sortable="true">TiCKs</th>
       <th colspan="2">Actions</th>
@@ -21,6 +22,7 @@
         <td><%= user.name %></td>
         <td><%= user.last_name %></td>
         <td><%= user.team %></td>
+        <td><%# user.teams.name %></td>
         <% if user.rats.count >= 1 %>
           <td><span class="label label-danger"><%= user.rats.count %></span></td>
         <% else %>

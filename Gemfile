@@ -28,7 +28,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'redis', '~> 3.0'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
-gem 'acts_as_list'
+# gem 'acts_as_list'
 
 # Add Bootstrap gems
 gem 'bootstrap-sass'
