@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   # once built
    
   resources :users
+  resources :teams
 
   resources :users do
     resources :rats
