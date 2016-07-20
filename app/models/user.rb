@@ -1,7 +1,8 @@
 class User < ApplicationRecord
   has_many :rats
   has_many :ticks
-  belongs_to :team
+  has_many :user_teams
+  has_many :teams, :through => :user_teams
   # acts_as_list :scope => :teams
 
   accepts_nested_attributes_for :rats, :ticks, allow_destroy: true, reject_if: :all_blank 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160720170946) do
+ActiveRecord::Schema.define(version: 20160720190927) do
 
   create_table "admin_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "first_name",      limit: 25
@@ -37,7 +37,6 @@ ActiveRecord::Schema.define(version: 20160720170946) do
     t.text     "description", limit: 65535
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
-    t.string   "team"
   end
 
   create_table "ticks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -51,12 +50,23 @@ ActiveRecord::Schema.define(version: 20160720170946) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "user_teams", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer  "user_id"
+    t.integer  "team_id"
+    t.string   "summary"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_user_teams_on_team_id", using: :btree
+    t.index ["user_id", "team_id"], name: "index_user_teams_on_user_id_and_team_id", using: :btree
+    t.index ["user_id"], name: "index_user_teams_on_user_id", using: :btree
+  end
+
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
     t.string   "last_name"
-    t.string   "team"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "manual_team"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
     t.integer  "team_id"
     t.index ["team_id"], name: "index_users_on_team_id", using: :btree
   end
