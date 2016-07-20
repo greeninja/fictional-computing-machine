@@ -1,0 +1,55 @@
+<h3>Teams</h3>
+
+<% if @teams.count >= 1 %>
+<table class="table table-hover" data-sort-name="Name" data-sort-order="desc">
+  <thead>
+    <tr>
+      <th data-field="ID" data-sortable="true">ID</th>
+      <th data-field="Name"data-sortable="true">Name</th>
+      <th data-field="Last Name" data-sortable="true">Description</th>
+      <th colspan="2">Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @teams.each do |team| %>
+      <tr class="active">
+        <td><%= team.id %></td>
+        <td><%= team.name %></td>
+        <td><%=h truncate(team.description, :length => 100) %></td>
+        <td>
+          <div class="btn-group">
+            <button class="btn btn-sm btn-default">
+              Action
+            </button>
+            <button data-toggle="dropdown" class="btn btn-sm btn-default dropdown-toggle">
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <%= link_to 'Edit Team', edit_team_path(team) %>
+              </li>
+              <li>
+                <%= link_to 'Show Team', team %>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <%= link_to 'Delete', team, method: :delete, data: { confirm: 'Are you sure?' } %>
+              </li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<% else %>
+
+<h4>You have no teams configured</h4>
+<p>Click below to add teams</p>
+<% end %>
+
+<%= button_to 'New Team', new_team_path, :class => "btn btn-default" %>
