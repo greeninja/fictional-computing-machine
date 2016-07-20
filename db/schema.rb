@@ -34,9 +34,10 @@ ActiveRecord::Schema.define(version: 20160720170946) do
 
   create_table "teams", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
-    t.string   "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.text     "description", limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "team"
   end
 
   create_table "ticks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -53,10 +54,11 @@ ActiveRecord::Schema.define(version: 20160720170946) do
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
     t.string   "last_name"
+    t.string   "team"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "team_id"
-    t.string   "team"
+    t.index ["team_id"], name: "index_users_on_team_id", using: :btree
   end
 
 end
