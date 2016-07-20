@@ -1,0 +1,5 @@
+class PutTeamColumnBack < ActiveRecord::Migration[5.0]
+  def change
+    add_column "teams", "team", :string
+  end
+end
