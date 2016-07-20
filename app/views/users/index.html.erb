@@ -21,8 +21,8 @@
         <td><%= user.id %></td>
         <td><%= user.name %></td>
         <td><%= user.last_name %></td>
-        <td><%= user.team %></td>
-        <td><%# user.teams.name %></td>
+        <td><%= user.manual_team %></td>
+        <td><%= user.teams.name %></td>
         <% if user.rats.count >= 1 %>
           <td><span class="label label-danger"><%= user.rats.count %></span></td>
         <% else %>
