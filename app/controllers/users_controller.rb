@@ -1,8 +1,11 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :confirm_logged_in
+
+  helper_method :sort_column, :sort_direction
+
   def index
-    @users = User.sorted
+    @users = User.order(sort_column + " " + sort_direction)
   end
 
   def show
@@ -76,4 +79,12 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :last_name, :team, :rats_attributes => [:user_id, :longbreak, :latebreak, :offtask, :other, :_destroy], :ticks_attributes => [:ab, :late, :dynamic, :initiative, :void, :notes, :_destroy])
     end
+
+  def sort_column
+    User.column_names.include?(params[:sort]) ? params[:sort] : "name"
+  end
+  
+  def sort_direction
+    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+  end
 end

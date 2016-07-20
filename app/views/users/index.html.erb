@@ -1,13 +1,14 @@
 <h3>Resource and Timekeeping System</h3> 
 
-<table class="table table-hover">
+<table class="table table-hover" data-sort-name="Name" data-sort-order="desc">
   <thead>
     <tr>
-      <th>Name</th>
-      <th>Last Name</th>
-      <th>Team</th>
-      <th>RaTS</th>
-      <th>TiCK</th>
+      <th data-field="ID" data-sortable="true">ID</th>
+      <th data-field="Name"data-sortable="true">Name</th>
+      <th data-field="Last Name" data-sortable="true">Last Name</th>
+      <th data-field="Team" data-sortable="true">Team</th>
+      <th data-field="Rats" data-sortable="true">RaTs</th>
+      <th data-field="Tick" data-sortable="true">TiCKs</th>
       <th colspan="2">Actions</th>
       <th>Edit User</th>
     </tr>
@@ -16,6 +17,7 @@
   <tbody>
     <% @users.each do |user| %>
       <tr class="active">
+        <td><%= user.id %></td>
         <td><%= user.name %></td>
         <td><%= user.last_name %></td>
         <td><%= user.team %></td>
