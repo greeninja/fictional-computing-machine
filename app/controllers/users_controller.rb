@@ -5,9 +5,7 @@ class UsersController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    # @users = User.order(sort_column + " " + sort_direction)
     @users = User.sorted
-    # @teams = Team.find(:users.team_id)
   end
 
   def show
