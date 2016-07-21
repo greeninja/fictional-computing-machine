@@ -6,6 +6,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.sorted
+    @teams = User.uniq_team_id
   end
 
   def show

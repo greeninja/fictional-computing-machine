@@ -7,4 +7,5 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :ticks, reject_if: :all_blank
   scope :sorted, lambda { order("users.name ASC") }
   scope :sorted_by_id, lambda { order("users.id ASC") }
+  scope :uniq_team_id, lambda { select('DISTINCT(team_id)') }
 end
