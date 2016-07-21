@@ -11,7 +11,7 @@
 <% @teams.each do |dep| %>
   <div class="tab-content">
     <div class="<%= if (params[:team_id] == dep.team_id || !params[:team_id])then 'tab-pane active'  else 'tab-pane' end%>" id="<%= dep.team_id %>">
-      <%= render 'users', users: User.where(team_id: "dep.team_id") %>
+      <%= render 'users' %>
     </div>
   </div>
 <% end %>
