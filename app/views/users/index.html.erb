@@ -1,21 +1,27 @@
 <h3>Resource and Timekeeping System</h3> 
 
-<div class="tabbable tabs-left">
+<% if @teams.count >= 1 %>
+
   <ul class="nav nav-tabs">
     <% @teams.each do |dep| %>
-      <li class="<%= 'active' if params[:team_id] == dep.team_id %>"><a href="#<%= dep.team_id %>" data-toggle="tab"><%= dep.team.name %></a></li>
-    <% end %>  
+      <li class="<%= 'active' if params[:team_id] == dep.team_id %>"><a data-toggle="tab" href="#<%= dep.team_id %>"><%= dep.team.name %></a></li>
+    <% end %>
   </ul>
-</div>
-
-<% @teams.each do |dep| %>
   <div class="tab-content">
-    <div class="<%= if (params[:team_id] == dep.team_id || !params[:team_id])then 'tab-pane active'  else 'tab-pane' end%>" id="<%= dep.team_id %>">
-      <%= render 'users' %>
+    <div id="<%= :team_id %>" class="tab-pane fade in active">
+      <%= render 'users', users: @byteam %>
     </div>
   </div>
+
+<% else %>
+  <li class="active"><a href="#">All</a></li>
+  <%= render 'users' %>
 <% end %>
 
+  <div class="tab-content">
+    <%= render 'users' %>
+  </div>
+  
 <%# render "users" %>
 
 <%= button_to 'New User', new_user_path, :class => "btn btn-default" %>

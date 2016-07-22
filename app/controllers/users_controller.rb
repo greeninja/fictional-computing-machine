@@ -7,6 +7,7 @@ class UsersController < ApplicationController
   def index
     @users = User.sorted
     @teams = User.uniq_team_id
+    @byteam = User.where(team_id: params[:id])
   end
 
   def show
@@ -24,7 +25,6 @@ class UsersController < ApplicationController
 
   def edit
     @users = User.find(params[:id])
-    @users.rats.new
     @teams = Team.sorted
   end
   
