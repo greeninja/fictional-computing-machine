@@ -5,15 +5,16 @@
   <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#all">All</a></li>
   <% @teams.each do |dep| %>
-    <li class="<%= 'active' if params[:team_id] == dep.team_id %>"><a data-toggle="tab" href="#<%= dep.team_id %>"><%= dep.team.name %></a></li>
-    <% end %>
+    <li><a data-toggle="tab" href="#<%= dep.team_id %>"><%= dep.team.name %></a></li>
+  <% end %>
   </ul>
   <div class="tab-content">
+  <% puts "TEAM_ID => #{params[:team_id]}" %>
     <div id="all" class="tab-pane active">
-      <%= render 'users', users: @users %>
+        <%= render 'users', users: @users %>
     </div>
     <% @teams.each do |pane| %>
-      <div id="<%= pane.team_id %>" class="tab-pane fade in active">
+      <div id="<%= pane.team_id %>" class="tab-pane fade">
         <!-- TODO: Get this in the controller! -->
         <%= render 'users', users: User.where(team_id: pane.team_id) %>
         <%# render 'users', users: @byteam %>
