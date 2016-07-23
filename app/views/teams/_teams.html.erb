@@ -5,8 +5,8 @@
       <th data-field="ID" data-sortable="true">ID</th>
       <th data-field="Name"data-sortable="true">Name</th>
       <th>Users</th>
-      <th>Ticks</th>
       <th>Rats</th>
+      <th>Ticks</th>
       <th data-field="Descrition" data-sortable="true">Description</th>
       <th colspan="2">Actions</th>
     </tr>
@@ -18,8 +18,8 @@
         <td><%= team.id %></td>
         <td><%= team.name %></td>
         <td><span class="label label-info"><%= team.users.count %></span></td>
-        <td><span class="label label-success"><%= team.ticks.count %></span></td>
         <td><span class="label label-warning"><%= team.rats.count %></span></td>
+        <td><span class="label label-success"><%= team.ticks.count %></span></td>
         <td><%=h truncate(team.description, :length => 100) %></td>
         <td>
           <div class="btn-group">
