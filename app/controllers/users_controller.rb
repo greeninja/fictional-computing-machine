@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   def index
     @users = User.sorted
-    @teams = User.uniq_team_id
+    @teams = User.uniq_team_id.where.not(:team_id => nil)
     @byteam = User.where(team_id: params[:team_id])
   end
 

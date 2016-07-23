@@ -20,7 +20,12 @@
         <td><%= user.name %></td>
         <td><%= user.last_name %></td>
         <td><%= user.manual_team %></td>
-        <td><%= user.team.name %></td>
+        <td>
+          <% if user.team_id.present? %>
+            <%= user.team.name %></td>
+        <% else %>
+          Not Set
+        <% end %>
         <% if user.rats.count >= 1 %>
           <td><span class="label label-warning"><%= user.rats.count %></span></td>
         <% else %>
