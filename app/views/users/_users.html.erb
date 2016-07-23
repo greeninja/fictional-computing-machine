@@ -1,7 +1,7 @@
 <table class="table table-hover" data-sort-name="Name" data-sort-order="desc">
   <thead>
     <tr>
-      <th data-field="ID" data-sortable="true">ID</th>
+      <th data-field="Custom ID" data-sortable="true">ID</th>
       <th data-field="Name"data-sortable="true">Name</th>
       <th data-field="Last Name" data-sortable="true">Last Name</th>
       <th data-field="Team" data-sortable="true">Team</th>
@@ -16,7 +16,7 @@
   <tbody>
     <% users.each do |user| %>
       <tr class="active">
-        <td><%= user.id %></td>
+        <td><%= user.customid %></td>
         <td><%= user.name %></td>
         <td><%= user.last_name %></td>
         <td><%= user.manual_team %></td>
