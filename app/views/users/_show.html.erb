@@ -1,0 +1,97 @@
+<% if @user.rats.count < 1 and @user.ticks.count < 1 %>
+  <div class="alert alert-success alert-dismissable">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
+      ×
+    </button>
+    User - <strong><%= @user.name %> <%= @user.last_name %></strong> has No TiCKs or RaTs
+  </div>
+<% else %>
+
+  <% if @user.rats.count >= 1 %>
+
+  <h3 class="text-center text-muted">RaTs</h3>
+  <table class="table table-hover table-condensed table-bordered">
+    <thead>
+      <tr>
+        <th>Long Break</th>
+        <th>Late Break</th>
+        <th>Off Task</th>
+        <th>Notes</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+  <% @user.rats.sorted.each do |rat| %>
+    <tr>
+      <% if rat.longbreak? %>
+        <td><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
+      <% else %>
+        <td></td>
+      <% end %>
+      <% if rat.latebreak? %>
+        <td><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
+      <% else %>
+        <td></td>
+      <% end %>
+      <% if rat.offtask? %>
+        <td><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
+      <% else %>
+        <td></td>
+      <% end %>
+      <td><%= rat.other %></td>
+      <td><%= rat.created_at.localtime.to_s(:short) %></td>
+      <td><%= button_to "Delete", user_rat_path(@user, rat), data: {:confirm => "Are you sure?"}, :class => "btn btn-xs btn-danger", :method => :delete %></th>
+    </tr>
+  <% end %>
+  </table>
+
+  <% end %>
+
+  <% if @user.ticks.count >= 1 %>
+
+  <h3 class="text-center text-muted">TiCKs</h3>
+  <table class="table table-hover table-condensed table-bordered">
+    <thead>
+      <tr>
+        <th>Above and Beyond</th>
+        <th>Stayed Late</th>
+        <th>Dynamic</th>
+        <th>Initiative</th>
+        <th>Notes</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+  <% @user.ticks.sorted.each do |tick| %>
+    <tr>
+      <% if tick.ab? %>
+        <td><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
+      <% else %>
+        <td></td>
+      <% end %>
+      <% if tick.late? %>
+        <td><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
+      <% else %>
+        <td></td>
+      <% end %>
+      <% if tick.dynamic? %>
+        <td><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
+      <% else %>
+        <td></td>
+      <% end %>
+      <% if tick.initiative? %>
+        <td><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
+      <% else %>
+        <td></td>
+      <% end %>
+      <td><%= tick.notes %></td>
+      <td><%= tick.created_at.to_s(:short) %></td>
+      <td><%= button_to "Delete", user_tick_path(@user, tick), data: {:confirm => "Are you sure?"}, :class => "btn btn-xs btn-danger", :method => "delete" %></th>
+    </tr>
+  <% end %>
+  </table>
+
+  <% end %>
+<% end %>
