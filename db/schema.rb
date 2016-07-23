@@ -50,6 +50,17 @@ ActiveRecord::Schema.define(version: 20160723174836) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "user_teams", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer  "user_id"
+    t.integer  "team_id"
+    t.string   "summary"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["team_id"], name: "index_user_teams_on_team_id", using: :btree
+    t.index ["user_id", "team_id"], name: "index_user_teams_on_user_id_and_team_id", using: :btree
+    t.index ["user_id"], name: "index_user_teams_on_user_id", using: :btree
+  end
+
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
     t.string   "last_name"
