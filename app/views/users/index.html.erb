@@ -1,5 +1,9 @@
 <h3>Resource and Timekeeping System</h3> 
 
+<% if @teamcount == 0 %>
+  <%= render 'warning', :message => "There are no teams configured, this will cause errors" %>
+<% end %>
+
 <% if @teams.count >= 1 %>
 
   <ul class="nav nav-tabs">
@@ -23,7 +27,9 @@
 
 
 <% else %>
-  <li class="active"><a href="#">All</a></li>
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#">All</a></li>
+  </ul>
   <div id="All" class="tab-pane fade in active">
     <%= render 'users', users: @users %>
   </div>
