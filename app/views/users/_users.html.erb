@@ -35,9 +35,7 @@
         <td><%= button_to("New TiCK", {:action => 'tick', :id => user.id}, :class => "btn btn-sm btn-success") %></td>
         <td>
           <div class="btn-group">
-            <button class="btn btn-sm btn-default">
-              Action
-            </button>
+            <%= link_to 'Show', user, :class => "btn btn-sm btn-default" %>
             <button data-toggle="dropdown" class="btn btn-sm btn-default dropdown-toggle">
               <span class="caret"></span>
             </button>
