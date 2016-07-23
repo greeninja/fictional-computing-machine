@@ -1,0 +1,66 @@
+<table class="table table-hover" data-sort-name="Name" data-sort-order="desc">
+  <thead>
+    <tr>
+      <th data-field="Custom ID" data-sortable="true">ID</th>
+      <th data-field="Name"data-sortable="true">Name</th>
+      <th data-field="Last Name" data-sortable="true">Last Name</th>
+      <th data-field="Team" data-sortable="true">Team</th>
+      <th data-field="Team NEW" data-sortable="true">Team NEW</th>
+      <th data-field="Rats" data-sortable="true">RaTs</th>
+      <th data-field="Tick" data-sortable="true">TiCKs</th>
+      <th colspan="2">Actions</th>
+      <th>Edit User</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% users.each do |user| %>
+      <tr class="active">
+        <td><%= user.customid %></td>
+        <td><%= user.name %></td>
+        <td><%= user.last_name %></td>
+        <td><%= user.manual_team %></td>
+        <td>
+          <% if user.team_id.present? %>
+            <%= user.team.name %></td>
+        <% else %>
+          Not Set
+        <% end %>
+        <% if user.rats.count >= 1 %>
+          <td><span class="label label-warning"><%= user.rats.count %></span></td>
+        <% else %>
+          <td></td>
+        <% end %>
+        <% if user.ticks.count >= 1 %>
+          <td><span class="label label-success"><%= user.ticks.count %></span></td>
+        <% else %>
+          <td></td>
+        <% end %>
+        <td><%= button_to("New RaT", {:action => 'rat', :id => user.id}, :class => "btn btn-sm btn-warning") %></td>
+        <td><%= button_to("New TiCK", {:action => 'tick', :id => user.id}, :class => "btn btn-sm btn-success") %></td>
+        <td>
+          <div class="btn-group">
+            <%= link_to 'Show', user, :class => "btn btn-sm btn-default" %>
+            <button data-toggle="dropdown" class="btn btn-sm btn-default dropdown-toggle">
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <%= link_to 'Edit User', edit_user_path(user) %>
+              </li>
+              <li>
+                <%= link_to 'Show RaTs / Ticks', user %>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <%= link_to 'Delete User', user, method: :delete, data: { confirm: 'Are you sure?' } %>
+              </li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>

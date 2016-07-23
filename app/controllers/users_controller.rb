@@ -5,7 +5,10 @@ class UsersController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def index
-    @users = User.order(sort_column + " " + sort_direction)
+    @users = User.sorted
+    @teams = User.uniq_team_id.where.not(:team_id => nil)
+    @byteam = User.where(team_id: params[:team_id])
+    @teamcount = Team.count
   end
 
   def show
@@ -18,11 +21,12 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @teams = Team.sorted
   end
 
   def edit
     @users = User.find(params[:id])
-    @users.rats.new
+    @teams = Team.sorted
   end
   
   def create
@@ -77,7 +81,7 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :last_name, :team, :rats_attributes => [:user_id, :longbreak, :latebreak, :offtask, :other, :_destroy], :ticks_attributes => [:ab, :late, :dynamic, :initiative, :void, :notes, :_destroy])
+      params.require(:user).permit(:name, :last_name, :team, :manual_team, :team_id, :customid, :rats_attributes => [:user_id, :longbreak, :latebreak, :offtask, :other, :_destroy], :ticks_attributes => [:ab, :late, :dynamic, :initiative, :void, :notes, :_destroy])
     end
 
   def sort_column

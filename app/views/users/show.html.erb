@@ -1,99 +1,15 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3>User: <%= @user.name %> <%= @user.last_name %></h3><h4>Team: <%= @user.team %>
+  <% if @user.team_id.present? %>
+    <h3>User: <%= @user.name %> <%= @user.last_name %></h3><h4>Team: <%= @user.team.name %></h4>
+  <% else %>
+    <h3>User: <%= @user.name %> <%= @user.last_name %></h3><h4>Team: Not Set</h4>
+  <% end %>
   </div>
   <div class="panel-body">
-
-<%# link_to 'Edit', edit_user_path(@user) %>
-<%# link_to 'Back', users_path %>
-
-  <% if @user.rats.count >= 1 %>
-
-  <h3 class="text-center text-muted">RaTs</h3>
-  <table class="table table-hover table-condensed table-bordered">
-    <thead>
-      <tr>
-        <th>Long Break</th>
-        <th>Late Break</th>
-        <th>Off Task</th>
-        <th>Notes</th>
-        <th>Date</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-
-  <% @user.rats.sorted.each do |rat| %>
-    <tr>
-      <% if rat.longbreak? %>
-        <td><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
-      <% else %>
-        <td></td>
-      <% end %>
-      <% if rat.latebreak? %>
-        <td><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
-      <% else %>
-        <td></td>
-      <% end %>
-      <% if rat.offtask? %>
-        <td><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
-      <% else %>
-        <td></td>
-      <% end %>
-      <td><%= rat.other %></td>
-      <td><%= rat.created_at.to_s(:short) %></td>
-      <td><%= button_to "Delete", user_rat_path(@user, rat), data: {:confirm => "Are you sure?"}, :class => "btn btn-xs btn-danger", :method => :delete %></th>
-    </tr>
-  <% end %>
-  </table>
-
-  <% end %>
-
-  <% if @user.ticks.count >= 1 %>
-
-  <h3 class="text-center text-muted">TiCKs</h3>
-  <table class="table table-hover table-condensed table-bordered">
-    <thead>
-      <tr>
-        <th>Above and Beyond</th>
-        <th>Stayed Late</th>
-        <th>Dynamic</th>
-        <th>Initiative</th>
-        <th>Notes</th>
-        <th>Date</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-
-  <% @user.ticks.sorted.each do |tick| %>
-    <tr>
-      <% if tick.ab? %>
-        <td><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
-      <% else %>
-        <td></td>
-      <% end %>
-      <% if tick.late? %>
-        <td><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
-      <% else %>
-        <td></td>
-      <% end %>
-      <% if tick.dynamic? %>
-        <td><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
-      <% else %>
-        <td></td>
-      <% end %>
-      <% if tick.initiative? %>
-        <td><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
-      <% else %>
-        <td></td>
-      <% end %>
-      <td><%= tick.notes %></td>
-      <td><%= tick.created_at.to_s(:short) %></td>
-      <td><%= button_to "Delete", user_tick_path(@user, tick), data: {:confirm => "Are you sure?"}, :class => "btn btn-xs btn-danger", :method => "delete" %></th>
-    </tr>
-  <% end %>
-  </table>
-
-  <% end %>
+    <%= render 'show' %>
+  </div>
+  <div class="panel-footer">
+    <%= button_to("Back", {action: 'index'}, method: "get", class: "btn btn-default pull-right") %>
   </div>
 </div>
-<%= button_to("Back", {action: 'index'}, method: "get", class: "btn btn-default pull-right") %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160714162824) do
+ActiveRecord::Schema.define(version: 20160723174836) do
 
   create_table "admin_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "first_name",      limit: 25
@@ -32,13 +32,19 @@ ActiveRecord::Schema.define(version: 20160714162824) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "teams", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string   "name"
+    t.text     "description", limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
   create_table "ticks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "user_id"
     t.boolean  "ab"
     t.boolean  "late"
     t.boolean  "dynamic"
     t.boolean  "initiative"
-    t.boolean  "void"
     t.string   "notes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -47,9 +53,12 @@ ActiveRecord::Schema.define(version: 20160714162824) do
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
     t.string   "last_name"
-    t.string   "team"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "manual_team"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "team_id"
+    t.string   "customid"
+    t.index ["team_id"], name: "index_users_on_team_id", using: :btree
   end
 
 end

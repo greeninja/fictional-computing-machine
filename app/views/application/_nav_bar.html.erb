@@ -11,8 +11,11 @@
         
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li class="active">
+            <li class="<%= 'active' if params[:controller] == 'users' %>">
               <%= link_to("RaTs", :controller => 'users') %>
+            </li>
+            <li class="<%= 'active' if params[:controller] == 'teams' %>">
+              <%= link_to("Teams", :controller => 'teams') %>
             </li>
             <!--<li>
               <a href="#">Link</a>
