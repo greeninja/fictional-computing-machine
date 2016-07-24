@@ -29,6 +29,7 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 # gem 'acts_as_list'
+gem 'chartkick'
 
 # Add Bootstrap gems
 gem 'bootstrap-sass'

@@ -1,0 +1,7 @@
+<% if @teams.count >= 1 %>
+    <%# @teams.each do |t| %>
+      <%# column_chart t.joins(:rats).group("teams.name").count %>
+  <%# end %>
+  <%# Team.all.map{|t| t.rats.count } %>
+  <%= column_chart Team.joins(:rats).group("teams.name").count %>
+<% end %>
