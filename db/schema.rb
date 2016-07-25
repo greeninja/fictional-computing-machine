@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160723174836) do
+ActiveRecord::Schema.define(version: 20160725094148) do
 
   create_table "admin_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "first_name",      limit: 25
@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(version: 20160723174836) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "team_id"
-    t.string   "customid"
+    t.bigint   "customid"
     t.index ["team_id"], name: "index_users_on_team_id", using: :btree
   end
 
