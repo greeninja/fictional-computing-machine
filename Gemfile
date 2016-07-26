@@ -30,6 +30,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 # gem 'acts_as_list'
 gem 'chartkick'
+gem 'lazy_high_charts'
 
 # Add Bootstrap gems
 gem 'bootstrap-sass'

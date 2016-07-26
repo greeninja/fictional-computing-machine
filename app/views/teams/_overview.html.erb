@@ -5,3 +5,4 @@
   <%# Team.all.map{|t| t.rats.count } %>
   <%= column_chart Team.joins(:rats).group("teams.name").count %>
 <% end %>
+

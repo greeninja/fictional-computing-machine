@@ -3,9 +3,9 @@
 development:
   adapter: mysql2
   encoding: utf8
-  database: fictional_computing_machine
-  host: localhost
+  database: <%= ENV['DB_DATABASE'] || 'fictional_computing_machine' %>
+  host: <%= ENV['DB_HOST'] || 'localhost' %>
   pool: 5
-  username: fictional
-  password: Password1
+  username: <%= ENV['DB_USER'] || 'fictional' %>
+  password: <%= ENV['DB_PASS'] || 'Password1' %>
 
