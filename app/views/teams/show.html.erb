@@ -18,9 +18,11 @@
     <div id="overview" class="tab-pane active">
       <%= render 'graphs', graph: User.where(team_id: @team.id), team_name: @team.name %>
     </div>
-    <div id="rats" class="tab-pane active">
+    <div id="rats" class="tab-pane">
+      <%= render "warning" %>
     </div>
-    <div id="ticks" class="tab-pane active">
+    <div id="ticks" class="tab-pane">
+      <%= render "warning" %>
     </div>
   </div>
   <div class="panel-footer">
