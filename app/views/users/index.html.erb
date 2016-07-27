@@ -10,6 +10,7 @@
     <li class="active"><a data-toggle="tab" href="#all">All</a></li>
   <% @teams.each do |dep| %>
     <li><a data-toggle="tab" href="#<%= dep.team_id %>"><%= dep.team.name %></a></li>
+    <li><a data-toggle="tab" href="#graph-<%= dep.team_id %>"><%= dep.team.name %> Graphs</a></li>
   <% end %>
   </ul>
   <div class="tab-content">
@@ -21,6 +22,9 @@
         <!-- TODO: Get this in the controller! -->
         <%= render 'users', users: User.where(team_id: pane.team_id) %>
         <%# render 'users', users: @byteam %>
+      </div>
+      <div id="graph-<%= pane.team_id %>" class="tab-pane fade">
+        <%= render 'graphs', graph: User.where(team_id: pane.team_id), team_name: pane.team.name %>
       </div>
     <% end %>
   </div>

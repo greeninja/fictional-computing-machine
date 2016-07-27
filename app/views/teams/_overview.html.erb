@@ -1,8 +1,20 @@
-<% if @teams.count >= 1 %>
-    <%# @teams.each do |t| %>
-      <%# column_chart t.joins(:rats).group("teams.name").count %>
-  <%# end %>
-  <%# Team.all.map{|t| t.rats.count } %>
-  <%= column_chart Team.joins(:rats).group("teams.name").count %>
-<% end %>
+<div class="row">
+
+  <% if @teams.count >= 1 %>
+    <%# column_chart [[Team.joins(:rats).group("teams.name").count], [Team.joins(:ticks).group("teams.name").count]] %>
+    <div class="col-md-4">
+      <h3 class="text-muted text-center">
+        Rats per Team
+      </h3>
+      <%= column_chart Team.joins(:rats).group("teams.name").count %>
+    </div>
+    <div class="col-md-4">
+    </div>
+    <div class="col-md-4">
+      <h3 class="text-muted text-center">
+        Ticks per Team
+      </h3>
+      <%= column_chart Team.joins(:ticks).group("teams.name").count %>
+    </div>
+  <% end %>
 
