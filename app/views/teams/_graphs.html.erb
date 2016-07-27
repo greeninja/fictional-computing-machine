@@ -1,0 +1,16 @@
+<div class="row">
+  <div class="col-md-6">
+    <h3 class="text-muted text-center">Rats for <%= team_name %></h3>
+    <%= column_chart graph.joins(:rats).group(:name).count, :library => {:colors => ["orange"]} %>
+  </div>
+  <div class="col-md-6">
+    <h3 class="text-muted text-center">Ticks for <%= team_name %></h3>
+    <%= column_chart graph.joins(:ticks).group(:name).count, :library => {:colors => ["green"]} %>
+  </div>
+</div>
+<!-- <div class="row">
+  <div class="col-md-12">
+    <%# column_chart [{ (graph.joins(:rats).group(:name).count) }, { (graph.joins(:ticks).group(:name).count) }] %>
+  </div>
+</div> -->
+    

@@ -11,6 +11,13 @@ class UsersController < ApplicationController
     @teamcount = Team.count
   end
 
+  def overview
+    @users = User.sorted
+    @teams = User.uniq_team_id.where.not(:team_id => nil)
+    @byteam = User.where(team_id: params[:team_id])
+    @teamcount = Team.count
+  end
+
   def show
     @users = User.find(params[:id])
   end
