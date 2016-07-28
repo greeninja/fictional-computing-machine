@@ -1,6 +1,6 @@
 class User < ApplicationRecord
-  
-  belongs_to :team  
+
+  belongs_to :team
   has_many :rats
   has_many :ticks
 
