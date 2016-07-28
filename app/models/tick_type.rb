@@ -1,0 +1,2 @@
+class TickType < ApplicationRecord
+end

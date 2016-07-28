@@ -1,0 +1,2 @@
+class RatType < ApplicationRecord
+end

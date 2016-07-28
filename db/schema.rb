@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160725094148) do
+ActiveRecord::Schema.define(version: 20160728155852) do
 
   create_table "admin_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "first_name",      limit: 25
@@ -22,17 +22,33 @@ ActiveRecord::Schema.define(version: 20160725094148) do
     t.datetime "updated_at",                 null: false
   end
 
+  create_table "rat_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string   "name"
+    t.text     "description", limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
   create_table "rats", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "user_id"
     t.boolean  "longbreak"
     t.boolean  "latebreak"
     t.boolean  "offtask"
     t.string   "other"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "rat_type_id"
+    t.index ["rat_type_id"], name: "index_rats_on_rat_type_id", using: :btree
   end
 
   create_table "teams", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string   "name"
+    t.text     "description", limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  create_table "tick_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
     t.text     "description", limit: 65535
     t.datetime "created_at",                null: false
@@ -46,8 +62,10 @@ ActiveRecord::Schema.define(version: 20160725094148) do
     t.boolean  "dynamic"
     t.boolean  "initiative"
     t.string   "notes"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "tick_type_id"
+    t.index ["tick_type_id"], name: "index_ticks_on_tick_type_id", using: :btree
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
