@@ -11,7 +11,33 @@
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit %>
+<div class="row">
+  <div class="col-md-8">
+    <form class="form-horizontal" role="form">
+      <div class="form-group">
+        <label for="inputName">
+          <%= f.label "Setting Name" %>
+        </label>
+          <%= f.text_field :name, :class => "form-control", :id => "inputName" %>
+      </div>
+      <div class="form-group">
+        <label for="inputDescription">
+          <%= f.label "Description" %>
+        </label>
+        <%= f.text_area :description, :class => "form-control", :id => "inputDescription", :size => "1x4" %>
+      </div>
+      <div class="form-group">
+          <label for="inputEnabled">
+            <%= f.label "Enabled" %>
+          </label>
+          <%= f.check_box :enabled, :class => "checkbox"  %>
+      </div>
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <%= f.submit :Submit, :class => "btn btn-success pull-right"  %>
+        </div>
+      </div>
+    </form>
   </div>
+</div>
 <% end %>

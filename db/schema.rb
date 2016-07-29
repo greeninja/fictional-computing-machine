@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160728162110) do
+ActiveRecord::Schema.define(version: 20160729143853) do
 
   create_table "admin_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "first_name",      limit: 25
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 20160728162110) do
     t.text     "description", limit: 65535
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.integer  "setting_id"
+    t.index ["setting_id"], name: "index_rat_types_on_setting_id", using: :btree
   end
 
   create_table "rats", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -43,6 +45,14 @@ ActiveRecord::Schema.define(version: 20160728162110) do
     t.index ["rat_type_id"], name: "index_rats_on_rat_type_id", using: :btree
   end
 
+  create_table "settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "name"
+    t.text     "description", limit: 65535
+    t.boolean  "enabled"
+  end
+
   create_table "teams", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
     t.text     "description", limit: 65535
@@ -55,6 +65,8 @@ ActiveRecord::Schema.define(version: 20160728162110) do
     t.text     "description", limit: 65535
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+    t.integer  "setting_id"
+    t.index ["setting_id"], name: "index_tick_types_on_setting_id", using: :btree
   end
 
   create_table "ticks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|

@@ -1,0 +1,17 @@
+<%= f.fields_for @rat_types.new do |u| %>
+<form role="form">
+  <div class="form-group">
+    <label for="Name">
+      Name
+    </label>
+    <%= u.text_field :name, :class => "form-control", :id => "Name" %>
+  </div>
+  <div class="form-group">
+    <label for="Description">
+      Description
+    </label>
+    <%= u.text_field :description, :class => "form-control", :id => "Description" %>
+  </div>
+</form>
+<% end %>
+

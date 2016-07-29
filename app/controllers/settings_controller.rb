@@ -61,6 +61,16 @@ class SettingsController < ApplicationController
     end
   end
 
+  def tick_type
+    @setting = Setting.find(:id)
+    @setting.tick_types.new
+  end
+
+  def rat_type
+    @setting = Setting.find(:id)
+    @setting.rat_types.new
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_setting
@@ -69,6 +79,9 @@ class SettingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def setting_params
-      params.fetch(:setting, {})
+      params.require(:setting).permit(:name, :description, :enabled,
+        :tick_types_attributes => [:name, :description, :setting_id],
+        :rat_types_attributes => [:name, :description, :setting_id]
+      )
     end
 end
