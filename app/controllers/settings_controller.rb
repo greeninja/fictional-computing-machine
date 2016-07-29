@@ -1,28 +1,33 @@
 class SettingsController < ApplicationController
   before_action :set_setting, only: [:show, :edit, :update, :destroy]
 
-  # GET /settings
-  # GET /settings.json
   def index
-    @settings = Setting.all
+    @settings = Setting.sorted
   end
 
-  # GET /settings/1
-  # GET /settings/1.json
   def show
+    @setting = Setting.find(params[:id])
+    # TODO
+    # This is UBER inificient - there has to be a better way!
+    @tick_types = TickType.where(setting_id: params[:id])
+    @rat_types = RatType.where(setting_id: params[:id])
   end
 
-  # GET /settings/new
+  def show_rat_types
+    @rat_types = RatType.sorted
+  end
+
+  def show_tick_types
+    @tick_types = TickType.sorted
+  end
+
   def new
     @setting = Setting.new
   end
 
-  # GET /settings/1/edit
   def edit
   end
 
-  # POST /settings
-  # POST /settings.json
   def create
     @setting = Setting.new(setting_params)
 
@@ -37,8 +42,6 @@ class SettingsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /settings/1
-  # PATCH/PUT /settings/1.json
   def update
     respond_to do |format|
       if @setting.update(setting_params)
@@ -51,8 +54,6 @@ class SettingsController < ApplicationController
     end
   end
 
-  # DELETE /settings/1
-  # DELETE /settings/1.json
   def destroy
     @setting.destroy
     respond_to do |format|
