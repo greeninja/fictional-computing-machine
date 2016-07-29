@@ -1,9 +1,9 @@
 <p><strong>Description: </strong><%= @setting.description %></p>
 <% if @tick_types.count >= 1 %>
-  <%= render "tick_types" %>
-<% elseif @rat_types.count >= 1 %>
-  <%= render "rat_types" %>
+  <%= render "list_tick_types" %>
+<% elsif @rat_types.count >= 1 %>
+  <%= render "list_rat_types" %>
 <% else %>
-  <p> error </p>
+  <p><strong>There are currently no settings for this model</strong></p>
 <% end %>
-<%= button_to("New #{@setting.name}", {:action => "new_#{@setting.name}", :setting_id => @setting.id}, :class => "btn btn-default") %>
+<%= link_to("New #{@setting.name}", {:action => "#{@setting.name}", :id => @setting.id}, :class => "btn btn-default") %>

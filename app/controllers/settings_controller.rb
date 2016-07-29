@@ -62,13 +62,13 @@ class SettingsController < ApplicationController
     end
   end
 
-  def tick_type
-    @setting = Setting.find(:id)
+  def tick_types
+    @setting = Setting.find(params[:id])
     @setting.tick_types.new
   end
 
-  def rat_type
-    @setting = Setting.find(:id)
+  def rat_types
+    @setting = Setting.find(params[:id])
     @setting.rat_types.new
   end
 

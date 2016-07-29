@@ -1,0 +1,14 @@
+<%= form_for(setting) do |f| %>
+  <% if setting.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+      <ul>
+        <% user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <%= render(:partial => "rat_types_form", :locals => {:f => f}) %>
+  <%= f.submit :Submit, :class => "btn btn-success" %>
+<% end %>

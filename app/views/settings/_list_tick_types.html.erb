@@ -1,0 +1,17 @@
+<h3 class="text-center text-muted">Tick Types Settings</h3>
+<table class="table table-hover table-condensed table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Actions</th>
+    </tr>
+
+    <% @setting.tick_types.sorted.each do |tick| %>
+      <tr>
+        <td><%= tick.name %></td>
+        <td><%= tick.description %></td>
+        <td>TODO - Actions</td>
+      </tr>
+    <% end %>
+</table>
