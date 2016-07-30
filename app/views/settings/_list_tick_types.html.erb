@@ -11,7 +11,11 @@
       <tr>
         <td><%= tick.name %></td>
         <td><%= tick.description %></td>
-        <td>TODO - Actions</td>
+        <td>
+          <div class="btn-group">
+            <%= link_to "Edit", edit_setting_tick_type_path(@setting, tick), :class => "btn btn-xs btn-default" %>
+          </div>
+        </td>
       </tr>
     <% end %>
 </table>

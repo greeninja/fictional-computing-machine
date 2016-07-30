@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   resources :users
   resources :teams
   resources :settings
+  resources :tick_types
+  resources :rat_types
 
   resources :users do
     resources :rats

@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :get_types, only: [:show]
+  before_action :get_settings
   before_action :confirm_logged_in
 
   helper_method :sort_column, :sort_direction
@@ -72,11 +74,13 @@ class UsersController < ApplicationController
 
   def rat
     @user = User.find(params[:id])
+    @rat_types = RatType.sorted
     @user.rats.new
   end
 
   def tick
     @user = User.find(params[:id])
+    @tick_types = TickType.sorted
     @user.rats.new
   end
 
@@ -88,7 +92,9 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :last_name, :team, :manual_team, :team_id, :customid, :rats_attributes => [:user_id, :longbreak, :latebreak, :offtask, :other, :_destroy], :ticks_attributes => [:ab, :late, :dynamic, :initiative, :void, :notes, :_destroy])
+      params.require(:user).permit(:name, :last_name, :team, :manual_team, :team_id, :customid, 
+                                   :rats_attributes => [:rat_type_id, :longbreak, :latebreak, :offtask, :other, :_destroy], 
+                                   :ticks_attributes => [:tick_type_id, :ab, :late, :dynamic, :initiative, :void, :notes, :_destroy])
     end
 
   def sort_column
@@ -98,4 +104,15 @@ class UsersController < ApplicationController
   def sort_direction
     %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
   end
+
+  def get_settings
+    @rat_enabled = Setting.find_by(name: "rat_types")
+    @tick_enabled = Setting.find_by(name: "tick_types")
+  end
+
+  def get_types
+    @rat_types = RatType.sorted
+    @tick_types = TickType.sorted
+  end
+
 end

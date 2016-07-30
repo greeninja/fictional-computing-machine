@@ -11,7 +11,11 @@
       <tr>
         <td><%= rat.name %></td>
         <td><%= rat.description %></td>
-        <td>TODO - Actions</td>
+        <td>
+          <div class="btn-group">
+            <%= link_to "Edit", edit_setting_rat_type_path(@setting, rat), :class => "btn btn-default" %>
+          </div>
+        </td>
       </tr>
     <% end %>
 </table>
