@@ -1,38 +1,21 @@
 <%= f.fields_for :ticks, @user.ticks.new do |u| %>
 
-<form role="form">
-  <div class="form-group">
-    <div class="checkbox">
-      <label>
-        <%= u.check_box :ab %> Above and Beyond
-      </label>
-    </div>
-  <div class="form-group">
-    <div class="checkbox">
-      <label>
-        <%= u.check_box :late %> Stayed Late
-      </label>
-    </div>
-  </div>
-  <div class="form-group">
-    <div class="checkbox">
-      <label>
-        <%= u.check_box :dynamic %> Dynamic
-      </label>
+  <div class="row">
+    <div class="col-md-6">
+      <form class="form-horizontal" role="form">
+          <% @tick_types.each do |t| %>
+            <div class="form-group">
+              <%= u.radio_button :tick_type_id, t.id %>
+              <%= u.label :tick_type_id, t.name %>
+            </div>
+          <% end %>
+        <div class="form-group">
+          <label for="Notes">
+            Notes
+          </label>
+          <%= u.text_area :notes, :class => "form-control", :id => "Notes", :size => "1x4" %>
+        </div>
     </div>
   </div>
-  <div class="form-group">
-    <div class="checkbox">
-      <label>
-        <%= u.check_box :initiative %> Used Initiative
-      </label>
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="Notes">
-      Notes
-    </label>
-    <%= u.text_field :notes, :class => "form-control", :id => "Notes" %>
-  </div>
-</form>
+
 <% end %>

@@ -4,10 +4,9 @@
   </div>
   <div class="panel-body">
     <% if @tick_enabled.enabled %>
-      <%= render 'tick_new', user: @user %>
+      <%= render 'tick', user: @user %>
     <% else %>
       <%= render 'warning', message: "This is using the old setup without dynamic settings!" %>
-      <%= render 'tick', user: @user %>
     <% end %>
   </div>
   <div class="panel-footer">
