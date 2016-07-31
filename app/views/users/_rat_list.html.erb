@@ -11,26 +11,18 @@
       </tr>
     </thead>
 
-  <% @user.rats.sorted.each do |rat| %>
-    <tr>
-      <% if rat.longbreak? %>
-        <td><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
-      <% else %>
-        <td></td>
-      <% end %>
-      <% if rat.latebreak? %>
-        <td><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
-      <% else %>
-        <td></td>
-      <% end %>
-      <% if rat.offtask? %>
-        <td><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></td>
-      <% else %>
-        <td></td>
+    <% @user.rats.sorted.each do |rat| %>
+      <tr>
+      <% @rat_types.sorted.each do |type| %>
+        <% if rat.rat_type_id == type.id %>
+          <td><span class="glyphicon glyphicon-ok" aria-hidden="true"></td>
+        <% else %>
+          <td></td>
+        <% end %>
       <% end %>
       <td><%= rat.other %></td>
       <td><%= rat.created_at.localtime.to_s(:short) %></td>
-      <td><%= button_to "Delete", user_rat_path(@user, rat), data: {:confirm => "Are you sure?"}, :class => "btn btn-xs btn-danger", :method => :delete %></th>
+      <td><%= button_to "Delete", user_rat_path(@user, rat), data: {:confirm => "Are you sure?"}, :class => "btn btn-xs btn-danger", :method => :delete %>
     </tr>
-  <% end %>
+    <% end %>
   </table>
