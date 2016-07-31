@@ -1,5 +1,6 @@
 class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy]
+  before_action :type_lookup, only: [:index, :show]
 
   def index
     @teams = Team.all
@@ -58,5 +59,10 @@ class TeamsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def team_params
       params.require(:team).permit(:name, :description)
+    end
+
+    def type_lookup
+      @tick_types = TickType.sorted
+      @rat_types = RatType.sorted
     end
 end
