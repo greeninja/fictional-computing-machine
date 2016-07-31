@@ -19,10 +19,10 @@
       <%= render 'graphs', graph: User.where(team_id: @team.id), team_name: @team.name %>
     </div>
     <div id="rats" class="tab-pane">
-      <%= render "warning" %>
+      <%= render "warning", message: 'This section is still under development. See Github for more information.' %>
     </div>
     <div id="ticks" class="tab-pane">
-      <%= render "warning" %>
+      <%= render "warning", message: 'This section is still under development. See Github for more information.' %>
     </div>
   </div>
   <div class="panel-footer">
