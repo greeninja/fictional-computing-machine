@@ -47,7 +47,7 @@ class TickTypesController < ApplicationController
   def destroy
     @tick_type.destroy
     respond_to do |format|
-      format.html { redirect_to tick_types_url, notice: 'Tick type was successfully destroyed.' }
+      format.html { redirect_to settings_path, notice: 'Tick type was successfully deleted.' }
       format.json { head :no_content }
     end
   end

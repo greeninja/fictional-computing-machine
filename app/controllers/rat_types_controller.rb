@@ -44,7 +44,7 @@ class RatTypesController < ApplicationController
   def destroy
     @rat_type.destroy
     respond_to do |format|
-      format.html { redirect_to rat_types_url, notice: 'Rat type was successfully destroyed.' }
+      format.html { redirect_to settings_path, notice: 'Rat type was successfully deleted.' }
       format.json { head :no_content }
     end
   end
