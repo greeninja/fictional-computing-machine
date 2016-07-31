@@ -8,6 +8,10 @@
 <% else %>
 
   <% if @user.rats.count >= 1 %>
+  <% if @rat_enabled.enabled %>
+    <%= render "rat_list" %>
+  <% else %>
+    <%= render "warning", message: "This is using the old model without dynamic settings!" %>
 
   <h3 class="text-center text-muted">RaTs</h3>
   <table class="table table-hover table-condensed table-bordered">
@@ -47,8 +51,13 @@
   </table>
 
   <% end %>
+  <% end %>
 
   <% if @user.ticks.count >= 1 %>
+  <% if @tick_enabled.enabled %>
+        <%= render "tick_list" %>
+    <% else %>
+        <%= render "warning", message: "This is using the old model without dynamic settings!" %>
 
   <h3 class="text-center text-muted">TiCKs</h3>
   <table class="table table-hover table-condensed table-bordered">
@@ -93,5 +102,6 @@
   <% end %>
   </table>
 
+  <% end %>
   <% end %>
 <% end %>

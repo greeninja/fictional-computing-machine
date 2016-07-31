@@ -1,0 +1,11 @@
+<h3>RaTs Settings</h3>
+<% if @settings.count >= 1 %>
+  <%= render "list" %>
+<% else %>
+  <%= render "no_setting_warning" %>
+<% end %>
+<div class="row">
+  <div class="col-md-4">
+    <%= button_to 'New Setting', new_setting_path, :class => "btn btn-default" %>
+  </div>
+</div>

@@ -1,11 +1,17 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3>Add TiCK for <%= @user.name %> <%= @user.last_name %></h3>
+    <h3>Add Tick for <%= @user.name %> <%= @user.last_name %></h3>
   </div>
   <div class="panel-body">
-    <%= render 'tick', user: @user %>
+    <% if @tick_enabled.enabled %>
+      <%= render 'tick_new', user: @user %>
+    <% else %>
+      <%= render 'warning', message: "This is using the old setup without dynamic settings!" %>
+      <%= render 'tick', user: @user %>
+    <% end %>
   </div>
   <div class="panel-footer">
     <%= render "back" %>
   </div>
 </div>
+

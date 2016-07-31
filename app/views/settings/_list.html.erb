@@ -1,0 +1,33 @@
+<div class="row">
+  <% @settings.each do |s| %>
+    <div class="col-md-3">
+      <div class="panel <%= s.enabled ? "panel-success" : "panel-danger" %>">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <%= s.name %>
+        </h3>
+      </div>
+      <div class="panel-body">
+        <span class="label <%= s.enabled ? "label-success" : "label-danger" %>">Module <%= s.enabled ? "Enabled" : "Disabled" %></span>
+        <p><%= s.description %></p>
+      </div>
+      <div class="panel-footer">
+        <div class="btn-group">
+          <%= link_to "Show", s, :class => "btn btn-default" %>
+            <button data-toggle="dropdown" class="btn btn-default dropdown-toggle">
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <%= link_to "Edit", edit_setting_path(s)  %>
+              </li>
+              <li class="divider"></li>
+              <li>
+              <%= link_to "Delete", s, method: :delete, data: { confirm: 'Are you sure? THIS WILL BREAK THINGS!' } %>
+            </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
+</div>

@@ -1,0 +1,28 @@
+  <h3 class="text-center text-muted">Ticks</h3>
+  <table class="table table-hover table-condensed table-bordered">
+    <thead>
+      <tr>
+      <% @tick_types.each do |type| %> 
+        <th><%= type.name %></th>
+      <% end %>
+        <th>Notes</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <% @user.ticks.sorted.each do |tick| %>
+      <tr>
+      <% @tick_types.sorted.each do |type| %>
+        <% if tick.tick_type_id == type.id %>
+          <td><span class="glyphicon glyphicon-ok" aria-hidden="true"></td>
+        <% else %>
+          <td></td>
+        <% end %>
+      <% end %>
+      <td><%= tick.notes %></td>
+      <td><%= tick.created_at.localtime.to_s(:short) %></td>
+      <td><%= button_to "Delete", user_tick_path(@user, tick), data: {:confirm => "Are you sure?"}, :class => "btn btn-xs btn-danger", :method => :delete %>
+    </tr>
+    <% end %>
+  </table>

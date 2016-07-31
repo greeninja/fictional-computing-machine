@@ -1,30 +1,14 @@
 <% if @teams.count >= 1 %>
-<!--  <div class="row">
-    <div class="col-md-4">
-      <h3 class="text-muted text-center">
-        Rats per Team
-      </h3>
-      <%# column_chart Team.joins(:rats).group(:name).count %>
-    </div>
-    <div class="col-md-4">
-    </div>
-    <div class="col-md-4">
-      <h3 class="text-muted text-center">
-        Ticks per Team
-      </h3>
-      <%# column_chart Team.joins(:ticks).group(:name).count %>
-    </div>
-  </div> -->
   <div class="row">
     <div class="col-md-6">
       <h3 class="text-muted text-center">
         Rats
       </h3>
-      <%= column_chart User.joins(:rats).group(:name).count, :library => {:colors => ["orange"]} %>
+      <%= bar_chart User.joins(:rats).group(:name).count, :library => {:colors => ["orange"]}, height: "500px" %>
     </div>
     <div class="col-md-6">
       <h3 class="text-muted text-center">Ticks</h3>
-      <%= column_chart User.joins(:ticks).group(:name).count, :library => {:colors => ["green"]} %>
+      <%= bar_chart User.joins(:ticks).group(:name).count, :library => {:colors => ["green"]}, height: "500px" %>
     </div>
   </div>
 

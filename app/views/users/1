@@ -1,0 +1,21 @@
+<%= f.fields_for :rats, @user.rats.new do |u| %>
+
+  <div class="row">
+    <div class="col-md-6">
+      <form class="form-horizontal" role="form">
+          <% @rat_types.each do |t| %>
+            <div class="form-group">
+              <%= u.radio_button :rat_type_id, t.id %>
+              <%= u.label :rat_type_id, t.name %>
+            </div>
+          <% end %>
+        <div class="form-group">
+          <label for="Notes">
+            Notes
+          </label>
+          <%= u.text_area :other, :class => "form-control", :id => "Notes", :size => "1x4" %>
+        </div>
+    </div>
+  </div>
+
+<% end %>

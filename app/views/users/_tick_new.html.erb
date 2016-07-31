@@ -1,0 +1,7 @@
+<%= form_for(user) do |f| %>
+  <% if user.errors.any? %>
+    <%= render "form_error" %>
+  <% end %>
+    <%= render(:partial => "ticks_new", :locals => {:f => f}) %>
+    <%= f.submit :Submit, :class => "btn btn-success" %>
+<% end %>

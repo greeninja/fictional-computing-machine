@@ -1,0 +1,29 @@
+<h3 class="text-center text-muted">Tick Types Settings</h3>
+<table class="table table-hover table-condensed table-bordered">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Actions</th>
+    </tr>
+
+    <% @setting.tick_types.sorted.each do |tick| %>
+      <tr>
+        <td><%= tick.name %></td>
+        <td><%= tick.description %></td>
+        <td>
+          <div class="btn-group">
+            <%= link_to "Edit", edit_setting_tick_type_path(@setting, tick), :class => "btn btn-sm btn-default" %>
+            <button data-toggle="dropdown" class="btn btn-sm btn-default dropdown-toggle">
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+              <%= link_to "Delete", tick, method: :delete, data: { confirm: "Are you sure? This will cause issues if there are rats applied to Agents." } %>
+              </li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+</table>

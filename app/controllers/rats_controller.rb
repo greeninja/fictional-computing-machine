@@ -1,34 +1,27 @@
 class RatsController < ApplicationController
   before_action :set_rat, only: [:show, :edit, :update, :destroy]
+  before_action :confirm_logged_in
 
   before_filter :get_user
 
   def get_user
-    @user = User.find(params[:user_id]) if params[:user_id]#
+    @user = User.find(params[:user_id]) if params[:user_id]
   end
-  
-  # GET /rats
-  # GET /rats.json
+
   def index
     @rats = Rat.all
   end
 
-  # GET /rats/1
-  # GET /rats/1.json
   def show
   end
 
-  # GET /rats/new
   def new
     @rat = Rat.new
   end
 
-  # GET /rats/1/edit
   def edit
   end
 
-  # POST /rats
-  # POST /rats.json
   def create
     @rat = Rat.new(rat_params)
 
@@ -43,8 +36,6 @@ class RatsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /rats/1
-  # PATCH/PUT /rats/1.json
   def update
     respond_to do |format|
       if @rat.update(rat_params)
@@ -57,8 +48,6 @@ class RatsController < ApplicationController
     end
   end
 
-  # DELETE /rats/1
-  # DELETE /rats/1.json
   def destroy
     @rat.destroy
     @user = User.find(params[:user_id])
@@ -71,7 +60,7 @@ class RatsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_rat
-      @rat = Rat.find(params[:id])
+      @rat_types = Rat.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

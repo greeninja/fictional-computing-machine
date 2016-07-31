@@ -1,28 +1,21 @@
 class TicksController < ApplicationController
   before_action :set_tick, only: [:show, :edit, :update, :destroy]
+  before_action :confirm_logged_in
 
-  # GET /ticks
-  # GET /ticks.json
   def index
     @ticks = Tick.all
   end
 
-  # GET /ticks/1
-  # GET /ticks/1.json
   def show
   end
 
-  # GET /ticks/new
   def new
     @tick = Tick.new
   end
 
-  # GET /ticks/1/edit
   def edit
   end
 
-  # POST /ticks
-  # POST /ticks.json
   def create
     @tick = Tick.new(tick_params)
 
@@ -37,8 +30,6 @@ class TicksController < ApplicationController
     end
   end
 
-  # PATCH/PUT /ticks/1
-  # PATCH/PUT /ticks/1.json
   def update
     respond_to do |format|
       if @tick.update(tick_params)
@@ -51,8 +42,6 @@ class TicksController < ApplicationController
     end
   end
 
-  # DELETE /ticks/1
-  # DELETE /ticks/1.json
   def destroy
     @tick.destroy
     @user = User.find(params[:user_id])
