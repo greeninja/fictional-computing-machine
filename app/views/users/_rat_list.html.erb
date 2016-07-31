@@ -20,7 +20,7 @@
           <td></td>
         <% end %>
       <% end %>
-      <td><%= rat.other %></td>
+      <td><%= rat.notes %></td>
       <td><%= rat.created_at.localtime.to_s(:short) %></td>
       <td><%= button_to "Delete", user_rat_path(@user, rat), data: {:confirm => "Are you sure?"}, :class => "btn btn-xs btn-danger", :method => :delete %>
     </tr>

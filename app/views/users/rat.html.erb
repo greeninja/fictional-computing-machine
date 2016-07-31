@@ -4,10 +4,9 @@
   </div>
   <div class="panel-body">
     <% if @rat_enabled.enabled %>
-      <%= render 'rat_new', user: @user %>
+      <%= render 'rat', user: @user %>
     <% else %>
       <%= render 'warning', message: "This is using the old setup without dynamic settings!" %>
-      <%= render 'rat', user: @user %>
     <% end %>
   </div>
   <div class="panel-footer">

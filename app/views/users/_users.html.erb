@@ -4,7 +4,6 @@
       <th data-field="Custom ID" data-sortable="true">ID</th>
       <th data-field="Name"data-sortable="true">Name</th>
       <th data-field="Last Name" data-sortable="true">Last Name</th>
-      <th data-field="Team OLD" data-sortable="true">Team OLD</th>
       <th data-field="Team" data-sortable="true">Team</th>
       <th data-field="Rats" data-sortable="true">RaTs</th>
       <th data-field="Tick" data-sortable="true">TiCKs</th>
@@ -19,7 +18,6 @@
         <td><%= user.customid %></td>
         <td><%= user.name %></td>
         <td><%= user.last_name %></td>
-        <td><%= user.manual_team %></td>
         <td>
           <% if user.team_id.present? %>
             <%= user.team.name %></td>
