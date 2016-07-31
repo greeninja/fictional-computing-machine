@@ -58,7 +58,7 @@ class SettingsController < ApplicationController
   def destroy
     @setting.destroy
     respond_to do |format|
-      format.html { redirect_to settings_url, notice: 'Setting was successfully destroyed.' }
+      format.html { redirect_to settings_url, notice: 'Setting was successfully deleted.' }
       format.json { head :no_content }
     end
   end
