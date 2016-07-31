@@ -1,5 +1,7 @@
-<h3>Resource and Timekeeping System</h3> 
-
+<div class="row">
+  <h3>Resource and Timekeeping System</h3>
+  <%= render "daterange" %> 
+</div>
 <% if @teamcount == 0 %>
   <%= render 'warning', message: "There are no teams configured, this will cause errors" %>
 <% end %>
