@@ -1,5 +1,6 @@
 class RatsController < ApplicationController
   before_action :set_rat, only: [:show, :edit, :update, :destroy]
+  before_action :confirm_logged_in
 
   before_filter :get_user
 

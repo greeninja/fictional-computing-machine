@@ -1,5 +1,6 @@
 class RatTypesController < ApplicationController
   before_action :set_rat_type, only: [:show, :edit, :update, :destroy]
+  before_action :confirm_logged_in
 
   def index
     @rat_types = RatType.all

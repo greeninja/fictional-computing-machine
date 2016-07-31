@@ -1,6 +1,7 @@
 class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy]
   before_action :type_lookup, only: [:index, :show]
+  before_action :confirm_logged_in
 
   def index
     @teams = Team.all
