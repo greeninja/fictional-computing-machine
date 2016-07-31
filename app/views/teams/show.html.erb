@@ -18,11 +18,12 @@
       <%= render 'graphs', graph: User.where(team_id: @team.id), team_name: @team.name %>
     </div>
     <div id="rats" class="tab-pane">
-      <%= render "warning", message: 'This section is still under development. See Github for more information.' %>
-      <%# render "rats_overview" %>
+      <%# render "warning", message: 'This section is still under development. See Github for more information.' %>
+      <%= render "rat_graphs", graph: User.where(team_id: @team.id) %>
     </div>
     <div id="ticks" class="tab-pane">
-      <%= render "warning", message: 'This section is still under development. See Github for more information.' %>
+      <%# render "warning", message: 'This section is still under development. See Github for more information.' %>
+      <%= render "tick_graphs", graph: User.where(team_id: @team.id) %>
     </div>
   </div>
   <div class="panel-footer">
