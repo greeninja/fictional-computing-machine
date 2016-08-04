@@ -5,8 +5,9 @@
       <form class="form-horizontal" role="form">
           <% @rat_types.each do |t| %>
             <div class="form-group">
-              <%= u.radio_button :rat_type_id, t.id %>
               <%= u.label :rat_type_id, t.name %>
+              <%= u.radio_button :rat_type_id, t.id %>
+              <a href="#" data-toggle="tooltip" title="<%= t.description %>"><span class="glyphicon glyphicon-info-sign"></span></a><br>
             </div>
           <% end %>
         <div class="form-group">
