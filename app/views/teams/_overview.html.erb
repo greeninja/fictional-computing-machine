@@ -4,11 +4,11 @@
       <h3 class="text-muted text-center">
         Rats
       </h3>
-      <%= bar_chart User.joins(:rats).group(:last_name, :name).count, :library => {:colors => ["orange"]}, height: "600px" %>
+      <%= bar_chart User.joins(:rats).group(:last_name).count, :library => {:colors => ["orange"]}, height: "600px" %>
     </div>
     <div class="col-md-6">
       <h3 class="text-muted text-center">Ticks</h3>
-      <%= bar_chart User.joins(:ticks).group(:last_name, :name).count, :library => {:colors => ["green"]}, height: "600px" %>
+      <%= bar_chart User.joins(:ticks).group(:last_name).count, :library => {:colors => ["green"]}, height: "600px" %>
     </div>
   </div>
 
