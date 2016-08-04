@@ -4,7 +4,7 @@
       <h3 class="text-muted text-center">
       <%= t.name %>
       </h3>
-      <%= bar_chart Tick.joins(:user).where("ticks.tick_type_id = #{t.id}").group(:last_name).count, :library => {:colors => ["green"]}, height: "500px" %>
+      <%= bar_chart Tick.joins(:user).where("ticks.tick_type_id = #{t.id}").group(:name).count, :library => {:colors => ["green"]}, height: "500px" %>
     </div>
   <% end %>
 </div>
