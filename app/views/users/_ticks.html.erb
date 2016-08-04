@@ -5,8 +5,10 @@
       <form class="form-horizontal" role="form">
           <% @tick_types.each do |t| %>
             <div class="form-group">
-              <%= u.radio_button :tick_type_id, t.id %>
               <%= u.label :tick_type_id, t.name %>
+              <%= u.radio_button :tick_type_id, t.id %>
+              <a id="modal-<%= t.id %>" href="#modal-container-<%= t.id %>" data-toggle="modal"><span class="glyphicon glyphicon-info-sign"></span></a>
+              <%= render(:partial => "modal", :locals => {:t => t}) %>
             </div>
           <% end %>
         <div class="form-group">
