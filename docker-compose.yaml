@@ -10,7 +10,7 @@ services:
     volumes:
       - /opt/data:/var/lib/mysql
   web:
-    build: .
+    image: greeninja/fictional-computing-machine
     ports:
       - "8080:8080"
     environment:
