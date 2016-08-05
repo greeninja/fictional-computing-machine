@@ -11,8 +11,6 @@ class UsersController < ApplicationController
     @teams = User.uniq_team_id.where.not(:team_id => nil)
     @byteam = User.where(team_id: params[:team_id])
     @teamcount = Team.count
-    @search = RatSearch.new(params[:search])
-    @rats_test = @search.scope
   end
 
   def overview
