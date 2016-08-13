@@ -1,7 +1,7 @@
 <div class="pull-right">
   <%= form_tag users_path, method: :get do %>
-    <%= text_field_tag "search[date_from]", @search.date_from %>
-    <%= text_field_tag "search[date_to]", @search.date_to %>
+    <%= text_field_tag :date_from, @date_from %>
+    <%= text_field_tag :date_to, @date_to %>
     <%= submit_tag "Search", :class => "btn btn-default" %>
   <% end %>
 </div>
