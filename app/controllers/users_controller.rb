@@ -11,6 +11,9 @@ class UsersController < ApplicationController
     @teams = User.uniq_team_id.where.not(:team_id => nil)
     @byteam = User.where(team_id: params[:team_id])
     @teamcount = Team.count
+    @date_from = parsed_date(params[:date_from], Date.today.beginning_of_month)
+    @date_to = parsed_date(params[:date_to], Date.today.end_of_month)
+    @search = Search.new(params[:search])
   end
 
   def overview
@@ -114,5 +117,12 @@ class UsersController < ApplicationController
     @rat_types = RatType.sorted
     @tick_types = TickType.sorted
   end
+
+  def parsed_date(date_string, default)
+    Date.parse(date_string)
+  rescue ArgumentError, TypeError
+    default
+  end
+
 
 end
