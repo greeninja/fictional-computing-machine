@@ -12,25 +12,8 @@
  *
  *= require_tree .
  *= require_self
+ *= require bootstrap-datepicker
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
-@import "bootstrap-datetimepicker";
 
-/* Sortable table css */
-/* .pretty {
-  th {
-    .current {
-      padding-right: 12px;
-      background-repeat: no-repeat;
-      background-position: right center;
-      background-image: url(/images/glyphicons-404-sorting.png);
-    }
-    .asc {
-      background-image: url(/images/glyphicons-409-sort-by-attributes.png);
-    }
-    .desc {
-      background-image: url(/images/glyphicons-410-sort-by-attributes-alt.png);
-    }
-  }
-} */

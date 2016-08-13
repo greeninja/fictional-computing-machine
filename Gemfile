@@ -35,8 +35,8 @@ gem 'lazy_high_charts'
 # Add Bootstrap gems
 gem 'bootstrap-sass'
 gem 'momentjs-rails', '>= 2.9.0'
-gem 'bootstrap3-datetimepicker-rails', '~> 4.17.37'
-
+# gem 'bootstrap-datetimepicker-rails'
+gem 'bootstrap-datepicker-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
