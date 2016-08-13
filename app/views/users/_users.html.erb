@@ -38,7 +38,7 @@
         <td><%= button_to("New TiCK", {:action => 'tick', :id => user.id}, :class => "btn btn-sm btn-success") %></td>
         <td>
           <div class="btn-group">
-            <%= link_to 'Show', user, :class => "btn btn-sm btn-default" %>
+            <%= link_to 'Show', {:action => "show", :id => user.id, :date_from => @date_from, :date_to => @date_to}, :class => "btn btn-sm btn-default" %>
             <button data-toggle="dropdown" class="btn btn-sm btn-default dropdown-toggle">
               <span class="caret"></span>
             </button>
@@ -47,7 +47,7 @@
                 <%= link_to 'Edit User', edit_user_path(user) %>
               </li>
               <li>
-                <%= link_to 'Show RaTs / Ticks', user %>
+                <%= link_to 'Show RaTs / Ticks', user, date_from: @date_from, date_to: @date_to %>
               </li>
               <li class="divider"></li>
               <li>
