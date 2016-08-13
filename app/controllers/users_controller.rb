@@ -121,11 +121,4 @@ class UsersController < ApplicationController
     @tick_types = TickType.sorted
   end
 
-  def parsed_date(date_string, default)
-    Date.parse(date_string)
-  rescue ArgumentError, TypeError
-    default
-  end
-
-
 end

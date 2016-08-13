@@ -11,4 +11,11 @@ class ApplicationController < ActionController::Base
         return true
       end
     end
+
+  def parsed_date(date_string, default)
+    Date.parse(date_string)
+  rescue ArgumentError, TypeError
+    default
+  end
+
 end
