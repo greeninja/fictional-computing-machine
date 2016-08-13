@@ -11,6 +11,9 @@ class UsersController < ApplicationController
     @teams = User.uniq_team_id.where.not(:team_id => nil)
     @byteam = User.where(team_id: params[:team_id])
     @teamcount = Team.count
+    @date_from = parsed_date(params[:date_from], Date.today.beginning_of_month)
+    @date_to = parsed_date(params[:date_to], Date.today.end_of_month)
+    @search = Search.new(params[:search])
   end
 
   def overview
@@ -22,6 +25,9 @@ class UsersController < ApplicationController
 
   def show
     @users = User.find(params[:id])
+    @date_from = parsed_date(params[:date_from], Date.today.beginning_of_month)
+    @date_to = parsed_date(params[:date_to], Date.today.end_of_month)
+    @search = Search.new(params[:search])
   end
 
   def list

@@ -1,0 +1,15 @@
+<form class="form-inline" role="form">
+<div class="pull-right">
+  <%= form_tag users_path, method: :get do %>
+  <div class="form-group">
+    <label for="from">From:</label>
+    <%= text_field_tag :date_from, @date_from, :class => "form-control", :id => "from" %>
+  </div>
+  <div class="form-group">
+    <label for="to">To:</label>
+    <%= text_field_tag :date_to, @date_to, :class => "form-control", :id => "to" %>
+  </div>
+    <%= submit_tag "Search", :class => "btn btn-sm btn-default" %>
+  <% end %>
+</form>
+</div>
