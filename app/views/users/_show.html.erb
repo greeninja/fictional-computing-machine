@@ -2,7 +2,7 @@
   <%= render "success", message: "User #{@user.name} #{@user.last_name} has No TiCKs or RaTs" %>
 <% else %>
 
-  <%= render "daterange" %>"
+  <%= render "daterange" %>
 
   <% if @user.rats.count >= 1 %>
     <% if @rat_enabled.enabled %>
