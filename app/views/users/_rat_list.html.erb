@@ -2,7 +2,7 @@
   <table class="table table-hover table-condensed table-bordered">
     <thead>
       <tr>
-      <% @rat_types.each do |type| %> 
+      <% @rat_types.each do |type| %>
         <th><%= type.name %></th>
       <% end %>
         <th>Notes</th>
@@ -11,7 +11,7 @@
       </tr>
     </thead>
 
-    <% @user.rats.sorted.each do |rat| %>
+    <% @user.rats.where('rats.created_at BETWEEN ? AND ?', @date_from, @date_to).each do |rat| %>
       <tr>
       <% @rat_types.sorted.each do |type| %>
         <% if rat.rat_type_id == type.id %>
