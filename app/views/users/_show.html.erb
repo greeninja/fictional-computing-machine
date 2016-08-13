@@ -2,9 +2,11 @@
   <%= render "success", message: "User #{@user.name} #{@user.last_name} has No TiCKs or RaTs" %>
 <% else %>
 
+  <%= render "daterange" %>"
+
   <% if @user.rats.count >= 1 %>
     <% if @rat_enabled.enabled %>
-      <%= render "rat_list" %>
+      <%= render "rat_list", date_from: @date_from, date_to: @date_to %>
     <% else %>
       <%= render "warning", message: "This is using the old model without dynamic settings!" %>
     <% end %>
@@ -12,7 +14,7 @@
 
   <% if @user.ticks.count >= 1 %>
     <% if @tick_enabled.enabled %>
-      <%= render "tick_list" %>
+      <%= render "tick_list", date_from: @date_from, date_to: @date_to %>
     <% else %>
       <%= render "warning", message: "This is using the old model without dynamic settings!" %>
     <% end %>
