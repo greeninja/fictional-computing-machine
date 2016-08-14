@@ -1,9 +1,9 @@
 class AccessController < ApplicationController
 
   # layout "access"
-    
+
   before_action :confirm_logged_in, :except => [:login, :attempt_login, :logout]
-    
+
   def index
     # display text and links
   end
@@ -11,7 +11,7 @@ class AccessController < ApplicationController
   def login
     # display login form
   end
-    
+
   def attempt_login
     if params[:username].present? && params[:password].present?
       found_user = AdminUser.where(:username => params[:username]).first
@@ -30,7 +30,7 @@ class AccessController < ApplicationController
       redirect_to(:action => 'login')
     end
   end
-    
+
   def logout
   # Mark user as logged out
     session[:user_id] = nil
