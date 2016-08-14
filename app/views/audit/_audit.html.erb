@@ -1,0 +1,36 @@
+<% if @audits.count >= 1 %>
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Model</th>
+      <th>Action</th>
+      <th>Time</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @audits.where('versions.created_at BETWEEN ? AND ?', @date_from, @date_to).each do |audit| %>
+      <tr>
+        <% if audit.whodunnit? %>
+          <td><%= AdminUser.find(audit.whodunnit).username %></td>
+        <% else %>
+          <td><span class="label label-danger">No user defined!</span></td>
+        <% end %>
+        <td><%= audit.item_type %></td>
+        <% if audit.event == "destroy" %>
+          <td><span class="label label-warning"><%= audit.event %></span></td>
+        <% else %>
+          <td><%= audit.event %></td>
+        <% end %>
+        <td><%= audit.created_at.to_s(:short) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<% else %>
+  <%= render "warning", message: "No audit logs! Check the model is working. Using gem => papertrail" %>
+<% end %>
