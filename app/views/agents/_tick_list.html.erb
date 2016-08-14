@@ -22,7 +22,7 @@
       <% end %>
       <td><%= tick.notes %></td>
       <td><%= tick.created_at.localtime.to_s(:short) %></td>
-      <td><%= button_to "Delete", user_tick_path(@user, tick), data: {:confirm => "Are you sure?"}, :class => "btn btn-xs btn-danger", :method => :delete %>
+      <td><%= button_to "Delete", agent_tick_path(@user, tick), data: {:confirm => "Are you sure?"}, :class => "btn btn-xs btn-danger", :method => :delete %>
     </tr>
     <% end %>
   </table>

@@ -1,5 +1,5 @@
 class Rat < ApplicationRecord
-  belongs_to :user
+  belongs_to :agent
   belongs_to :rat_type
 
   scope :byuser, lambda { order("rats.created_at DESC") }

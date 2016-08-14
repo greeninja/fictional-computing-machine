@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160731132519) do
+ActiveRecord::Schema.define(version: 20160814130224) do
 
   create_table "admin_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "first_name",      limit: 25
@@ -20,6 +20,16 @@ ActiveRecord::Schema.define(version: 20160731132519) do
     t.string   "password_digest"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+  end
+
+  create_table "agents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string   "name"
+    t.string   "last_name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "team_id"
+    t.bigint   "customid"
+    t.index ["team_id"], name: "index_agents_on_team_id", using: :btree
   end
 
   create_table "rat_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -32,7 +42,7 @@ ActiveRecord::Schema.define(version: 20160731132519) do
   end
 
   create_table "rats", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.integer  "user_id"
+    t.integer  "agent_id"
     t.string   "notes"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
@@ -67,7 +77,7 @@ ActiveRecord::Schema.define(version: 20160731132519) do
   end
 
   create_table "ticks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.integer  "user_id"
+    t.integer  "agent_id"
     t.string   "notes"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
@@ -75,16 +85,6 @@ ActiveRecord::Schema.define(version: 20160731132519) do
     t.integer  "admin_user_id"
     t.index ["admin_user_id"], name: "index_ticks_on_admin_user_id", using: :btree
     t.index ["tick_type_id"], name: "index_ticks_on_tick_type_id", using: :btree
-  end
-
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.string   "name"
-    t.string   "last_name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "team_id"
-    t.bigint   "customid"
-    t.index ["team_id"], name: "index_users_on_team_id", using: :btree
   end
 
 end
