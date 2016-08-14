@@ -1,21 +1,21 @@
 Rails.application.routes.draw do
 
-  root :to => "users#index"
+  root :to => "agents#index"
   # ideally:
   # root :to => welcome#index
   # once built
 
-  resources :users
+  resources :agents
   resources :teams
   resources :settings
   resources :tick_types
   resources :rat_types
 
-  resources :users do
+  resources :agents do
     resources :rats
   end
 
-  resources :users do
+  resources :agents do
     resources :ticks
   end
 

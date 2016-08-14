@@ -5,7 +5,7 @@ class RatsController < ApplicationController
   before_filter :get_user
 
   def get_user
-    @user = User.find(params[:user_id]) if params[:user_id]
+    @user = Agent.find(params[:agent_id]) if params[:agent_id]
   end
 
   def index
@@ -50,9 +50,9 @@ class RatsController < ApplicationController
 
   def destroy
     @rat.destroy
-    @user = User.find(params[:user_id])
+    @user = Agent.find(params[:agent_id])
     respond_to do |format|
-      format.html { redirect_to user_path(@user), notice: 'Rat was successfully deleted' }
+      format.html { redirect_to agent_path(@user), notice: 'Rat was successfully deleted' }
       format.json { head :no_content }
     end
   end

@@ -1,5 +1,5 @@
 class Tick < ApplicationRecord
-  belongs_to :user
+  belongs_to :agent
   belongs_to :tick_type
 
   scope :byuser, lambda { order("ticks.created_at DESC") }

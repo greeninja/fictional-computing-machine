@@ -3,7 +3,7 @@
     <h3>Resource and Timekeeping System</h3>
   </div>
   <div class="col-md-6">
-    <%= render "daterange" %> 
+    <%= render "daterange" %>
   </div>
 </div>
 <% if @teamcount == 0 %>
@@ -24,7 +24,7 @@
     <% @teams.each do |pane| %>
       <div id="<%= pane.team_id %>" class="tab-pane fade">
         <!-- TODO: Get this in the controller! -->
-        <%= render 'users', users: User.where(team_id: pane.team_id) %>
+        <%= render 'users', users: Agent.where(team_id: pane.team_id) %>
         <%# render 'users', users: @byteam %>
       </div>
     <% end %>
@@ -41,4 +41,4 @@
 
 <% end %>
 
-<%= button_to 'New User', new_user_path, :class => "btn btn-default" %>
+<%= button_to 'New User', new_agent_path, :class => "btn btn-default" %>

@@ -19,15 +19,15 @@
   </ul>
   <div class="tab-content">
     <div id="overview" class="tab-pane active">
-      <%= render 'graphs', graph: User.where(team_id: @team.id), team_name: @team.name %>
+      <%= render 'graphs', graph: Agent.where(team_id: @team.id), team_name: @team.name %>
     </div>
     <div id="rats" class="tab-pane">
       <%# render "warning", message: 'This section is still under development. See Github for more information.' %>
-      <%= render "rat_graphs", graph: User.where(team_id: @team.id) %>
+      <%= render "rat_graphs", graph: Agent.where(team_id: @team.id) %>
     </div>
     <div id="ticks" class="tab-pane">
       <%# render "warning", message: 'This section is still under development. See Github for more information.' %>
-      <%= render "tick_graphs", graph: User.where(team_id: @team.id) %>
+      <%= render "tick_graphs", graph: Agent.where(team_id: @team.id) %>
     </div>
   </div>
   <div class="panel-footer">

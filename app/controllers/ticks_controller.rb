@@ -44,9 +44,9 @@ class TicksController < ApplicationController
 
   def destroy
     @tick.destroy
-    @user = User.find(params[:user_id])
+    @user = Agent.find(params[:agent_id])
     respond_to do |format|
-      format.html { redirect_to user_path(@user), notice: 'Tick was successfully deleted' }
+      format.html { redirect_to agent_path(@user), notice: 'Tick was successfully deleted' }
       format.json { head :no_content }
     end
   end

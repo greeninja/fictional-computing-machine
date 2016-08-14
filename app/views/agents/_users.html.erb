@@ -44,7 +44,7 @@
             </button>
             <ul class="dropdown-menu">
               <li>
-                <%= link_to 'Edit User', edit_user_path(user) %>
+                <%= link_to 'Edit User', edit_agent_path(user) %>
               </li>
               <li>
               <%= link_to 'Show RaTs / Ticks', {:action => "show", :id => user.id, :date_from => @date_from, :date_to => @date_to} %>

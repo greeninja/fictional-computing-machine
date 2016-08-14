@@ -1,4 +1,4 @@
-<% if setting.errors.any? %>
+<% if form.errors.any? %>
 
   <div class="row">
     <div class="col-md-12">
@@ -6,9 +6,9 @@
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
           ×
         </button>
-        <h2><%= pluralize(setting.errors.count, "error") %> prohibited this setting from being saved:</h2>
+        <h2><%= pluralize(form.errors.count, "error") %> prohibited this setting from being saved:</h2>
         <ul>
-          <% setting.errors.full_messages.each do |message| %>
+          <% form.errors.full_messages.each do |message| %>
           <li><%= message %></li>
           <% end %>
         </ul>
