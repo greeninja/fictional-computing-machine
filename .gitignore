@@ -2,3 +2,4 @@
 development.log
 tmp/*
 Gemfile.lock
+*.swp
