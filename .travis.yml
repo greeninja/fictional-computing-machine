@@ -6,13 +6,10 @@ env:
 services:
   - mysql
 before_script:
-  - mysql -e "show databases;"
   - mysql -e "create database fictional_computing_machine;"
   - mysql -e "create user fictional;"
   - mysql -u root -e "grant all privileges on fictional_computing_machine.* to 'fictional'@'localhost' identified by 'Password1';"
   - mysql -u root -e "flush privileges;"
-  - mysql -e "show databases;"
-  - mysql -u root -e "show grants for 'fictional'@'localhost';"
 script:
   - rake db:migrate
   - rake db:seed
