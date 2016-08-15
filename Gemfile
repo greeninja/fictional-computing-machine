@@ -33,6 +33,7 @@ gem 'chartkick'
 gem 'lazy_high_charts'
 gem 'rack-pratchett'
 gem 'paper_trail'
+gem 'bootstrap-datepicker-rails'
 
 # Add Bootstrap gems
 gem 'bootstrap-sass'
