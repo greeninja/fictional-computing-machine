@@ -1,6 +1,8 @@
 language: ruby
 rvm:
   - 2.2.2
+env:
+  - RAILS_ENV=development
 services:
   - mysql
 before_script:
