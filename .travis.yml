@@ -1,13 +1,13 @@
 language: ruby
 rvm:
   - 2.2.2
-
+env:
+  - DB_HOST=mysql
+  - RAILS_ENV=development
 services:
   - mysql
-
 before_script:
   - mysql -e 'create database fictional_computing_machine'
-
 script:
   - rake db:migrate
   - rake db:seed
