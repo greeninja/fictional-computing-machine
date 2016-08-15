@@ -1,13 +1,13 @@
 language: ruby
 rvm:
   - 2.2.2
-env:
-  - DB_HOST=mysql
-  - RAILS_ENV=development
 services:
   - mysql
 before_script:
-  - mysql -e 'create database fictional_computing_machine'
+  - mysql -e 'create database fictional_computing_machine;'
+  - mysql -e 'create user fictional identified by password("Password1");'
+  - mysql -e 'grant all privileges on fictional_computing_machine.* to "fictional"@"localhost";'
+  - mysql -e 'flush privileges;'
 script:
   - rake db:migrate
   - rake db:seed
