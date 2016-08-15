@@ -4,9 +4,10 @@ rvm:
 services:
   - mysql
 before_script:
+  - mysql -e "show databases;"
   - mysql -e "create database fictional_computing_machine;"
   - mysql -e "create user fictional;"
-  - mysql -e "grant all privileges on fictional_computing_machine.* to 'fictional'@'localhost' identified by 'Password1';"
+  - mysql -u root -e "grant all privileges on fictional_computing_machine.* to 'fictional'@'localhost' identified by 'Password1';"
   - mysql -e "flush privileges;"
 script:
   - rake db:migrate
