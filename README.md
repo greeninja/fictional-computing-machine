@@ -1,6 +1,6 @@
-[![Travis badge](https://travis-ci.org/greeninja/fictional-computing-machine.svg?branch=master)](https://travis-ci.org/greeninja/fictional-computing-machine.svg?branch=master)
+# Readme
 
-# README
+[![Travis badge](https://travis-ci.org/greeninja/fictional-computing-machine.svg?branch=master)](https://travis-ci.org/greeninja/fictional-computing-machine)
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
