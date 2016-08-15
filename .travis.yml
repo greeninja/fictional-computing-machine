@@ -1,0 +1,11 @@
+language: ruby
+rvm:
+  - 2.3
+  - jruby
+  - rbx-2
+
+services:
+  - mysql
+
+before_script:
+  - mysql -e 'create database fictional_computing_machine'
