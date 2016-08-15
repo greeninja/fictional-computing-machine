@@ -1,3 +1,5 @@
+[![Travis badge](https://travis-ci.org/greeninja/fictional-computing-machine.svg?branch=master)](https://travis-ci.org/greeninja/fictional-computing-machine.svg?branch=master)
+
 # README
 
 This README would normally document whatever steps are necessary to get the
