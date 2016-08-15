@@ -2,11 +2,17 @@
 <div class="pull-right">
   <%= form_tag agents_path, method: :get do %>
   <div class="input-daterange input-group" id="datepicker">
-    <%= text_field_tag :date_from, @date_from, :class => "input-sm form-control", :name => "date_from" %>
+    <%= text_field_tag :date_from, @date_from, :class => "input-sm form-control", :name => "date_from", "data-behaviour" => "datepicker" %>
     <span class="input-group-addon">to</span>
-    <%= text_field_tag :date_to, @date_to, :class => "input-sm form-control", :name => "date_to" %>
+    <%= text_field_tag :date_to, @date_to, :class => "input-sm form-control", :name => "date_to", "data-behaviour" => "datepicker" %>
   </div>
     <%= submit_tag "Search", :class => "btn btn-sm btn-default" %>
   <% end %>
 </form>
 </div>
+<script type="text/javascript">
+  $('[data-behaviour~=datepicker]').datepicker({
+    format: "yyyy-mm-dd",
+    todayHighlight: true
+  });
+</script>
