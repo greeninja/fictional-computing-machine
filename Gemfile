@@ -38,8 +38,6 @@ gem 'bootstrap-datepicker-rails'
 # Add Bootstrap gems
 gem 'bootstrap-sass'
 gem 'momentjs-rails', '>= 2.9.0'
-# gem 'bootstrap-datetimepicker-rails'
-gem 'bootstrap-datepicker-rails'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
