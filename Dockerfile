@@ -7,6 +7,5 @@ ADD . /home
 RUN bundle install
 
 EXPOSE 8080:8080
-USER 100000
 
 CMD ["rails", "server", "-b", "0.0.0.0", "-p", "8080"]
