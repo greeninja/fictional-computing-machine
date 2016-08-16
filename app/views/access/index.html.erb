@@ -1,7 +1,7 @@
 <h3>Admin Menu</h3>
 <h4>Logged in as: <%=session[:username] %></h4>
 <ul>
-  <li><%= link_to("RaTs", :controller => 'users') %></li>
+  <li><%= link_to("RaTs", :controller => 'agents') %></li>
   <li><%= link_to("Manage Admin Users", :controller => 'admin_user') %></li>
   <li><%= link_to("Logout", :action => 'logout') %></li>
 </ul>
