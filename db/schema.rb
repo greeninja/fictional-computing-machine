@@ -10,17 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160814143408) do
-
-  create_table "admin_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.string   "first_name",      limit: 25
-    t.string   "last_name",       limit: 50
-    t.string   "username",        limit: 25
-    t.string   "email"
-    t.string   "password_digest"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
-  end
+ActiveRecord::Schema.define(version: 20160819105333) do
 
   create_table "agents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
@@ -85,6 +75,17 @@ ActiveRecord::Schema.define(version: 20160814143408) do
     t.integer  "admin_user_id"
     t.index ["admin_user_id"], name: "index_ticks_on_admin_user_id", using: :btree
     t.index ["tick_type_id"], name: "index_ticks_on_tick_type_id", using: :btree
+  end
+
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string   "first_name",      limit: 25
+    t.string   "last_name",       limit: 50
+    t.string   "username",        limit: 25
+    t.string   "email"
+    t.string   "password_digest"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+    t.integer  "role"
   end
 
   create_table "versions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|

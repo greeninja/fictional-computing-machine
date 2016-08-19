@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
-  root :to => "agents#index"
+  get 'overview/index'
+
+  root :to => "overview#index"
   # ideally:
   # root :to => welcome#index
   # once built
@@ -10,6 +12,7 @@ Rails.application.routes.draw do
   resources :settings
   resources :tick_types
   resources :rat_types
+  resources :users
 
   resources :agents do
     resources :rats

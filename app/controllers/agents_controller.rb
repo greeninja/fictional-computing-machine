@@ -11,8 +11,8 @@ class AgentsController < ApplicationController
     @teams = Agent.uniq_team_id.where.not(:team_id => nil)
     @byteam = Agent.where(team_id: params[:team_id])
     @teamcount = Team.count
-    @date_from = parsed_date(params[:date_from], Date.today.beginning_of_month)
-    @date_to = parsed_date(params[:date_to], Date.today.end_of_month)
+    @date_from = parsed_date(params[:date_from], Date.today.beginning_of_week)
+    @date_to = parsed_date(params[:date_to], Date.today.next_week)
     @search = Search.new(params[:search])
   end
 
@@ -25,8 +25,8 @@ class AgentsController < ApplicationController
 
   def show
     @users = Agent.find(params[:id])
-    @date_from = parsed_date(params[:date_from], Date.today.beginning_of_month)
-    @date_to = parsed_date(params[:date_to], Date.today.end_of_month)
+    @date_from = parsed_date(params[:date_from], Date.today.beginning_of_week)
+    @date_to = parsed_date(params[:date_to], Date.today.next_week)
     @search = Search.new(params[:search])
   end
 
