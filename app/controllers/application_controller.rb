@@ -3,9 +3,9 @@ class ApplicationController < ActionController::Base
 
   before_filter :set_paper_trail_whodunnit
 
-
-  def user_for_paper_trail
-    session[:user_id].present? ? session[:user_id] : 'User Unknown!'
+  def current_user
+    return unless session[:user_id]
+    @current_user ||= User.find(session[:user_id])
   end
 
   private
