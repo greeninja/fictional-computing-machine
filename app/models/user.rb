@@ -5,6 +5,9 @@ class User < ApplicationRecord
   has_many :rats
   has_many :ticks
 
+  enum role: [:user, :supervisor, :team_leader, :junior_admin, :admin]
+  after_initialize :set_default_role, :if => :new_record?
+
   scope :sorted, lambda { order("users.last_name ASC").order("users.first_name ASC") }
 
   EMAIL_REGEX = /\A[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}\Z/
@@ -31,6 +34,10 @@ class User < ApplicationRecord
 
   def name
     "#{first_name} #{last_name}"
+  end
+
+  def set_default_role
+    self.role ||= :user
   end
 
 end

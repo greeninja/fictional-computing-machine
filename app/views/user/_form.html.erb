@@ -16,13 +16,19 @@
         <th><%= f.label(:email, "Email") %></th>
         <td><%= f.email_field(:email) %></td>
     </tr>
-  <!--  <tr>
+<!--  <tr>
         <th><%# f.label(:email_confirmation, "Confirm Email") %></th>
         <th><%# f.email_field(:email_confimation) %></th></tr>
     <tr>
 -->
-        <th><%= f.label(:password, "Password") %></th>
+  <tr>
+    <th><%= f.label(:password, "Password") %></th>
     <td><%= f.password_field(:password) %></td>
-    </tr>
+  </tr>
+
+  <tr>
+    <th><%= f.label(:role, "Role") %></th>
+    <tr><%= f.select(:role, User.roles.keys.map {|role| [role.titleize,role]}) %></tr>
+  </tr>
 </table>
 
