@@ -1,11 +1,11 @@
-class AdminUser < ApplicationRecord
+class User < ApplicationRecord
 
   has_secure_password
   has_many :users
   has_many :rats
   has_many :ticks
 
-  scope :sorted, lambda { order("admin_users.last_name ASC").order("admin_users.first_name ASC") }
+  scope :sorted, lambda { order("users.last_name ASC").order("users.first_name ASC") }
 
   EMAIL_REGEX = /\A[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}\Z/
   FORBIDDEN_USERNAMES = ['littlebopeep','humptydumpty','marymary','root']
