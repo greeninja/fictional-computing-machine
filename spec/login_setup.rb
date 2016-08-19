@@ -128,7 +128,7 @@ describe "Login and Install" do
   it "Enable's Rats and Ticks" do
     @browser.link(:text => "Admin").click
     @browser.link(:text => "Settings").click
-    @browser.xpath(:value => "//div[3]/div/button").click
+    @browser.button(:class => 'class="btn btn-default dropdown-toggle"', :index => 0).click
     @browser.link(:text => "Edit").click
     @browser.checkbox(:id => "setting_enabled").set
     @browser.button(:value => "Submit").click
