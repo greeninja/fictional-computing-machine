@@ -43,7 +43,7 @@ class UsersController < ApplicationController
     if @user.update(permitted_attributes(@user))
     # If update succeeds, redirect to the index action
       flash[:notice] = "User '#{@user.name}' updated successfully"
-      redirect_to root_path
+      redirect_to(:action => 'edit', :id => @user.id)
     else
     # If update fails, redisplay the form so user can fix problems
       render('edit')
