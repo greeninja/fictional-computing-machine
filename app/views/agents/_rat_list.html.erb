@@ -11,7 +11,7 @@
       </tr>
     </thead>
 
-    <% @user.rats.where('rats.created_at BETWEEN ? AND ?', @date_from, @date_to).each do |rat| %>
+    <% @user.rats.sorted.where('rats.created_at BETWEEN ? AND ?', @date_from, @date_to).each do |rat| %>
       <tr>
       <% @rat_types.sorted.each do |type| %>
         <% if rat.rat_type_id == type.id %>
