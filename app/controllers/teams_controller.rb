@@ -2,29 +2,35 @@ class TeamsController < ApplicationController
   before_action :set_team, only: [:show, :edit, :update, :destroy]
   before_action :type_lookup, only: [:index, :show]
   before_action :confirm_logged_in
+  after_action :verify_authorized
 
   def index
     @teams = Team.all
     @date_from = parsed_date(params[:date_from], Date.today.beginning_of_week)
     @date_to = parsed_date(params[:date_to], Date.today.next_week)
     @search = Search.new(params[:search])
+    authorize Team
   end
 
   def show
     @date_from = parsed_date(params[:date_from], Date.today.beginning_of_week)
     @date_to = parsed_date(params[:date_to], Date.today.next_week)
     @search = Search.new(params[:search])
+    authorize Team
   end
 
   def new
+    authorize Team
     @team = Team.new
   end
 
   def edit
+    authorize Team
   end
 
   def create
     @team = Team.new(team_params)
+    authorize Team
 
     respond_to do |format|
       if @team.save
@@ -38,6 +44,7 @@ class TeamsController < ApplicationController
   end
 
   def update
+    authorize Team
     respond_to do |format|
       if @team.update(team_params)
         format.html { redirect_to @team, notice: 'Team was successfully updated.' }
@@ -50,6 +57,7 @@ class TeamsController < ApplicationController
   end
 
   def destroy
+    authorize Team
     @team.destroy
     respond_to do |format|
       format.html { redirect_to teams_url, notice: 'Team was successfully deleted.' }

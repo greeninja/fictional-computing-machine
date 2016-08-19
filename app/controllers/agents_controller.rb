@@ -3,8 +3,9 @@ class AgentsController < ApplicationController
   before_action :get_types, only: [:show]
   before_action :get_settings
   before_action :confirm_logged_in
+  after_action :verify_authorized
 
-  helper_method :sort_column, :sort_direction
+  # helper_method :sort_column, :sort_direction
 
   def index
     @users = Agent.sorted
@@ -14,6 +15,7 @@ class AgentsController < ApplicationController
     @date_from = parsed_date(params[:date_from], Date.today.beginning_of_week)
     @date_to = parsed_date(params[:date_to], Date.today.next_week)
     @search = Search.new(params[:search])
+    authorize Agent
   end
 
   def overview
@@ -21,6 +23,7 @@ class AgentsController < ApplicationController
     @teams = Agent.uniq_team_id.where.not(:team_id => nil)
     @byteam = Agent.where(team_id: params[:team_id])
     @teamcount = Team.count
+    authorize Agent
   end
 
   def show
@@ -28,6 +31,7 @@ class AgentsController < ApplicationController
     @date_from = parsed_date(params[:date_from], Date.today.beginning_of_week)
     @date_to = parsed_date(params[:date_to], Date.today.next_week)
     @search = Search.new(params[:search])
+    authorize Agent
   end
 
   def list
@@ -37,16 +41,18 @@ class AgentsController < ApplicationController
   def new
     @user = Agent.new
     @teams = Team.sorted
+    authorize Agent
   end
 
   def edit
     @users = Agent.find(params[:id])
     @teams = Team.sorted
+    authorize Agent
   end
 
   def create
     @user = Agent.new(user_params)
-
+    authorize Agent 
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
@@ -59,6 +65,7 @@ class AgentsController < ApplicationController
   end
 
   def update
+    authorize Agent
     respond_to do |format|
       if @user.update_attributes(user_params)
         format.html { redirect_to @user, notice: 'User was successfully updated.' }
@@ -71,6 +78,7 @@ class AgentsController < ApplicationController
   end
 
   def destroy
+    authorize Agent
     @user.destroy
     respond_to do |format|
       format.html { redirect_to agents_url, notice: 'User was successfully destroyed.' }
@@ -79,12 +87,14 @@ class AgentsController < ApplicationController
   end
 
   def rat
+    authorize Agent
     @user = Agent.find(params[:id])
     @rat_types = RatType.sorted
     @user.rats.new
   end
 
   def tick
+    authorize Agent
     @user = Agent.find(params[:id])
     @tick_types = TickType.sorted
     @user.rats.new
