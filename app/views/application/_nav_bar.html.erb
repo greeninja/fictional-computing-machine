@@ -9,7 +9,7 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li class="<%= 'active' if params[:controller] == 'users' %>">
+            <li class="<%= 'active' if params[:controller] == 'agents' %>">
               <%= link_to("Agents", :controller => 'agents') %>
             </li>
             <li class="<%= 'active' if params[:controller] == 'teams' %>">
@@ -30,7 +30,7 @@
                   <%= link_to("Application Audit", :controller => 'audit') %>
                 </li>
                 <li>
-                  <%= link_to("Manage Admin Users", :controller => 'user') %>
+                  <%= link_to("Manage Admin Users", :controller => 'users') %>
                 </li>
                 <li class="divider">
                 </li>

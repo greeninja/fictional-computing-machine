@@ -1,0 +1,15 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3>User: <%= @user.name %></h3>
+  </div>
+  <div class="panel-body">
+    <strong>Username:   </strong><%= @user.username %><br />
+    <strong>First Name: </strong><%= @user.first_name %><br />
+    <strong>Last Name:  </strong><%= @user.last_name %><br />
+    <strong>eMail:      </strong><%= @user.email %><br />
+    <strong>Role:       </strong><%= @user.role.titleize %><br />
+  </div>
+  <div class="panel-footer">
+    <%= render "back" %>
+  </div>
+</div>

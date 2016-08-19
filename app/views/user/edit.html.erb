@@ -1,8 +1,0 @@
-<%# link_to 'Edit', edit_user_path(@user) %>
-<%# link_to 'Back', users_path %>
-
-<h3>Edit User</h3>
-<%= form_for(:user, :url => {:action => 'update', :id => @user.id}) do |f| %>
-  <%= render(:partial => "form", :locals => {:f => f}) %>
-  <%= submit_tag("Update User") %>
-<% end %>

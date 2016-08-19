@@ -1,8 +1,12 @@
-class UserController < ApplicationController
+class UsersController < ApplicationController
   before_action :confirm_logged_in
 
   def index
     @users = User.sorted
+  end
+
+  def show
+    @user = User.find(params[:id])
   end
 
   def new
@@ -22,7 +26,7 @@ class UserController < ApplicationController
   end
 
   def edit
-      @user = User.find(params[:id])
+    @user = User.find(params[:id])
   end
 
   def update
@@ -31,8 +35,8 @@ class UserController < ApplicationController
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
     # If update succeeds, redirect to the index action
-        flash[:notice] = "Subject '#{@user.name}' updated successfully"
-        redirect_to(:action => 'index')
+      flash[:notice] = "Subject '#{@user.name}' updated successfully"
+      redirect_to(:action => 'index')
     else
     # If update fails, redisplay the form so user can fix problems
       render('edit')
@@ -40,7 +44,7 @@ class UserController < ApplicationController
   end
 
   def delete
-      @user = User.find(params[:id])
+    @user = User.find(params[:id])
   end
 
     def destroy
