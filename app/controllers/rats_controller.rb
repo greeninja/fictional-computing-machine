@@ -1,6 +1,7 @@
 class RatsController < ApplicationController
   before_action :set_rat, only: [:show, :edit, :update, :destroy]
   before_action :confirm_logged_in
+  after_action :verify_authorized
 
   before_filter :get_user
 
@@ -10,20 +11,25 @@ class RatsController < ApplicationController
 
   def index
     @rats = Rat.all
+    authorize Rat
   end
 
   def show
+    authorize Rat
   end
 
   def new
     @rat = Rat.new
+    authorize Rat
   end
 
   def edit
+    authorize Rat
   end
 
   def create
     @rat = Rat.new(rat_params)
+    authorize Rat
 
     respond_to do |format|
       if @rat.save
@@ -37,6 +43,7 @@ class RatsController < ApplicationController
   end
 
   def update
+    authorize Rat
     respond_to do |format|
       if @rat.update(rat_params)
         format.html { redirect_to @rat, notice: 'Rat was successfully updated.' }
@@ -49,6 +56,7 @@ class RatsController < ApplicationController
   end
 
   def destroy
+    authorize Rat
     @rat.destroy
     @user = Agent.find(params[:agent_id])
     respond_to do |format|

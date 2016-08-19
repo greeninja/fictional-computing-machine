@@ -38,6 +38,7 @@
           <%= f.email_field :email, :class => "form-control", :id => "inputeMail" %>
         </div>
       </div>
+      <% if @current_user.admin? or @current_user.junior_admin? %>
       <div class="form-group">
         <label for="inputRole" class="col-sm-2 control-label">
           <%= f.label "User Role" %>
@@ -46,6 +47,7 @@
           <%= f.select(:role, User.roles.keys.map {|role| [role.titleize,role]}, {}, {:class => "form-control", :id => "inputrole"}) %>
         </div>
       </div>
+      <% end %>
       <div class="form-group">
         <label for="inputPassword" class="col-sm-2 control-label">
           <%= f.label "Password" %>

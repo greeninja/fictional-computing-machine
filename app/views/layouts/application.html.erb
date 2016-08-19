@@ -13,16 +13,10 @@
   <% if session[:user_id] %>
     <%= render(:partial => "application/nav_bar") %>
     <% if notice.present? %>
-      <div class="row">
-        <div class="col-md-12">
-          <div class="alert alert-dismissable alert-success">
-            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">
-              ×
-            </button>
-            <strong>Success: </strong><%= notice %>
-          </div>
-        </div>
-      </div>
+      <%= render "success", message: notice %>
+    <% end %>
+    <% if flash[:warning] %>
+      <%= render "warning", message: flash[:warning] %>
     <% end %>
     <div class="row">
       <div class="col-md-1">

@@ -1,12 +1,15 @@
 class SettingsController < ApplicationController
   before_action :set_setting, only: [:show, :edit, :update, :destroy]
   before_action :confirm_logged_in
+  after_action :verify_authorized
 
   def index
+    authorize Setting
     @settings = Setting.sorted
   end
 
   def show
+    authorize Setting
     @setting = Setting.find(params[:id])
     # TODO
     # This is UBER inificient - there has to be a better way!
@@ -15,22 +18,27 @@ class SettingsController < ApplicationController
   end
 
   def show_rat_types
+    authorize Setting
     @rat_types = RatType.sorted
   end
 
   def show_tick_types
+    authorize Setting
     @tick_types = TickType.sorted
   end
 
   def new
+    authorize Setting
     @setting = Setting.new
   end
 
   def edit
+    authorize Setting
   end
 
   def create
     @setting = Setting.new(setting_params)
+    authorize Setting
 
     respond_to do |format|
       if @setting.save
@@ -44,6 +52,7 @@ class SettingsController < ApplicationController
   end
 
   def update
+    authorize Setting
     respond_to do |format|
       if @setting.update(setting_params)
         format.html { redirect_to @setting, notice: 'Setting was successfully updated.' }
@@ -56,6 +65,7 @@ class SettingsController < ApplicationController
   end
 
   def destroy
+    authorize Setting
     @setting.destroy
     respond_to do |format|
       format.html { redirect_to settings_url, notice: 'Setting was successfully deleted.' }
