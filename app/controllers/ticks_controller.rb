@@ -1,23 +1,29 @@
 class TicksController < ApplicationController
   before_action :set_tick, only: [:show, :edit, :update, :destroy]
   before_action :confirm_logged_in
+  after_action :verify_authorized
 
   def index
     @ticks = Tick.all
+    authorize Tick
   end
 
   def show
+    authorize Tick
   end
 
   def new
     @tick = Tick.new
+    authorize Tick
   end
 
   def edit
+    authorize Tick
   end
 
   def create
     @tick = Tick.new(tick_params)
+    authorize Tick
 
     respond_to do |format|
       if @tick.save
@@ -31,6 +37,7 @@ class TicksController < ApplicationController
   end
 
   def update
+    authorize Tick
     respond_to do |format|
       if @tick.update(tick_params)
         format.html { redirect_to @tick, notice: 'Tick was successfully updated.' }
@@ -43,6 +50,7 @@ class TicksController < ApplicationController
   end
 
   def destroy
+    authorize Tick
     @tick.destroy
     @user = Agent.find(params[:agent_id])
     respond_to do |format|

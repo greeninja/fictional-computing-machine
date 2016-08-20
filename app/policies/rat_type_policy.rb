@@ -1,6 +1,4 @@
-class SettingPolicy < ApplicationPolicy
-
-  attr_reader :current_user, :model
+class RatTypePolicy < ApplicationPolicy
 
   def initialize(current_user, model)
     @current_user = current_user
@@ -28,16 +26,6 @@ class SettingPolicy < ApplicationPolicy
   end
 
   def destroy?
-    @current_user.admin? or
-    @current_user.junior_admin?
-  end
-
-  def tick_types?
-    @current_user.admin? or
-    @current_user.junior_admin?
-  end
-
-  def rat_types?
     @current_user.admin? or
     @current_user.junior_admin?
   end

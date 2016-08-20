@@ -22,7 +22,7 @@ describe "Login and Install" do
     @browser.text_field(:name => "username").set "admin"
     @browser.text_field(:name => "password").set "admin"
     @browser.button(:value => "Log In").click
-    @browser.h3(:text => "Admin Menu").wait_until_present
+    @browser.h3(:text => "Resource and Timekeeping System").wait_until_present
   end
 
 # Setup Teams

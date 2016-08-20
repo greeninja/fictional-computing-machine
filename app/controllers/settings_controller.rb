@@ -76,11 +76,13 @@ class SettingsController < ApplicationController
   def tick_types
     @setting = Setting.find(params[:id])
     @setting.tick_types.new
+    authorize Setting
   end
 
   def rat_types
     @setting = Setting.find(params[:id])
     @setting.rat_types.new
+    authorize Setting
   end
 
   private

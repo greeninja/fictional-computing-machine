@@ -7,8 +7,8 @@ services:
       - MYSQL_DATABASE=fictional_computing_machine
       - MYSQL_USER=fictional
       - MYSQL_PASSWORD=Password1
-    volumes:
-      - /opt/data:/var/lib/mysql
+#    volumes:
+#      - /opt/data:/var/lib/mysql
   web:
     image: greeninja/fictional-computing-machine
     ports:

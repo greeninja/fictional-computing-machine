@@ -1,25 +1,31 @@
 class TickTypesController < ApplicationController
   before_action :set_tick_type, only: [:show, :edit, :update, :destroy]
   before_action :confirm_logged_in
+  after_action :verify_authorized
 
   def index
     @tick_types = TickType.all
+    authorize TickType
   end
 
   def show
+    authorize TickType
   end
 
   def new
     @tick_type = TickType.new
+    authorize TickType
   end
 
   # GET /tick_types/1/edit
   def edit
     @tick_type = TickType.find(params[:id])
+    authorize TickType
   end
 
   def create
     @tick_type = TickType.new(tick_type_params)
+    authorize TickType
 
     respond_to do |format|
       if @tick_type.save
@@ -33,6 +39,7 @@ class TickTypesController < ApplicationController
   end
 
   def update
+    authorize TickType
     respond_to do |format|
       if @tick_type.update(tick_type_params)
         format.html { redirect_to settings_path(params[:id => :setting_id]), notice: 'Tick type was successfully updated.' }
@@ -45,6 +52,7 @@ class TickTypesController < ApplicationController
   end
 
   def destroy
+    authorize TickType
     @tick_type.destroy
     respond_to do |format|
       format.html { redirect_to settings_path, notice: 'Tick type was successfully deleted.' }

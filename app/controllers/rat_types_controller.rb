@@ -1,23 +1,29 @@
 class RatTypesController < ApplicationController
   before_action :set_rat_type, only: [:show, :edit, :update, :destroy]
   before_action :confirm_logged_in
+  after_action :verify_authorized
 
   def index
     @rat_types = RatType.all
+    authorize RatType
   end
 
   def show
+    authorize RatType
   end
 
   def new
     @rat_type = RatType.new
+    authorize RatType
   end
 
   def edit
+    authorize RatType
   end
 
   def create
     @rat_type = RatType.new(rat_type_params)
+    authorize RatType
 
     respond_to do |format|
       if @rat_type.save
@@ -31,6 +37,7 @@ class RatTypesController < ApplicationController
   end
 
   def update
+    authorize RatType
     respond_to do |format|
       if @rat_type.update(rat_type_params)
         format.html { redirect_to settings_path(params[:id => :setting_id]), notice: 'Rat type was successfully updated.' }
@@ -43,6 +50,7 @@ class RatTypesController < ApplicationController
   end
 
   def destroy
+    authorize RatType
     @rat_type.destroy
     respond_to do |format|
       format.html { redirect_to settings_path, notice: 'Rat type was successfully deleted.' }
