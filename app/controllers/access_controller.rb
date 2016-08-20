@@ -21,10 +21,16 @@ class AccessController < ApplicationController
     # Mark user as logged in
       session[:user_id] = authorized_user.id
       session[:username] = authorized_user.username
-      flash[:notice] = "You are now logged in."
-      redirect_to(:controller => 'overview', :action => 'index')
+      # Check if password needs updating
+      if User.find(authorized_user.id).updated_at > Date.today - 90.days
+        flash[:notice] = "You are now logged in."
+        redirect_to(:controller => 'overview', :action => 'index')
+      else
+        flash[:warning] = "Your password has expired! Please change it"
+        redirect_to(:controller => 'users', :action => 'edit', :id => authorized_user.id)
+      end
     else
-      flash[:notice] = "Invalid username/password combination"
+      flash[:warning] = "Invalid username/password combination"
       redirect_to(:action => 'login')
     end
   end
