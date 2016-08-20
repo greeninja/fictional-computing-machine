@@ -52,7 +52,7 @@ class AgentsController < ApplicationController
 
   def create
     @user = Agent.new(user_params)
-    authorize Agent 
+    authorize Agent
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'User was successfully created.' }
