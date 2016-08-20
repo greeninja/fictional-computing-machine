@@ -14,7 +14,9 @@ class AccessController < ApplicationController
     if params[:username].present? && params[:password].present?
       found_user = User.where(:username => params[:username]).first
       if found_user
-        authorized_user = found_user.authenticate(params[:password])
+        unless found_user.disabled?
+          authorized_user = found_user.authenticate(params[:password])
+        end
       end
     end
     if authorized_user
@@ -30,7 +32,7 @@ class AccessController < ApplicationController
         redirect_to(:controller => 'users', :action => 'edit', :id => authorized_user.id)
       end
     else
-      flash[:warning] = "Invalid username/password combination"
+      flash[:warning] = "Invalid username/password or the account has been disabled."
       redirect_to(:action => 'login')
     end
   end

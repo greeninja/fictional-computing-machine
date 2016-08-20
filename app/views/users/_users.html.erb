@@ -6,13 +6,18 @@
       <th>User Name</th>
       <th>eMail</th>
       <th>Role</th>
+      <th>Status</th>
       <th colspan="2">Actions</th>
     </tr>
   </thead>
 
   <tbody>
-    <% @users.each do |user| %>
+  <% @users.each do |user| %>
+    <% if user.disabled? %>
+      <tr class="danger">
+    <% else %>
       <tr>
+    <% end %>
         <td><%= user.name %></td>
         <td><%= user.username %></td>
         <td><%= user.email %></td>
@@ -31,6 +36,7 @@
             ERROR - NO ROLE ASSIGNED
           <% end %>
         </td>
+        <td><%= user.disabled? ? "Disabled" : "Active" %></td>
         <td>
           <div class="btn-group">
             <%= link_to 'Show', {:action => "show", :id => user.id }, :class => "btn btn-sm btn-default" %>
@@ -52,7 +58,7 @@
           </div>
         </td>
       </tr>
-    <% end %>
+  <% end %>
   </tbody>
 </table>
 
