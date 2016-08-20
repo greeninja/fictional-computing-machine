@@ -34,8 +34,7 @@ class TickPolicy < ApplicationPolicy
 
   def destroy?
     @current_user.admin? or
-    @current_user.junior_admin? or
-    @current_user.team_leader?
+    @current_user.junior_admin?
   end
 
 
