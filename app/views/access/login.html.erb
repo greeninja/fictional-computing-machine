@@ -1,3 +1,11 @@
+<% if notice.present? %>
+  <%= render "success", message: notice %>
+<% end %>
+<% if flash[:warning] %>
+  <%= render "warning", message: flash[:warning] %>
+<% end %>
+
+
 <div class="container-fluid">
   <div class="row">
     <div class="col-md-12">
