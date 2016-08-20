@@ -8,6 +8,7 @@
     <strong>Last Name:  </strong><%= @user.last_name %><br />
     <strong>eMail:      </strong><%= @user.email %><br />
     <strong>Role:       </strong><%= @user.role.titleize %><br />
+    <strong>Status:     </strong><%= @user.disabled? ? "Disabled" : "Active" %><br />
   </div>
   <div class="panel-footer">
     <%= render "back" %>

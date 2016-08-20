@@ -14,17 +14,25 @@ class AccessController < ApplicationController
     if params[:username].present? && params[:password].present?
       found_user = User.where(:username => params[:username]).first
       if found_user
-        authorized_user = found_user.authenticate(params[:password])
+        unless found_user.disabled?
+          authorized_user = found_user.authenticate(params[:password])
+        end
       end
     end
     if authorized_user
     # Mark user as logged in
       session[:user_id] = authorized_user.id
       session[:username] = authorized_user.username
-      flash[:notice] = "You are now logged in."
-      redirect_to(:controller => 'overview', :action => 'index')
+      # Check if password needs updating
+      if User.find(authorized_user.id).updated_at > Date.today - 90.days
+        flash[:notice] = "You are now logged in."
+        redirect_to(:controller => 'overview', :action => 'index')
+      else
+        flash[:warning] = "Your password has expired! Please change it"
+        redirect_to(:controller => 'users', :action => 'edit', :id => authorized_user.id)
+      end
     else
-      flash[:notice] = "Invalid username/password combination"
+      flash[:warning] = "Invalid username/password or the account has been disabled."
       redirect_to(:action => 'login')
     end
   end

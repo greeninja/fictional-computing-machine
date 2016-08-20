@@ -6,6 +6,8 @@ class Agent < ApplicationRecord
 
   has_paper_trail
 
+  validates_uniqueness_of :customid
+
   accepts_nested_attributes_for :rats, :ticks, allow_destroy: true, reject_if: :all_blank
   accepts_nested_attributes_for :ticks, reject_if: :all_blank
   scope :sorted, lambda { order("agents.customid ASC") }

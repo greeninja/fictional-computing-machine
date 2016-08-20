@@ -1,6 +1,6 @@
 <%= form_for(user) do |f| %>
   <% if user.errors.any? %>
-    <%= render "form_error" %>
+    <%= render "form_error", form: user %>
   <% end %>
 <div class="row">
   <div class="col-md-6">
