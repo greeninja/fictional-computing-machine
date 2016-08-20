@@ -1,6 +1,6 @@
 <%= form_for(team) do |f| %>
   <% if team.errors.any? %>
-    <%= render "form_error" %>
+    <%= render "form_error", form: team %>
   <% end %>
 
 <div class="row">

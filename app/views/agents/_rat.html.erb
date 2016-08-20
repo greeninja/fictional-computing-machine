@@ -1,6 +1,6 @@
 <%= form_for(user) do |f| %>
   <% if user.errors.any? %>
-    <%= render(:partial => "form_error", :locals => { :form => user }) %>
+    <%= render "form_error", form: user %>
   <% end %>
     <%= render(:partial => "rats", :locals => {:f => f}) %>
     <%= f.submit :Submit, :class => "btn btn-success" %>
