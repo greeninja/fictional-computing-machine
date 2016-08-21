@@ -28,7 +28,9 @@ class UsersController < ApplicationController
       redirect_to(:action => 'index')
     else
     # If save fails, redisplay the form so user can fix problems
-    render('new')
+      @teams = Team.sorted
+      @agents = Agent.sorted
+      render 'new', user: @user, teams: @teams, agents: @agent
     end
   end
 
@@ -47,10 +49,12 @@ class UsersController < ApplicationController
     if @user.update(permitted_attributes(@user))
     # If update succeeds, redirect to the index action
       flash[:notice] = "User '#{@user.name}' updated successfully"
-      redirect_to(:action => 'edit', :id => @user.id)
+      redirect_to(:action => 'show', :id => @user.id)
     else
     # If update fails, redisplay the form so user can fix problems
-      render('edit')
+      @teams = Team.sorted
+      @agents = Agent.sorted
+      render 'edit', user: @user, teams: @teams, agents: @agents
     end
   end
 

@@ -1,7 +1,7 @@
 class Agent < ApplicationRecord
 
   belongs_to :team
-  belongs_to :user
+  has_many :users
   has_many :rats
   has_many :ticks
 

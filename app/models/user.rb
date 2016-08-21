@@ -1,8 +1,8 @@
 class User < ApplicationRecord
 
   has_secure_password
-  has_many :agents
-  has_many :teams
+  belongs_to :agent
+  belongs_to :team
 
   enum role: [:user, :supervisor, :team_leader, :junior_admin, :admin]
   after_initialize :set_default_role, :if => :new_record?
@@ -24,6 +24,11 @@ class User < ApplicationRecord
   validates_confirmation_of :email
 
   #validates :username_is_allowed
+
+  # Start validations to allow Nil values for team and agents
+
+  validates :agent_id, length: { minimum: 0 }, :allow_nil => true, :presence => false
+  validates :team_id, length: { minimum: 0 }, :allow_nil => true, :presence => false
 
   def username_is_allowed
     if FORBIDDEN_USERNAMES.include?(username)

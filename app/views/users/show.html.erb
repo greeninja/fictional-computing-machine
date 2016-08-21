@@ -8,7 +8,7 @@
     <strong>Last Name:  </strong><%= @user.last_name %><br />
     <strong>eMail:      </strong><%= @user.email %><br />
     <strong>Role:       </strong><%= @user.role.titleize %><br />
-    <strong>Agent:      </strong><%= @user.agent_id? ? "#{@user.agents.name} #{@user.agents.last_name}" : "No Agent Defined" %><br />
+    <strong>Agent:      </strong><%= @user.agent_id? ? "#{@user.agent.name} #{@user.agent.last_name}" : "No Agent Defined" %><br />
     <strong>Team:       </strong><%= @user.team_id? ? @user.team.name : "No Team Defined" %><br />
     <strong>Status:     </strong><%= @user.disabled? ? "Disabled" : "Active" %><br />
   </div>
