@@ -7,11 +7,21 @@ class AgentsController < ApplicationController
 
   # helper_method :sort_column, :sort_direction
 
+  # Rescue from Not Found error
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found_message
+
   def index
-    @users = Agent.sorted
-    @teams = Agent.uniq_team_id.where.not(:team_id => nil)
-    @byteam = Agent.where(team_id: params[:team_id])
-    @teamcount = Team.count
+    if @current_user.team_id?
+      @users = Agent.where(:team_id => @current_user.team_id)
+      @teams = Agent.uniq_team_id.where(:team_id => @current_user.team_id)
+      @byteam = Agent.where(:team_id => @current_user.team_id)
+      @teamcount = Team.where(:id => @current_user.team_id).count
+    else
+      @users = Agent.sorted
+      @teams = Agent.uniq_team_id.where.not(:team_id => nil)
+      @byteam = Agent.where(team_id: params[:team_id])
+      @teamcount = Team.count
+    end
     @date_from = parsed_date(params[:date_from], Date.today.beginning_of_week)
     @date_to = parsed_date(params[:date_to], Date.today.next_week)
     @search = Search.new(params[:search])
@@ -27,7 +37,11 @@ class AgentsController < ApplicationController
   end
 
   def show
-    @users = Agent.find(params[:id])
+    if @current_user.team_id?
+      @users = Agent.where(:team_id => @current_user.team_id).find(params[:id])
+    else
+      @users = Agent.find(params[:id])
+    end
     @date_from = parsed_date(params[:date_from], Date.today.beginning_of_week)
     @date_to = parsed_date(params[:date_to], Date.today.next_week)
     @search = Search.new(params[:search])
@@ -88,14 +102,22 @@ class AgentsController < ApplicationController
 
   def rat
     authorize Agent
-    @user = Agent.find(params[:id])
+    if @current_user.team_id?
+      @user = Agent.where(:team_id => @current_user.team_id).find(params[:id])
+    else
+      @user = Agent.find(params[:id])
+    end
     @rat_types = RatType.sorted
     @user.rats.new
   end
 
   def tick
     authorize Agent
-    @user = Agent.find(params[:id])
+    if @current_user.team_id?
+      @user = Agent.where(:team_id => @current_user.team_id).find(params[:id])
+    else
+      @user = Agent.find(params[:id])
+    end
     @tick_types = TickType.sorted
     @user.rats.new
   end
@@ -129,6 +151,11 @@ class AgentsController < ApplicationController
   def get_types
     @rat_types = RatType.sorted
     @tick_types = TickType.sorted
+  end
+
+  def not_found_message
+    flash[:warning] = "You are either not authorised to perform this action or the record was not found"
+    redirect_to(request.referrer || root_path)
   end
 
 end
