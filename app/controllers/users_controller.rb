@@ -14,6 +14,8 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @teams = Team.sorted
+    @agents = Agent.sorted
     authorize User
   end
 
@@ -26,12 +28,16 @@ class UsersController < ApplicationController
       redirect_to(:action => 'index')
     else
     # If save fails, redisplay the form so user can fix problems
-    render('new')
+      @teams = Team.sorted
+      @agents = Agent.sorted
+      render 'new', user: @user, teams: @teams, agents: @agent
     end
   end
 
   def edit
     @user = User.find(params[:id])
+    @agents = Agent.sorted
+    @teams = Team.sorted
     authorize @user
   end
 
@@ -43,10 +49,12 @@ class UsersController < ApplicationController
     if @user.update(permitted_attributes(@user))
     # If update succeeds, redirect to the index action
       flash[:notice] = "User '#{@user.name}' updated successfully"
-      redirect_to(:action => 'edit', :id => @user.id)
+      redirect_to(:action => 'show', :id => @user.id)
     else
     # If update fails, redisplay the form so user can fix problems
-      render('edit')
+      @teams = Team.sorted
+      @agents = Agent.sorted
+      render 'edit', user: @user, teams: @teams, agents: @agents
     end
   end
 
@@ -64,6 +72,6 @@ class UsersController < ApplicationController
 
   private
     def user_params
-        params.require(:user).permit(:first_name, :last_name, :username, :email, :password, :role, :disabled)
+        params.require(:user).permit(:first_name, :last_name, :username, :email, :password, :role, :disabled, :team_id, :agent_id)
     end
 end

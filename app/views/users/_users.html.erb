@@ -5,6 +5,8 @@
       <th>Name</th>
       <th>User Name</th>
       <th>eMail</th>
+      <th>Agent</th>
+      <th>Team</th>
       <th>Role</th>
       <th>Status</th>
       <th colspan="2">Actions</th>
@@ -21,6 +23,8 @@
         <td><%= user.name %></td>
         <td><%= user.username %></td>
         <td><%= user.email %></td>
+        <td><%= user.agent_id? ? "#{user.agent.name} #{user.agent.last_name}" : "No Agent Defined" %></td>
+        <td><%= user.team_id? ? user.team.name : "No Team Defined" %></td>
         <td>
           <% if user.role == "admin" %>
             <span class="label label-danger"><%= user.role.titleize %></span>

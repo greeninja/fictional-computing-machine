@@ -4,8 +4,16 @@ class TeamsController < ApplicationController
   before_action :confirm_logged_in
   after_action :verify_authorized
 
+  # Rescue from Not Found error
+  rescue_from ActiveRecord::RecordNotFound, with: :not_found_message
+
+
   def index
-    @teams = Team.all
+    if @current_user.team_id?
+      @teams = Team.where(:id => @current_user.team_id)
+    else
+      @teams = Team.all
+    end
     @date_from = parsed_date(params[:date_from], Date.today.beginning_of_week)
     @date_to = parsed_date(params[:date_to], Date.today.next_week)
     @search = Search.new(params[:search])
@@ -13,6 +21,11 @@ class TeamsController < ApplicationController
   end
 
   def show
+    if @current_user.team_id?
+      @team = Team.where(:id => @current_user.team_id).find(params[:id])
+    else
+      @team = Team.find(params[:id])
+    end
     @date_from = parsed_date(params[:date_from], Date.today.beginning_of_week)
     @date_to = parsed_date(params[:date_to], Date.today.next_week)
     @search = Search.new(params[:search])
@@ -25,6 +38,11 @@ class TeamsController < ApplicationController
   end
 
   def edit
+    if @current_user.team_id?
+      @team = Team.where(:id => @current_user.team_id).find(params[:id])
+    else
+      @team = Team.find(params[:id])
+    end
     authorize Team
   end
 
@@ -80,4 +98,10 @@ class TeamsController < ApplicationController
       @tick_types = TickType.sorted
       @rat_types = RatType.sorted
     end
+
+  def not_found_message
+    flash[:warning] = "You are either not authorised to perform this action or the record was not found"
+    redirect_to(request.referrer || root_path)
+  end
+
 end

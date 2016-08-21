@@ -49,6 +49,22 @@
         </div>
       </div>
       <div class="form-group">
+        <label for="inputAgentID" class="col-sm-2 control-label">
+          <%= f.label "Agent Reference" %>
+        </label>
+        <div class="col-sm-10">
+          <%= f.collection_select :agent_id, @agents, :id, :full_name, {:include_blank => true}, {:class => "form-control", :id => "inputAgentID"} %>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputTeamID" class="col-sm-2 control-label">
+          <%= f.label "User Team" %>
+        </label>
+        <div class="col-sm-10">
+          <%= f.select(:team_id, @teams.map {|team| [team.name, team.id]}, {:include_blank => true}, {:class => "form-control", :id => "inputTeamID"}) %>
+        </div>
+      </div>
+      <div class="form-group">
         <label for="inputDisabled" class="col-sm-2 control-label">
           <%= f.label "User Disabled" %>
         </label>
@@ -56,6 +72,7 @@
           <%= f.check_box :disabled, :class => "form_control", :id => "inputDisabled" %>
         </div>
       </div>
+
 
       <% end %>
 
