@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160820123243) do
+ActiveRecord::Schema.define(version: 20160821090929) do
 
   create_table "agents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
@@ -87,6 +87,10 @@ ActiveRecord::Schema.define(version: 20160820123243) do
     t.datetime "updated_at",                 null: false
     t.integer  "role"
     t.boolean  "disabled"
+    t.integer  "agent_id"
+    t.integer  "team_id"
+    t.index ["agent_id"], name: "index_users_on_agent_id", using: :btree
+    t.index ["team_id"], name: "index_users_on_team_id", using: :btree
   end
 
   create_table "versions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4" do |t|

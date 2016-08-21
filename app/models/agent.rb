@@ -1,6 +1,7 @@
 class Agent < ApplicationRecord
 
   belongs_to :team
+  belongs_to :user
   has_many :rats
   has_many :ticks
 
@@ -12,5 +13,10 @@ class Agent < ApplicationRecord
   accepts_nested_attributes_for :ticks, reject_if: :all_blank
   scope :sorted, lambda { order("agents.customid ASC") }
   scope :uniq_team_id, lambda { select('DISTINCT(team_id)') }
+
+
+  def full_name
+    "#{name} #{last_name}"
+  end
 
 end

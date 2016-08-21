@@ -1,9 +1,8 @@
 class User < ApplicationRecord
 
   has_secure_password
-  has_many :users
-  has_many :rats
-  has_many :ticks
+  has_many :agents
+  has_many :teams
 
   enum role: [:user, :supervisor, :team_leader, :junior_admin, :admin]
   after_initialize :set_default_role, :if => :new_record?

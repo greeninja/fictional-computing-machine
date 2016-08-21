@@ -14,6 +14,8 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+    @teams = Team.sorted
+    @agents = Agent.sorted
     authorize User
   end
 
@@ -32,6 +34,8 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find(params[:id])
+    @agents = Agent.sorted
+    @teams = Team.sorted
     authorize @user
   end
 
@@ -64,6 +68,6 @@ class UsersController < ApplicationController
 
   private
     def user_params
-        params.require(:user).permit(:first_name, :last_name, :username, :email, :password, :role, :disabled)
+        params.require(:user).permit(:first_name, :last_name, :username, :email, :password, :role, :disabled, :team_id, :agent_id)
     end
 end
