@@ -119,7 +119,7 @@ class AgentsController < ApplicationController
       @user = Agent.find(params[:id])
     end
     @tick_types = TickType.sorted
-    @user.rats.new
+    @user.ticks.new
   end
 
   private
