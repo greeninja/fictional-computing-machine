@@ -44,9 +44,9 @@ class UserPolicy < ApplicationPolicy
 
   def permitted_attributes
     if @current_user.admin? or @current_user.junior_admin?
-      [:first_name, :last_name, :username, :email, :password, :role, :disabled, :agent_id, :team_id]
+      [:first_name, :last_name, :username, :email, :password, :role, :disabled, :agent_id, :team_id, :password_confirmation]
     else
-      [:first_name, :last_name, :username, :email, :password]
+      [:first_name, :last_name, :username, :email, :password, :password_confirmation]
     end
   end
 
