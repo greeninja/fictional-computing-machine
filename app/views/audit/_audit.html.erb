@@ -5,7 +5,9 @@
       <th>User</th>
       <th>Model</th>
       <th>Action</th>
+      <th>Agent</th>
       <th>Time</th>
+      <th>Actions</th>
     </tr>
   </thead>
 
@@ -23,8 +25,32 @@
         <% else %>
           <td><%= audit.event %></td>
         <% end %>
+        <td>
+          <% if audit.item_type == "Rat" and audit.event == "create" %>
+            <% if Rat.exists?(audit.item_id) %>
+              <%  agent_id = Rat.find(audit.item_id).agent_id %>
+              <%= "#{Agent.find(agent_id).name} " "#{Agent.find(agent_id).last_name}" %>
+            <% end %>
+          <% elsif audit.item_type == "Tick" and audit.event == "create" %>
+            <% if Tick.exists?(audit.item_id) %>
+              <% agent_id = Tick.find(audit.item_id).agent_id %>
+              <%= "#{Agent.find(agent_id).name} " "#{Agent.find(agent_id).last_name}" %>
+            <% end %>
+          <% end %>
+        </td>
         <td><%= audit.created_at.to_s(:short) %></td>
-      </tr>
+        <td>
+          <% if audit.item_type == "Rat" and audit.event == "create" %>
+            <% if Rat.exists?(audit.item_id) %>
+              <%= link_to "Show", {:controller => "agents", :action => "show", :id => Rat.find(audit.item_id).agent_id, :date_from => audit.created_at - 3.days, :date_to => audit.created_at + 3.days, :highlight_id => audit.item_id} %>
+            <% end %>
+          <% elsif audit.item_type == "Tick" and audit.event == "create" %>
+            <% if Tick.exists?(audit.item_id) %>
+              <%= link_to "Show", {:controller => "agents", :action => "show", :id => Tick.find(audit.item_id).agent_id, :date_from => audit.created_at - 3.days, :date_to => audit.created_at + 3.days, :highlight_id => audit.item_id} %>
+            <% end %>
+          <% end %>
+        </td>
+          </tr>
     <% end %>
   </tbody>
 </table>
