@@ -42,11 +42,11 @@
         <td>
           <% if audit.item_type == "Rat" and audit.event == "create" %>
             <% if Rat.exists?(audit.item_id) %>
-              <%= link_to "Show", {:controller => "agents", :action => "show", :id => Rat.find(audit.item_id).agent_id, :date_from => audit.created_at - 3.days, :date_to => audit.created_at + 3.days, :highlight_id => audit.item_id} %>
+              <%= link_to "Show", {:controller => "agents", :action => "show", :id => Rat.find(audit.item_id).agent_id, :date_from => audit.created_at - 3.days, :date_to => audit.created_at + 3.days, :highlight_rat => audit.item_id}, :class => "btn btn-sm btn-default" %>
             <% end %>
           <% elsif audit.item_type == "Tick" and audit.event == "create" %>
             <% if Tick.exists?(audit.item_id) %>
-              <%= link_to "Show", {:controller => "agents", :action => "show", :id => Tick.find(audit.item_id).agent_id, :date_from => audit.created_at - 3.days, :date_to => audit.created_at + 3.days, :highlight_id => audit.item_id} %>
+              <%= link_to "Show", {:controller => "agents", :action => "show", :id => Tick.find(audit.item_id).agent_id, :date_from => audit.created_at - 3.days, :date_to => audit.created_at + 3.days, :highlight_tick => audit.item_id}, :class => "btn btn-sm btn-default" %>
             <% end %>
           <% end %>
         </td>
