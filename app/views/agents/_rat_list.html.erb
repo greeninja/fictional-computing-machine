@@ -1,4 +1,4 @@
-  <h3 class="text-center text-muted">RaTs</h3>
+<h3 class="text-center text-muted">RaTs</h3>
   <table class="table table-hover table-condensed table-bordered">
     <thead>
       <tr>
@@ -12,7 +12,11 @@
     </thead>
 
     <% @user.rats.sorted.where('rats.created_at BETWEEN ? AND ?', @date_from, @date_to).each do |rat| %>
-      <tr>
+      <% if params[:highlight_rat] == "#{ rat.id }" %>
+        <tr class="info">
+      <% else %>
+        <tr>
+      <% end %>
       <% @rat_types.sorted.each do |type| %>
         <% if rat.rat_type_id == type.id %>
           <td><span class="glyphicon glyphicon-ok" aria-hidden="true"></td>
