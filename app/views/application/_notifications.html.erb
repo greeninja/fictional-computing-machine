@@ -1,0 +1,13 @@
+<li class="<%= 'active' if params[:controller] == 'activities' %>">
+  <%= link_to root_path do %>
+    <% if @current_user.id? %>
+      <span class="glyphicon glyphicon-envelope">
+        Notifications
+      </span>
+    <% else %>
+      <span class="label label-pill label-danger"> <%= User.count %></span>
+        Notifications
+      </span>
+    <% end %>
+  <% end %>
+</li>

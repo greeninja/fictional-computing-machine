@@ -21,6 +21,8 @@
             <% end %>
           </ul>
           <ul class="nav navbar-nav navbar-right">
+            <%= render "broadcasts" %>
+            <%= render "notifications" %>
             <li>
             <%= link_to edit_user_path(@current_user) do %>
               <span class="glyphicon glyphicon-user"> <%= @current_user.username %></span>
