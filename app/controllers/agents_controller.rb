@@ -12,7 +12,7 @@ class AgentsController < ApplicationController
 
   def index
     if @current_user.team_id?
-      @users = Agent.where(:team_id => @current_user.team_id).order(customid: :asc)
+      @users = Agent.where(:team_id => @current_user.team_id).sorted
       @teams = Agent.uniq_team_id.where(:team_id => @current_user.team_id)
       @byteam = Agent.where(:team_id => @current_user.team_id)
       @teamcount = Team.where(:id => @current_user.team_id).count
