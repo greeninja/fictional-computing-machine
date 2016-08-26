@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160821090929) do
+ActiveRecord::Schema.define(version: 20160826173147) do
 
   create_table "agents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
@@ -20,6 +20,18 @@ ActiveRecord::Schema.define(version: 20160821090929) do
     t.integer  "team_id"
     t.bigint   "customid"
     t.index ["team_id"], name: "index_agents_on_team_id", using: :btree
+  end
+
+  create_table "notifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string   "controller"
+    t.integer  "item"
+    t.integer  "creator"
+    t.integer  "recipient"
+    t.string   "group"
+    t.text     "message",    limit: 65535
+    t.boolean  "read"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "rat_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|

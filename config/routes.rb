@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :tick_types
   resources :rat_types
   resources :users
+  resources :notification
 
   resources :agents do
     resources :rats

@@ -1,11 +1,13 @@
+<% notifyme = Notification.where("notifications.recipient = #{@current_user.id}").or(Notification.where("notifications.group = \'#{ @current_user.role }\' ")).where("notifications.read != true") %>
+
 <li class="<%= 'active' if params[:controller] == 'activities' %>">
-  <%= link_to root_path do %>
-    <% if @current_user.id? %>
+  <%= link_to notification_index_path do %>
+    <% if notifyme.count == 0 %>
       <span class="glyphicon glyphicon-envelope">
         Notifications
       </span>
     <% else %>
-      <span class="label label-pill label-danger"> <%= User.count %></span>
+      <span class="label label-pill label-danger"> <%= notifyme.count %></span>
         Notifications
       </span>
     <% end %>
