@@ -1,4 +1,4 @@
-<% notifyme = Notification.where("notifications.recipient = #{@current_user.id}").or(Notification.where("notifications.group = \'#{ @current_user.role }\' ")).where("notifications.read != true") %>
+<% notifyme = Notification.where("notifications.recipient = #{@current_user.id}").or(Notification.where("notifications.#{@current_user.role} = true")).where("notifications.read != true") %>
 
 <li class="<%= 'active' if params[:controller] == 'activities' %>">
   <%= link_to notification_index_path do %>
