@@ -7,13 +7,14 @@ class NotificationController < ApplicationController
   end
 
   def mark_read
-    @notification = Notification.find(params[:notification])
-    respond_to do |format|
-      if @notification.update_attributes(params)
-        format.html { redirect_to :index, notice: 'Notification was successfully marked as read.' }
-      else
-        format.html { render :index }
-      end
+    @notification = Notification.find(params[:id])
+    @notification.read = "true"
+    if @notification.save
+      flash[:notice] = "Marked as read"
+      redirect_to(:action => 'index')
+    else
+      flash[:error] = "Something went wrong trying to mark as read"
+      redirect_to(:action => 'index')
     end
   end
 
