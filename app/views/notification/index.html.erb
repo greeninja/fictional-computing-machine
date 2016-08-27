@@ -10,15 +10,10 @@
         <ul class="list-group">
           <% if @notifications.count >= 1 %>
             <% @notifications.each do |notification| %>
-              <li class="list-group-item">
-                <p>Found notification <%= notification.id %></p>
-                <%= button_to "Mark Read", :action => "mark_read", :notification => notification.id, :read => "true" %>
-                <%# link_to activity.owner.name, activity.owner, :class => "list-group-item-heading" if activity.owner %>
-                <%# render_activity activity %>
-              </li>
+              <%= render "notification", notification: notification %>
             <% end %>
           <% else %>
-            <h3>No notifications available</h3>
+            <h3>No notifications</h3>
           <% end %>
         </ul>
       </div>
