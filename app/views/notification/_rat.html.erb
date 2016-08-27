@@ -1,0 +1,6 @@
+<p>Found notification <%= notification.id %></p>
+  <%= notification.inspect %>
+  Read = <%= notification.read? ? "Read" : "Unread" %>
+  <% if not notification.read? %>
+    <%= link_to "Mark Read", :method => "put", :action => "mark_read", :id => notification.id %>
+  <% end %>

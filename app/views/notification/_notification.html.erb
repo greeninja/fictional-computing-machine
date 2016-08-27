@@ -1,0 +1,18 @@
+<li class="list-group-item">
+  <% if notification.controller == "rat" %>
+    <%= render "rat", notification: notification %>
+  <% elsif notification.controller == "tick" %>
+    <%= render "tick", notification: notification %>
+  <% else %>
+    <h3>Error matching partial"</h3>
+    <p>Found notification <%= notification.id %></p>
+    <%= notification.inspect %>
+    Read = <%= notification.read? ? "Read" : "Unread" %>
+    <% if not notification.read? %>
+      <%= link_to "Mark Read", :method => "put", :action => "mark_read", :id => notification.id %>
+    <% end %>
+    <%# link_to activity.owner.name, activity.owner, :class => "list-group-item-heading" if activity.owner %>
+    <%# render_activity activity %>
+  <% end %>
+</li>
+
