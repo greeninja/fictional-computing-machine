@@ -27,7 +27,7 @@
           <% if User.exists?(user.agent_id) %>
             <%= user.agent_id? ? "#{user.agent.name} #{user.agent.last_name}" : "No Agent Defined" %></td>
           <% else %>
-            User Deleted
+            No Agent Defined
           <% end %>
         </td>
         <td><%= user.team_id? ? user.team.name : "No Team Defined" %></td>
