@@ -46,7 +46,7 @@ class RatsController < ApplicationController
     authorize Rat
     @user = Agent.find(@rat.agent_id)
       if @rat.update(permitted_attributes(@rat))
-        @notify = Notification.new(:controller => "rat", :item => "#{ @rat.id }", :creator => "#{ @current_user.id }", :message => "has requested deletion of Rat", :junior_admin => true, :admin => true)
+        @notify = Notification.new(:controller => "rat", :item => "#{ @rat.id }", :creator => "#{ @current_user.id }", :message => "has requested deletion of a Rat", :junior_admin => true, :admin => true)
         if @notify.save
           flash[:notice] = "Marked rat for deletion"
           redirect_to(:controller => "agents", :action => "show", :id => @rat.agent_id)
@@ -76,7 +76,7 @@ class RatsController < ApplicationController
     @rat.req_reason = nil
     if @rat.save
       # Post notificaiton to Admins
-      @notify = Notification.new(:controller => "rat", :item => "#{ @rat.id }", :creator => "#{ @current_user.id }", :message => "has removed request to delete Rat", :junior_admin => true, :admin => true)
+      @notify = Notification.new(:controller => "rat", :item => "#{ @rat.id }", :creator => "#{ @current_user.id }", :message => "has removed request to delete a Rat", :junior_admin => true, :admin => true)
       if @notify.save
         flash[:notice] = "Cleared request to delete Rat"
         redirect_to(:controller => "agents", :action => "show", :id => @rat.agent_id)

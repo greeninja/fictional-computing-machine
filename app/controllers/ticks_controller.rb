@@ -40,7 +40,7 @@ class TicksController < ApplicationController
     authorize Tick
     @user = Agent.find(@tick.agent_id)
       if @tick.update(permitted_attributes(@tick))
-        @notify = Notification.new(:controller => "tick", :item => "#{ @tick.id }", :creator => "#{ @current_user.id }", :message => "has requested deletion of Tick", :junior_admin => true, :admin => true)
+        @notify = Notification.new(:controller => "tick", :item => "#{ @tick.id }", :creator => "#{ @current_user.id }", :message => "has requested deletion of a Tick", :junior_admin => true, :admin => true)
         if @notify.save
           flash[:notice] = "Marked tick for deletion"
           redirect_to(:controller => "agents", :action => "show", :id => @tick.agent_id)
@@ -60,7 +60,7 @@ class TicksController < ApplicationController
     @tick.req_reason = nil
     if @tick.save
       # Post notificaiton to Admins
-      @notify = Notification.new(:controller => "tick", :item => "#{ @tick.id }", :creator => "#{ @current_user.id }", :message => "has removed request to delete Tick", :junior_admin => true, :admin => true)
+      @notify = Notification.new(:controller => "tick", :item => "#{ @tick.id }", :creator => "#{ @current_user.id }", :message => "has removed request to delete a Tick", :junior_admin => true, :admin => true)
       if @notify.save
         flash[:notice] = "Cleared delete request"
         redirect_to(:controller => "agents", :action => "show", :id => @tick.agent_id)
