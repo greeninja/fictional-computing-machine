@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160827104349) do
+ActiveRecord::Schema.define(version: 20160828112306) do
 
   create_table "agents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
@@ -28,9 +28,9 @@ ActiveRecord::Schema.define(version: 20160827104349) do
     t.integer  "creator"
     t.integer  "recipient"
     t.text     "message",      limit: 65535
-    t.boolean  "read"
-    t.datetime "created_at",                 null: false
-    t.datetime "updated_at",                 null: false
+    t.boolean  "read",                       default: false
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
     t.boolean  "user"
     t.boolean  "supervisor"
     t.boolean  "team_leader"
@@ -50,10 +50,12 @@ ActiveRecord::Schema.define(version: 20160827104349) do
   create_table "rats", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "agent_id"
     t.string   "notes"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.integer  "rat_type_id"
     t.integer  "admin_user_id"
+    t.boolean  "req_delete"
+    t.text     "req_reason",    limit: 65535
     t.index ["admin_user_id"], name: "index_rats_on_admin_user_id", using: :btree
     t.index ["rat_type_id"], name: "index_rats_on_rat_type_id", using: :btree
   end
@@ -85,10 +87,12 @@ ActiveRecord::Schema.define(version: 20160827104349) do
   create_table "ticks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.integer  "agent_id"
     t.string   "notes"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.integer  "tick_type_id"
     t.integer  "admin_user_id"
+    t.boolean  "req_delete"
+    t.text     "req_reason",    limit: 65535
     t.index ["admin_user_id"], name: "index_ticks_on_admin_user_id", using: :btree
     t.index ["tick_type_id"], name: "index_ticks_on_tick_type_id", using: :btree
   end

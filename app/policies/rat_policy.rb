@@ -25,16 +25,43 @@ class RatPolicy < ApplicationPolicy
     @current_user.team_leader?
   end
 
-  def rat?
+  def destroy?
+    @current_user.admin? or
+    @current_user.junior_admin?
+  end
+
+  def req_delete?
     @current_user.admin? or
     @current_user.junior_admin? or
     @current_user.team_leader? or
     @current_user.supervisor?
   end
 
-  def destroy?
+  def remove_req?
     @current_user.admin? or
-    @current_user.junior_admin?
+    @current_user.junior_admin? or
+    @current_user.team_leader? or
+    @current_user.supervisor?
+  end
+
+  def edit?
+    @current_user.admin? or
+    @current_user.junior_admin? or
+    @current_user.team_leader? or
+    @current_user.supervisor?
+  end
+
+  def update?
+    @current_user.admin? or
+    @current_user.junior_admin? or
+    @current_user.team_leader? or
+    @current_user.supervisor?
+  end
+
+  def permitted_attributes
+    unless @current_user.user?
+      [:req_delete, :req_reason]
+    end
   end
 
 end

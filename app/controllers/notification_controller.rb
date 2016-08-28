@@ -3,7 +3,7 @@ class NotificationController < ApplicationController
   # after_action :verify_authorized
 
   def index
-    @notifications = Notification.where("notifications.recipient = #{@current_user.id}").or(Notification.where("notifications.#{current_user.role} = true "))
+    @notifications = Notification.where("notifications.recipient = #{@current_user.id}").or(Notification.where("notifications.#{@current_user.role} = true ")).where("notifications.read != true")
   end
 
   def mark_read
