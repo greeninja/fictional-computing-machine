@@ -29,7 +29,9 @@
           <% if audit.item_type == "Rat" and audit.event == "create" %>
             <% if Rat.exists?(audit.item_id) %>
               <%  agent_id = Rat.find(audit.item_id).agent_id %>
-              <%= "#{Agent.find(agent_id).name} " "#{Agent.find(agent_id).last_name}" %>
+              <% if Agent.exists?(agent_id) %>
+                <%= "#{Agent.find(agent_id).name} " "#{Agent.find(agent_id).last_name}" %>
+              <% end %>
             <% end %>
           <% elsif audit.item_type == "Tick" and audit.event == "create" %>
             <% if Tick.exists?(audit.item_id) %>
