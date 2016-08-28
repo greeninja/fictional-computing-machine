@@ -1,0 +1,8 @@
+<li class="list-group-item">
+  <%= broadcast.inspect %>
+  Read = <%= broadcast.read? ? "Read" : "Unread" %>
+  <% if not broadcast.read? %>
+    <%= link_to "Mark Read", :method => "put", :action => "mark_read", :id => broadcast.id %>
+  <% end %>
+</li>
+

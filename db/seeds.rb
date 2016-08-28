@@ -15,5 +15,5 @@ puts "Create Rat Setting"
 ratsetting = Setting.create :name => "tick_types", :description => "This is where we define which Ticks we want to record in the user section of RaTs. These will also be displayed in the per-team graphs", :enabled => "0"
 puts "Create Tick Setting"
 ticksetting = Setting.create :name => "rat_types", :description => "This is where we define which Rats we want to record in the user section of RaTs. These will also be displayed in the pre-team graphs", :enabled => "0"
-
-
+puts "Creating Broadcast setting"
+broadcast = Setting.create :name => "broadcasts", :description => "This defines if the broadcasts section of rats is enabled and what sections generate a broadcast message to all users.", :enabled => "0"
