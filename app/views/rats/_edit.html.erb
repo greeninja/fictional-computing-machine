@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal-container-<%= t.id %>" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="modal-container-<%= @rat.id %>" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -6,11 +6,11 @@
           ×
         </button>
         <h4 class="modal-title" id="myModalLabel">
-          <%= t.name %>
+          <%= @rat.id %>
         </h4>
       </div>
       <div class="modal-body">
-        <%= t.description %>
+        <%= render "form", rat: @rat %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">

@@ -38,14 +38,37 @@ class TicksController < ApplicationController
 
   def update
     authorize Tick
-    respond_to do |format|
-      if @tick.update(tick_params)
-        format.html { redirect_to @tick, notice: 'Tick was successfully updated.' }
-        format.json { render :show, status: :ok, location: @tick }
+    @user = Agent.find(@tick.agent_id)
+      if @tick.update(permitted_attributes(@tick))
+        @notify = Notification.new(:controller => "tick", :item => "#{ @tick.id }", :creator => "#{ @current_user.id }", :message => "has requested deletion of a Tick", :junior_admin => true, :admin => true)
+        if @notify.save
+          flash[:notice] = "Marked tick for deletion"
+          redirect_to(:controller => "agents", :action => "show", :id => @tick.agent_id)
+        else
+          flash[:warning] = "Error in notification!"
+        end
       else
-        format.html { render :edit }
+        format.html { render :edit, warning: 'Error in form' }
         format.json { render json: @tick.errors, status: :unprocessable_entity }
       end
+  end
+
+  def remove_req
+    authorize Tick
+    @tick = Tick.find(params[:id])
+    @tick.req_delete = false
+    @tick.req_reason = nil
+    if @tick.save
+      # Post notificaiton to Admins
+      @notify = Notification.new(:controller => "tick", :item => "#{ @tick.id }", :creator => "#{ @current_user.id }", :message => "has removed request to delete a Tick", :junior_admin => true, :admin => true)
+      if @notify.save
+        flash[:notice] = "Cleared delete request"
+        redirect_to(:controller => "agents", :action => "show", :id => @tick.agent_id)
+      else
+        flash[:warning] = "Error in notification!"
+      end
+    else
+      flash[:warning] = "Couldn't unmark tick for deletion."
     end
   end
 

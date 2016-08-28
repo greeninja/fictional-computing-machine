@@ -1,0 +1,21 @@
+<div class="row">
+  <div class="col col-sm-2">
+  </div>
+  <div class="col col-sm-8">
+    <div class="panel panel-default">
+      <div class="panel-heading"><h3 class="text-center text-muted">Notifications</h3></div>
+        <div class="panel-body">
+          <ul class="list-group">
+            <% if @notifications.count >= 1 %>
+              <% @notifications.each do |notification| %>
+                <%= render "notification", notification: notification %>
+              <% end %>
+            <% else %>
+              <h3>No notifications</h3>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

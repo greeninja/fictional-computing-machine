@@ -44,15 +44,19 @@ class RatsController < ApplicationController
 
   def update
     authorize Rat
-    respond_to do |format|
-      if @rat.update(rat_params)
-        format.html { redirect_to @rat, notice: 'Rat was successfully updated.' }
-        format.json { render :show, status: :ok, location: @rat }
+    @user = Agent.find(@rat.agent_id)
+      if @rat.update(permitted_attributes(@rat))
+        @notify = Notification.new(:controller => "rat", :item => "#{ @rat.id }", :creator => "#{ @current_user.id }", :message => "has requested deletion of a Rat", :junior_admin => true, :admin => true)
+        if @notify.save
+          flash[:notice] = "Marked rat for deletion"
+          redirect_to(:controller => "agents", :action => "show", :id => @rat.agent_id)
+        else
+          flash[:warning] = "Error in notification!"
+        end
       else
-        format.html { render :edit }
+        format.html { render :edit, warning: 'Error in form' }
         format.json { render json: @rat.errors, status: :unprocessable_entity }
       end
-    end
   end
 
   def destroy
@@ -65,6 +69,26 @@ class RatsController < ApplicationController
     end
   end
 
+  def remove_req
+    authorize Rat
+    @rat = Rat.find(params[:id])
+    @rat.req_delete = false
+    @rat.req_reason = nil
+    if @rat.save
+      # Post notificaiton to Admins
+      @notify = Notification.new(:controller => "rat", :item => "#{ @rat.id }", :creator => "#{ @current_user.id }", :message => "has removed request to delete a Rat", :junior_admin => true, :admin => true)
+      if @notify.save
+        flash[:notice] = "Cleared request to delete Rat"
+        redirect_to(:controller => "agents", :action => "show", :id => @rat.agent_id)
+      else
+        flash[:warning] = "Error in notification!"
+      end
+    else
+      flash[:warning] = "Couldn't unmark rat for deletion."
+    end
+  end
+
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_rat
@@ -73,6 +97,7 @@ class RatsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def rat_params
-      params.fetch(:rat, {})
+      # params.fetch(:rat, {})
+      params.require(:rat).permit(:req_delete, :req_reason)
     end
 end

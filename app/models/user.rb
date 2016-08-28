@@ -23,7 +23,7 @@ class User < ApplicationRecord
   validates_format_of :email, :with => EMAIL_REGEX
   # validates_confirmation_of :email
   validates_confirmation_of :password
-  validates :password_confirmation, :presence => true
+  # validates :password_confirmation, :presence => true
 
   #validates :username_is_allowed
 
