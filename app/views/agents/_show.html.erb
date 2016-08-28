@@ -5,9 +5,9 @@
   <%= render "daterange" %>
 
   <% if params[:highlight_rat].present? %>
-    <%= render 'info', message: "The Rat you selected from the audit log should be highlighted below" %>
+    <%= render 'info', message: "The Rat you selected should be highlighted below" %>
   <% elsif params[:highlight_tick].present? %>
-    <%= render 'info', message: "The Tick you selected from the audit log should be highlighted below" %>
+    <%= render 'info', message: "The Tick you selected should be highlighted below" %>
   <% end %>
 
   <% if @user.rats.count >= 1 %>

@@ -1,6 +1,22 @@
-<p>Found notification <%= notification.id %></p>
-  <%= notification.inspect %>
-  Read = <%= notification.read? ? "Read" : "Unread" %>
-  <% if not notification.read? %>
-    <%= link_to "Mark Read", :method => "put", :action => "mark_read", :id => notification.id %>
-  <% end %>
+<% user = User.find(notification.creator) %>
+<% if Rat.exists?(notification.item) %>
+  <% rat = Rat.find(notification.item) %>
+<% end %>
+
+<div class="media">
+  <!-- <a href="#" class="pull-left"><img alt="Bootstrap Media Preview" src="http://lorempixel.com/64/64/" class="media-object" /></a> -->
+  <%= image_tag("rat.png", :alt => "rat", :class => "pull-left") %>
+    <div class="media-body">
+      <h4 class="media-heading">
+        <%= user.name %> <%= notification.message %>
+      </h4>
+      <% if Rat.exists?(notification.item) %>
+        <%= link_to "Show", {:controller => "agents", :action => "show", :id => rat.agent_id, :date_from => rat.created_at - 3.days, :date_to => rat.created_at + 3.days, :highlight_rat => notification.item}, :class => "btn btn-sm btn-default" %>
+      <% else %>
+        <p>This Rat has since been removed</p>
+      <% end %>
+      <% if not notification.read? %>
+        <%= link_to "Mark Read", :method => "put", :action => "mark_read", :id => notification.id %>
+      <% end %>
+    </div>
+</div>

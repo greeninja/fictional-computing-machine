@@ -1,6 +1,22 @@
-<p>Found notification <%= notification.id %></p>
-  <%= notification.inspect %>
-  Read = <%= notification.read? ? "Read" : "Unread" %>
-  <% if not notification.read? %>
-      <%= link_to "Mark Read", :method => "put", :action => "mark_read", :id => notification.id %>
-  <% end %>
+<% user = User.find(notification.creator) %>
+<% if Tick.exists?(notification.item) %>
+  <% tick = Tick.find(notification.item) %>
+<% end %>
+
+<div class="media">
+  <!-- <a href="#" class="pull-left"><img alt="Bootstrap Media Preview" src="http://lorempixel.com/64/64/" class="media-object" /></a> -->
+  <%= image_tag("tick.png", :alt => "tick", :class => "pull-left") %>
+    <div class="media-body">
+      <h4 class="media-heading">
+        <%= user.name %> <%= notification.message %>
+      </h4>
+      <% if Tick.exists?(notification.item) %>
+        <%= link_to "Show", {:controller => "agents", :action => "show", :id => tick.agent_id, :date_from => tick.created_at - 3.days, :date_to => tick.created_at + 3.days, :highlight_tick => notification.item}, :class => "btn btn-sm btn-default" %>
+      <% else %>
+        <p>This Tick has since been removed</p>
+      <% end %>
+      <% if not notification.read? %>
+        <%= link_to "Mark Read", :method => "put", :action => "mark_read", :id => notification.id %>
+      <% end %>
+    </div>
+</div>
