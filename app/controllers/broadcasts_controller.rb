@@ -1,33 +1,9 @@
 class BroadcastsController < ApplicationController
-  before_action :set_broadcast, only: [:show, :edit, :update, :destroy]
+  before_action :set_broadcast, only: [:show, :edit, :update, :destroy, :mark_read]
 
   def index
-    # @broadcasts = Broadcast.where(:read => false)
-    @broadcasts = Broadcast.all
-  end
-
-  def show
-  end
-
-  def new
-    @broadcast = Broadcast.new
-  end
-
-  def edit
-  end
-
-  def create
-    @broadcast = Broadcast.new(broadcast_params)
-
-    respond_to do |format|
-      if @broadcast.save
-        format.html { redirect_to @broadcast, notice: 'Broadcast was successfully created.' }
-        format.json { render :show, status: :created, location: @broadcast }
-      else
-        format.html { render :new }
-        format.json { render json: @broadcast.errors, status: :unprocessable_entity }
-      end
-    end
+    @broadcasts = Broadcast.where(:read => false)
+    # @broadcasts = Broadcast.all
   end
 
   def update
@@ -42,16 +18,7 @@ class BroadcastsController < ApplicationController
     end
   end
 
-  def destroy
-    @broadcast.destroy
-    respond_to do |format|
-      format.html { redirect_to broadcasts_url, notice: 'Broadcast was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
   def mark_read
-    @broadcast = Broadcast.find(params[:id])
     @broadcast.read = "true"
     if @broadcast.save
       flash[:notice] = "Marked as read"
