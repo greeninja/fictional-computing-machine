@@ -14,7 +14,12 @@ class BroadcastPolicy < ApplicationPolicy
   end
 
   def mark_read?
-    @current_user.admin?
+    @current_user.admin? or
+    @current_user.junior_admin?
+  end
+
+  def update?
+    @current_user.admin? or
     @current_user.junior_admin?
   end
 
