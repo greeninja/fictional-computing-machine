@@ -1,13 +1,18 @@
-<li class="<%= 'active' if params[:controller] == 'activities' %>">
-  <%= link_to root_path do %>
-    <% if @current_user.id? %>
-      <span class="glyphicon glyphicon-bell">
-        Broadcasts
-      </span>
-    <% else %>
-      <span class="label label-pill label-danger"> <%= User.count %></span>
-        Broadcasts
-      </span>
+<% broadcasts = Broadcast.where(:read => false) %>
+<% setting = Setting.where(:name => "broadcast_settings").first %>
+
+<% if setting.enabled? %>
+  <li class="<%= 'active' if params[:controller] == 'broadcasts' %>">
+    <%= link_to broadcasts_path do %>
+      <% unless broadcasts.count >= 1 %>
+        <span class="glyphicon glyphicon-bell">
+          Broadcasts
+        </span>
+      <% else %>
+        <span class="label label-pill label-primary"> <%= broadcasts.count %></span>
+          Broadcasts
+        </span>
+      <% end %>
     <% end %>
-  <% end %>
-</li>
+  </li>
+<% end %>
