@@ -1,12 +1,16 @@
 class BroadcastsController < ApplicationController
-  before_action :set_broadcast, only: [:show, :edit, :update, :destroy, :mark_read]
+  before_action :set_broadcast, only: [:edit, :update, :mark_read]
+  before_action :confirm_logged_in
+  after_action :verify_authorized
 
   def index
     @broadcasts = Broadcast.where(:read => false)
     # @broadcasts = Broadcast.all
+    authorize Broadcast
   end
 
   def update
+    authorize Broadcast
     respond_to do |format|
       if @broadcast.update(broadcast_params)
         format.html { redirect_to @broadcast, notice: 'Broadcast was successfully updated.' }
@@ -19,6 +23,7 @@ class BroadcastsController < ApplicationController
   end
 
   def mark_read
+    authorize Broadcast
     @broadcast.read = "true"
     if @broadcast.save
       flash[:notice] = "Marked as read"
