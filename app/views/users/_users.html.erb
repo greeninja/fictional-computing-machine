@@ -1,4 +1,4 @@
-<% if @users.count >= 1 %>
+<% if users.count >= 1 %>
 <table class="table table-hover table-responsive" data-sort-name="Name" data-sort-order="desc">
   <thead>
     <tr>
@@ -14,7 +14,7 @@
   </thead>
 
   <tbody>
-  <% @users.each do |user| %>
+  <% users.each do |user| %>
     <% if user.disabled? %>
       <tr class="danger">
     <% else %>
