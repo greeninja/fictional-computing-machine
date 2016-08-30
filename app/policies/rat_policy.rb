@@ -2,7 +2,7 @@ class RatPolicy < ApplicationPolicy
 
   def initialize(current_user, model)
     @current_user = current_user
-    @user = model
+    @agent = model
   end
 
   def index?
@@ -31,6 +31,7 @@ class RatPolicy < ApplicationPolicy
   end
 
   def req_delete?
+    return false if @current_user.agent_id == @agent.id
     @current_user.admin? or
     @current_user.junior_admin? or
     @current_user.team_leader? or
@@ -38,6 +39,7 @@ class RatPolicy < ApplicationPolicy
   end
 
   def remove_req?
+    return false if @current_user.agent_id == @agent.id
     @current_user.admin? or
     @current_user.junior_admin? or
     @current_user.team_leader? or
@@ -45,6 +47,7 @@ class RatPolicy < ApplicationPolicy
   end
 
   def edit?
+    return false if @current_user.agent_id == @agent.id
     @current_user.admin? or
     @current_user.junior_admin? or
     @current_user.team_leader? or
@@ -52,6 +55,7 @@ class RatPolicy < ApplicationPolicy
   end
 
   def update?
+    return false if @current_user.agent_id == @agent.id
     @current_user.admin? or
     @current_user.junior_admin? or
     @current_user.team_leader? or

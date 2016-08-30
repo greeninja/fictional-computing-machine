@@ -24,7 +24,8 @@ class RatsController < ApplicationController
   end
 
   def edit
-    authorize Rat
+    @agent = Agent.find(@rat.agent_id)
+    authorize @agent
   end
 
   def create
@@ -43,8 +44,8 @@ class RatsController < ApplicationController
   end
 
   def update
-    authorize Rat
     @user = Agent.find(@rat.agent_id)
+    authorize @user
       if @rat.update(permitted_attributes(@rat))
         @notify = Notification.new(:controller => "rat", :item => "#{ @rat.id }", :creator => "#{ @current_user.id }", :message => "has requested deletion of a Rat", :junior_admin => true, :admin => true)
         if @notify.save
@@ -70,8 +71,10 @@ class RatsController < ApplicationController
   end
 
   def remove_req
-    authorize Rat
     @rat = Rat.find(params[:id])
+    @agent = Agent.find(@rat.agent_id)
+    @user = Agent.find(@rat.agent_id)
+    authorize @user
     @rat.req_delete = false
     @rat.req_reason = nil
     if @rat.save

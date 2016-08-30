@@ -61,7 +61,7 @@ class AgentsController < ApplicationController
   def edit
     @users = Agent.find(params[:id])
     @teams = Team.sorted
-    authorize Agent
+    authorize @users
   end
 
   def create
@@ -101,23 +101,25 @@ class AgentsController < ApplicationController
   end
 
   def rat
-    authorize Agent
+    # authorize Agent
     if @current_user.team_id?
       @user = Agent.where(:team_id => @current_user.team_id).find(params[:id])
     else
       @user = Agent.find(params[:id])
     end
+    authorize @user
     @rat_types = RatType.sorted
     @user.rats.new
   end
 
   def tick
-    authorize Agent
+    # authorize Agent
     if @current_user.team_id?
       @user = Agent.where(:team_id => @current_user.team_id).find(params[:id])
     else
       @user = Agent.find(params[:id])
     end
+    authorize @user
     @tick_types = TickType.sorted
     @user.ticks.new
   end
