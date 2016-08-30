@@ -21,9 +21,7 @@ class User < ApplicationRecord
   validates_presence_of :email
   validates_length_of :email, :maximum => 100
   validates_format_of :email, :with => EMAIL_REGEX
-  # validates_confirmation_of :email
-  validates_confirmation_of :password
-  # validates :password_confirmation, :presence => true
+  validates_confirmation_of :password, :if => :password
 
   #validates :username_is_allowed
 
