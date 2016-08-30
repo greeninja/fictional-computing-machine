@@ -37,7 +37,11 @@ class AgentsController < ApplicationController
   end
 
   def show
-    if @current_user.team_id?
+    if @current_user.user?
+      if Agent.exists?(@current_user.agent_id)
+        @users = Agent.find(@current_user.agent_id)
+      end
+    elsif @current_user.team_id?
       @users = Agent.where(:team_id => @current_user.team_id).find(params[:id])
     else
       @users = Agent.find(params[:id])
@@ -45,7 +49,8 @@ class AgentsController < ApplicationController
     @date_from = parsed_date(params[:date_from], Date.today.beginning_of_week)
     @date_to = parsed_date(params[:date_to], Date.today.next_week)
     @search = Search.new(params[:search])
-    authorize Agent
+    @agent = @user
+    authorize @agent
   end
 
   def list
@@ -61,7 +66,7 @@ class AgentsController < ApplicationController
   def edit
     @users = Agent.find(params[:id])
     @teams = Team.sorted
-    authorize Agent
+    authorize @users
   end
 
   def create
@@ -101,23 +106,25 @@ class AgentsController < ApplicationController
   end
 
   def rat
-    authorize Agent
+    # authorize Agent
     if @current_user.team_id?
       @user = Agent.where(:team_id => @current_user.team_id).find(params[:id])
     else
       @user = Agent.find(params[:id])
     end
+    authorize @user
     @rat_types = RatType.sorted
     @user.rats.new
   end
 
   def tick
-    authorize Agent
+    # authorize Agent
     if @current_user.team_id?
       @user = Agent.where(:team_id => @current_user.team_id).find(params[:id])
     else
       @user = Agent.find(params[:id])
     end
+    authorize @user
     @tick_types = TickType.sorted
     @user.ticks.new
   end

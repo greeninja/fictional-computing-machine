@@ -1,0 +1,16 @@
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#all">All</a></li>
+  <% @users.roles.keys.each do |role| %>
+      <li><a data-toggle="tab" href="#<%= role %>"><%= role.titleize %></a></li>
+  <% end %>
+</ul>
+<div class="tab-content">
+  <div id="all" class="tab-pane active">
+    <%= render 'users', users: @users %>
+  </div>
+  <% @users.roles.keys.each do |role| %>
+    <div id="<%= role %>" class="tab-pane fade">
+      <%= render 'users', users: User.where(:role => "#{ role }") %>
+    </div>
+  <% end %>
+</div>

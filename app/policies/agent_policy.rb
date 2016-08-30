@@ -4,7 +4,7 @@ class AgentPolicy < ApplicationPolicy
 
   def initialize(current_user, model)
     @current_user = current_user
-    @user = model
+    @agent = model
   end
 
   def index?
@@ -15,6 +15,7 @@ class AgentPolicy < ApplicationPolicy
   end
 
   def show?
+    return true if @current_user.agent_id == @agent.id
     @current_user.admin? or
     @current_user.junior_admin? or
     @current_user.team_leader? or
@@ -35,6 +36,7 @@ class AgentPolicy < ApplicationPolicy
   end
 
   def rat?
+    return false if @current_user.agent_id == @agent.id
     @current_user.admin? or
     @current_user.junior_admin? or
     @current_user.team_leader? or
@@ -42,6 +44,23 @@ class AgentPolicy < ApplicationPolicy
   end
 
   def tick?
+    return false if @current_user.agent_id == @agent.id
+    @current_user.admin? or
+    @current_user.junior_admin? or
+    @current_user.team_leader? or
+    @current_user.supervisor?
+  end
+
+  def remove_req?
+    return false if @current_user.agent_id == @agent.id
+    @current_user.admin? or
+    @current_user.junior_admin? or
+    @current_user.team_leader? or
+    @current_user.supervisor?
+  end
+
+  def edit?
+    return false if @current_user.agent_id == @agent.id
     @current_user.admin? or
     @current_user.junior_admin? or
     @current_user.team_leader? or
