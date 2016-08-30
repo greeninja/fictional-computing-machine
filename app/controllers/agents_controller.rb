@@ -49,7 +49,8 @@ class AgentsController < ApplicationController
     @date_from = parsed_date(params[:date_from], Date.today.beginning_of_week)
     @date_to = parsed_date(params[:date_to], Date.today.next_week)
     @search = Search.new(params[:search])
-    authorize @users
+    @agent = @user
+    authorize @agent
   end
 
   def list
