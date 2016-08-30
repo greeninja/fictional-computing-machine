@@ -1,5 +1,5 @@
 <h3 class="text-center text-muted">RaTs</h3>
-  <table class="table table-hover table-condensed table-bordered">
+  <table class="table table-hover table-condensed table-bordered table-responsive">
     <thead>
       <tr>
       <% @rat_types.each do |type| %>
@@ -39,8 +39,10 @@
             </button>
             <ul class="dropdown-menu">
             <li>
-              <% unless rat.req_delete? %>
+            <% unless rat.req_delete? %>
+              <% unless policy(Rat).destroy? %>
                 <%= link_to("Request Deletion", {:controller => "rats", :action => "edit", :id => rat.id}, :class => "dropdown-item") %>
+              <% end %>
               <% else %>
                 <%= link_to("Remove Request", {:controller => "rats", :action => "remove_req", :id => rat.id}, :class => "dropdown-item") %>
               <% end %>
