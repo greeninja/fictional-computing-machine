@@ -15,6 +15,7 @@ class AgentPolicy < ApplicationPolicy
   end
 
   def show?
+    return true if @current_user.agent_id == @agent.id
     @current_user.admin? or
     @current_user.junior_admin? or
     @current_user.team_leader? or
