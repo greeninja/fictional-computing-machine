@@ -1,5 +1,5 @@
 <h3 class="text-center text-muted">Ticks</h3>
-  <table class="table table-hover table-condensed table-bordered">
+  <table class="table table-hover table-condensed table-bordered table-responsive">
     <thead>
       <tr>
       <% @tick_types.each do |type| %>
@@ -39,8 +39,10 @@
             </button>
             <ul class="dropdown-menu">
             <li>
-              <% unless tick.req_delete? %>
+            <% unless tick.req_delete? %>
+              <% unless policy(Tick).destroy? %>
                 <%= link_to("Request Deletion", {:controller => "ticks", :action => "edit", :id => tick.id}, :class => "dropdown-item") %>
+              <% end %>
               <% else %>
                 <%= link_to("Remove Request", {:controller => "ticks", :action => "remove_req", :id => tick.id}, :class => "dropdown-item") %>
               <% end %>
