@@ -7,6 +7,6 @@ ADD . /home
 RUN chown 10000:100000 /home -R && \
     bundle install
 
-EXPOSE 8080:8080
+EXPOSE 8080
 
 ENTRYPOINT ["/home/docker-entrypoint.sh"]
