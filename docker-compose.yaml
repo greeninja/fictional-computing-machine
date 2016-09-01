@@ -20,6 +20,7 @@ services:
       - DB_USER=fictional
       - DB_DATABASE=fictional_computing_machine
       - DB_PASSWORD=Password1
+      - SECRET_KEY_BASE=SuperSecretKeyForProduction
       - RAILS_ENV=development
     depends_on:
       - db

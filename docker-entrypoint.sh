@@ -15,4 +15,8 @@ migrate () {
 
 migrate
 
+if [[ "$RAILS_ENV" == "production" ]]; then
+  rake assets:precompile
+fi
+
 rails server -b 0.0.0.0 -p 8080

@@ -1,6 +1,6 @@
 # MySQL database config file
 # Temp
-development:
+default: &default
   adapter: mysql2
   encoding: utf8
   database: <%= ENV['DB_DATABASE'] || 'fictional_computing_machine' %>
@@ -9,3 +9,11 @@ development:
   username: <%= ENV['DB_USER'] || 'fictional' %>
   password: <%= ENV['DB_PASS'] || 'Password1' %>
 
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
