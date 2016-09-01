@@ -4,6 +4,9 @@ RUN apk update && \
     rm -rf /var/cache/apk/*
 WORKDIR /home
 ADD . /home
+# RUN chown 10000:100000 /home -R && \
+#    bundle install
+
 RUN bundle install
 
 EXPOSE 8080:8080
