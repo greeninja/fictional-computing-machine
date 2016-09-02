@@ -18,7 +18,8 @@ class TicksController < ApplicationController
   end
 
   def edit
-    authorize Tick
+    @agent = Agent.find(@tick.agent_id)
+    authorize @agent
   end
 
   def create
