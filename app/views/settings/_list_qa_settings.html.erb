@@ -10,7 +10,7 @@
   </div>
   <% @teams.each do |team| %>
     <div id="<%= team.id %>" class="tab-pane fade">
-      <%= render 'tabbed_list_qa_settings', team: team, all:false %>
+      <%= render 'tabbed_list_qa_settings', team: team, all: false %>
     </div>
   <% end %>
 </div>
