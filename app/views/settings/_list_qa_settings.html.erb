@@ -1,0 +1,16 @@
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#all">All</a></li>
+  <% @teams.each do |team| %>
+      <li><a data-toggle="tab" href="#<%= team.id %>"><%= team.name %></a></li>
+  <% end %>
+</ul>
+<div class="tab-content">
+  <div id="all" class="tab-pane active">
+    <%= render 'tabbed_list_qa_settings', qa_settings: @qa_settings, all: true %>
+  </div>
+  <% @teams.each do |team| %>
+    <div id="<%= team.id %>" class="tab-pane fade">
+      <%= render 'tabbed_list_qa_settings', team: team, all:false %>
+    </div>
+  <% end %>
+</div>
