@@ -1,12 +1,8 @@
 Rails.application.routes.draw do
 
-  resources :broadcasts
   get 'overview/index'
 
   root :to => "overview#index"
-  # ideally:
-  # root :to => welcome#index
-  # once built
 
   resources :agents
   resources :teams
@@ -17,6 +13,8 @@ Rails.application.routes.draw do
   resources :notification
   resources :rats
   resources :ticks
+  resources :broadcasts
+  resources :qa_settings
 
   resources :agents do
     resources :rats
@@ -29,6 +27,7 @@ Rails.application.routes.draw do
   resources :settings do
     resources :tick_types
     resources :rat_types
+    resources :qa_settings
   end
 
   match ':controller(/:action(/:id(.:format)))', :via => [:get, :post]

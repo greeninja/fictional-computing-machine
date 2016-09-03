@@ -1,39 +1,10 @@
 class RatTypesController < ApplicationController
-  before_action :set_rat_type, only: [:show, :edit, :update, :destroy]
+  before_action :set_rat_type, only: [:edit, :update, :destroy]
   before_action :confirm_logged_in
   after_action :verify_authorized
 
-  def index
-    @rat_types = RatType.all
-    authorize RatType
-  end
-
-  def show
-    authorize RatType
-  end
-
-  def new
-    @rat_type = RatType.new
-    authorize RatType
-  end
-
   def edit
     authorize RatType
-  end
-
-  def create
-    @rat_type = RatType.new(rat_type_params)
-    authorize RatType
-
-    respond_to do |format|
-      if @rat_type.save
-        format.html { redirect_to @rat_type, notice: 'Rat type was successfully created.' }
-        format.json { render :show, status: :created, location: @rat_type }
-      else
-        format.html { render :new }
-        format.json { render json: @rat_type.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   def update
