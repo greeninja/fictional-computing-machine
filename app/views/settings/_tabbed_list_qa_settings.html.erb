@@ -1,25 +1,18 @@
 <% if @qa_settings.count >= 1 %>
 
-<h3 class="text-center text-muted">QA Settings</h3>
-<table class="table table-hover table-condensed table-bordered table-responsive">
-  <thead>
-    <tr>
-      <th>Team</th>
-      <th>QA Criteria</th>
-      <th>Description</th>
-      <th>Out Of</th>
-      <th>Actions</th>
-    </tr>
-    <% if all %>
-      <% @setting.qa_settings.sorted.each do |qa| %>
-        <% render "qa_table_row", qa: qa %>
+  <% if all %>
+    <% @setting.qa_settings.sorted.each do |qa| %>
+      <%= render "qa_table", qa: qa %>
+    <% end %>
+  <% else %>
+    <% if @setting.qa_settings.where(:team_id => team.id).count >= 1 %>
+      <% @setting.qa_settings.where(:team_id => team.id).each do |qa| %>
+        <%= render "qa_table", qa: qa %>
       <% end %>
     <% else %>
-      <% @setting.qa_settings.where(:team_id => team.id).each do |qa| %>
-        <% render "qa_table_row", qa: qa %>
-      <% end %>
+      <br /><p><strong>There are currently no settings for this team</strong></p><br />
     <% end %>
-</table>
+  <% end %>
 
 <% else %>
   <p><strong>There are currently no settings for this model</strong></p>
