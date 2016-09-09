@@ -20,7 +20,7 @@
         <%= render "qa_table", qa: qa %>
       <% end %>
     <% else %>
-      <br /><p><strong>There are currently no settings for this team</strong></p><br />
+      <%= render "warning", message: "There are currently no settings for this team. This team will inherit from QA criteria that are not assigned a team" %>
     <% end %>
   <% end %>
 </table>
