@@ -1,0 +1,2 @@
+class QasController < ApplicationController
+end
