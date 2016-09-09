@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160903111708) do
+ActiveRecord::Schema.define(version: 20160909144023) do
 
   create_table "agents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
@@ -101,6 +101,16 @@ ActiveRecord::Schema.define(version: 20160903111708) do
     t.datetime "updated_at",                null: false
     t.integer  "setting_id"
     t.index ["setting_id"], name: "index_tick_types_on_setting_id", using: :btree
+  end
+
+  create_table "tickets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string   "ticket_number"
+    t.date     "date"
+    t.integer  "agent_id"
+    t.integer  "qa_id"
+    t.integer  "met_id"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "ticks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
