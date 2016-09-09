@@ -6,7 +6,7 @@ class CreateTickets < ActiveRecord::Migration[5.0]
       t.integer :agent_id
       t.integer :qa_id
       t.integer :met_id
-
+      t.text :notes
       t.timestamps
     end
   end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160909144023) do
+ActiveRecord::Schema.define(version: 20160909154229) do
 
   create_table "agents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
@@ -55,6 +55,15 @@ ActiveRecord::Schema.define(version: 20160909144023) do
     t.integer  "out_of"
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
+  end
+
+  create_table "qas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer  "qa_setting_id"
+    t.integer  "ticket_id"
+    t.integer  "score"
+    t.integer  "out_of"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "rat_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -109,8 +118,9 @@ ActiveRecord::Schema.define(version: 20160909144023) do
     t.integer  "agent_id"
     t.integer  "qa_id"
     t.integer  "met_id"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.text     "notes",         limit: 65535
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
   end
 
   create_table "ticks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
