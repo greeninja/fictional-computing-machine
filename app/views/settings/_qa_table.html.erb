@@ -1,5 +1,5 @@
 <tr>
-  <td><%= qa.team.name %></td>
+  <td><%= qa.team_id? ? "#{ qa.team.name }" : "All Teams" %></td>
   <td><%= qa.qa %></td>
   <td><%= qa.description %></td>
   <td><%= qa.out_of %></td>
