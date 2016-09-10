@@ -1,0 +1,17 @@
+<li class="dropdown <%= 'active' if params[:controller] == 'agents' or params[:controller] == 'qas' %>">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown">Agent</a> <!-- <strong class="caret"></strong></a> -->
+  <ul class="dropdown-menu">
+  <% if policy(Agent).index? %>
+    <li class="<%= 'active' if params[:controller] == 'agents' %>">
+      <%= link_to("Rats & Ticks", :controller => 'agents') %>
+    </li>
+  <% elsif @current_user.user? and @current_user.agent_id? %>
+    <li class="<%= 'active' if params[:controller] == 'agents' %>">
+      <%= link_to("Rats & Ticks", :controller => 'agents', :action => "show", :id => @current_user.agent_id) %>
+    </li>
+  <% end %>
+    <li class="<%= 'active' if params[:controller] == 'qas' %>">
+      <%= link_to("QA", :controller => 'qas') %>
+    </li>
+  </ul>
+</li>

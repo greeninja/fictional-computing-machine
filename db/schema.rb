@@ -113,14 +113,15 @@ ActiveRecord::Schema.define(version: 20160909154229) do
   end
 
   create_table "tickets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.string   "ticket_number"
+    t.string   "ticket_reference"
     t.date     "date"
     t.integer  "agent_id"
     t.integer  "qa_id"
     t.integer  "met_id"
-    t.text     "notes",         limit: 65535
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
+    t.integer  "score"
+    t.text     "notes",            limit: 65535
+    t.datetime "created_at",                     null: false
+    t.datetime "updated_at",                     null: false
   end
 
   create_table "ticks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
