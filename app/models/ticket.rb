@@ -1,8 +1,8 @@
 class Ticket < ApplicationRecord
 
   belongs_to :agent
-  has_many :qas, required: false
-  has_many :mets, required: false
+  has_many :qas
+  has_many :mets
 
   has_paper_trail
 

@@ -1,0 +1,16 @@
+<h3 class="text-center text-muted">QA</h3>
+  <table class="table table-hover table-condensed table-bordered table-responsive">
+    <thead>
+      <tr>
+        <th>Ticket Ref</th>
+      <% @qa_settings.each do |type| %>
+        <th><%= type.qa %> <a id="modal-<%= type.id %>" href="#modal-container-<%= type.id %>" data-toggle="modal"><span class="glyphicon glyphicon-info-sign"></span></a></th>
+        <%= render "modal", t: type %>
+      <% end %>
+        <th>Notes</th>
+        <th>Score</th>
+        <th>Date</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+  </table>
