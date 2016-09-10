@@ -3,7 +3,8 @@
     <thead>
       <tr>
       <% @tick_types.each do |type| %>
-        <th><%= type.name %></th>
+        <th><%= type.name %> <a id="modal-tick-<%= type.id %>" href="#modal-container-tick-<%= type.id %>" data-toggle="modal"><span class="glyphicon glyphicon-info-sign"></span></a></th>
+        <%= render "modal", t: type, model: "tick" %>
       <% end %>
         <th>Notes</th>
         <th>Reason</th>
