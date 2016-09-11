@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :ticks
   resources :broadcasts
   resources :qa_settings
+  resources :qas
 
   resources :agents do
     resources :rats

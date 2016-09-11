@@ -1,10 +1,13 @@
-<% get_months.each do |mons| %>
-  <%= get_months.inspect %>
-
 <h3 class="text-center text-muted">QA</h3>
+
+<% get_months.each do |mons| %>
+<div class="row">
+  <div class="col-sm-12">
+<h4 class="text-center text-muted"><%= parse_months(mons.to_s).strftime("%B, %Y") %></h3>
   <table class="table table-hover table-condensed table-bordered table-responsive">
     <thead>
       <tr>
+        <th> </th>
         <th>Ticket Ref</th>
       <% @qa_settings.each do |type| %>
         <th><%= type.qa %> <a id="modal-<%= type.id %>" href="#modal-container-<%= type.id %>" data-toggle="modal"><span class="glyphicon glyphicon-info-sign"></span></a></th>
@@ -16,28 +19,48 @@
         <th>Actions</th>
       </tr>
     </thead>
-
-    <% @user.tickets.where('tickets.date BETWEEN ? AND ?', @date_from, @date_to).each do |ticket| %>
+    <% date = parse_months(mons.to_s) %>
+    <% @c = 0 %>
+    <% @user.tickets.where('tickets.date BETWEEN ? AND ?', date, date.end_of_month).each_with_index do |ticket, index| %>
       <% if params[:highlight_qa] == "#{ ticket.id }" %>
         <tr class="info">
       <% else %>
         <tr>
       <% end %>
-          <td><%= ticket.ticket_reference %></td>
-          <% @qa_settings.each do |criteria| %>
-            <td>
-            <% ticket.qas.each do |qa| %>
-              <% if qa.qa_setting_id == criteria.id %>
-                <%= qa.score %>
-              <% end %>
+        <td><%= index+1 %>
+        <td><%= ticket.ticket_reference %></td>
+        <% @qa_settings.each do |criteria| %>
+          <td>
+          <% ticket.qas.each do |qa| %>
+            <% if qa.qa_setting_id == criteria.id %>
+              <%= qa.score %>
             <% end %>
-            </td>
           <% end %>
-          <td><%= ticket.notes %></td>
-          <td><%= ticket.score %></td>
-          <td><%= ticket.date.to_s(:short) %></td>
-          <td>Actions</td>
-        </tr>
+          </td>
+        <% end %>
+        <td><%= ticket.notes %></td>
+        <td><%= ticket.score %></td>
+        <td><%= ticket.date.to_s(:short) %></td>
+        <td>Actions</td>
+      </tr>
+      <% @c += 1 %>
     <% end %>
+    <tr>
+      <% tickets =  @user.tickets.where('tickets.date BETWEEN ? AND ?', date, date.end_of_month) %>
+      <td>Total</td>
+      <td></td>
+      <% @qa_settings.each do |criteria| %>
+        <% score = 0 %>
+        <% tickets.each do |t| %>
+          <% score += t.qas.where(:qa_setting_id => criteria.id).sum(:score) %>
+        <% end %>
+        <% total_available = criteria.out_of * @c %>
+        <td><strong><%= (score.to_f / total_available.to_f) * 100 %> %</strong></td>
+      <% end %>
+      <% 4.times do |td| %>
+        <td></td>
+      <% end %>
   </table>
+  </div>
+</div>
 <% end %>
