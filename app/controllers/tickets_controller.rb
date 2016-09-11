@@ -26,15 +26,22 @@ class TicketsController < ApplicationController
 
   def update
     @user = Agent.find(@ticket.agent_id)
+    @qa_settings = QaSetting.where("qa_settings.team_id = #{@user.team_id}").or(QaSetting.where("qa_settings.team_id is null")).sorted
     if @ticket.update(ticket_params)
+    # Update score total
+      score = @ticket.qas.sum(:score)
+      total_available = @qa_settings.sum(:out_of)
+      total_score = (score.to_f / total_available.to_f) * 100
+      update_score = @ticket.update(:score => total_score)
     # If update succeeds, redirect to the index action
-      flash[:notice] = "QA for #{ @ticket_id } created successfully"
+      flash[:notice] = "QA for #{ @ticket.ticket_reference } created successfully"
       redirect_to(:controller => "qas", :action => 'show', :id => @user.id)
     else
     # If update fails, redisplay the form so user can fix problems
       @ticket = Ticket.find(params[:id])
       @user = Agent.find(@ticket.agent_id)
-      render 'edit', ticket: @ticket
+      flash[:warning] = "All QA Items need to be filled out"
+      render 'qa', ticket: @ticket
     end
 
   end

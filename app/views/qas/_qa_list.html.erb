@@ -13,7 +13,6 @@
         <th><%= type.qa %> <a id="modal-<%= type.id %>" href="#modal-container-<%= type.id %>" data-toggle="modal"><span class="glyphicon glyphicon-info-sign"></span></a></th>
         <%= render "modal", t: type %>
       <% end %>
-        <th>Notes</th>
         <th>Score</th>
         <th>Date</th>
         <th>Actions</th>
@@ -38,8 +37,7 @@
           <% end %>
           </td>
         <% end %>
-        <td><%= ticket.notes %></td>
-        <td><%= ticket.score %></td>
+        <td><strong><%= ticket.score %> %</strong></td>
         <td><%= ticket.date.to_s(:short) %></td>
         <td>Actions</td>
       </tr>
@@ -57,7 +55,10 @@
         <% total_available = criteria.out_of * @c %>
         <td><strong><%= (score.to_f / total_available.to_f) * 100 %> %</strong></td>
       <% end %>
-      <% 4.times do |td| %>
+      <td>
+        <strong><%= tickets.sum(:score).to_f / @c %> %</strong>
+      </td> 
+      <% 2.times do |td| %>
         <td></td>
       <% end %>
   </table>

@@ -1,23 +1,10 @@
 class Qa < ApplicationRecord
+
   has_many :settings
   belongs_to :ticket
 
-
-  # before_create :add_ticket
-
-  # has_paper_trail
+  validates_presence_of :score, :ticket_id, :out_of, :qa_setting_id
 
   accepts_nested_attributes_for :ticket, reject_if: :all_blank
-
-  def add_ticket
-    new_ticket = Ticket.new(params[:ticket_reference, :date, :agent_id, :score, :notes])
-
-    unless new_ticket.save
-      self.errors.add(:base, "Couldn't create ticker.")
-      return false
-    end
-
-    self.ticket_id = new_ticket.id
-  end
 
 end
