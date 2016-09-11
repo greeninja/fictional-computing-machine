@@ -6,4 +6,7 @@ class Ticket < ApplicationRecord
 
   has_paper_trail
   accepts_nested_attributes_for :qas, allow_destroy: true, reject_if: :all_blank
+
+  validates_presence_of :ticket_reference, :date
+
 end
