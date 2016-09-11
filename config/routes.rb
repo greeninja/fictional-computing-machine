@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :broadcasts
   resources :qa_settings
   resources :qas
+  resources :tickets
 
   resources :agents do
     resources :rats
@@ -29,6 +30,10 @@ Rails.application.routes.draw do
     resources :tick_types
     resources :rat_types
     resources :qa_settings
+  end
+
+  resources :tickets do
+    resources :qas
   end
 
   match ':controller(/:action(/:id(.:format)))', :via => [:get, :post]

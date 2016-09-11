@@ -2,9 +2,12 @@ class Qa < ApplicationRecord
   has_many :settings
   belongs_to :ticket
 
+
   before_create :add_ticket
 
   # has_paper_trail
+
+  accepts_nested_attributes_for :ticket, reject_if: :all_blank
 
   def add_ticket
     new_ticket = Ticket.new(params[:ticket_reference, :date, :agent_id, :score, :notes])
