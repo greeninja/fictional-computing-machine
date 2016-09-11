@@ -1,11 +1,37 @@
 <div class="row">
-  <div class="col-sm-12">
+  <div class="col-sm-6">
     <%= form_for(ticket) do |f| %>
       <% if ticket.errors.any? %>
         <%= render "form_error", form: ticket %>
       <% end %>
-      <%= f.text_field :ticket_reference %>
-      <% f.hidden_field 
+      <table class="table table-hover table-responsive" >
+        <thead>
+          <tr>
+            <th>Ticket Reference</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tr>
+          <td>
+            <div class="input-group" id="ticket_reference">
+              <%= f.text_field :ticket_reference, :class => "input-md form-control" %>
+            </div>
+          </td>
+          <td>
+            <div class="input-daterange input-group" id="date">
+              <%= f.text_field :date, :class => "input-md form-control", "data-behaviour" => "datepicker" %>
+            </div>
+          </td>
+          <%= f.hidden_field :agent_id, :value => @user.id %>
+        </tr>
+      </table>
+      <%= f.submit :Next, :class => "btn btn-success" %>
     <% end %>
   </div>
 </div>
+<script type="text/javascript">
+  $('[data-behaviour~=datepicker]').datepicker({
+    format: "yyyy-mm-dd",
+    todayHighlight: true
+  });
+</script>

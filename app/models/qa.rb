@@ -3,7 +3,7 @@ class Qa < ApplicationRecord
   belongs_to :ticket
 
 
-  before_create :add_ticket
+  # before_create :add_ticket
 
   # has_paper_trail
 

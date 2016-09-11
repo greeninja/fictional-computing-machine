@@ -1,6 +1,6 @@
 class QasController < ApplicationController
 
-  before_action :set_user, only: [:show, :edit, :new, :update, :destroy]
+  before_action :set_user, only: [:show, :edit, :new, :update, :destroy, :get_setting]
   before_action :get_setting, only: [:show, :new, :create]
   before_action :set_dates
 
