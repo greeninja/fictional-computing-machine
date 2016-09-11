@@ -9,7 +9,7 @@ class QasController < ApplicationController
     @teams = Agent.uniq_team_id.where.not(:team_id => nil)
     @teamcount = Team.count
     @date_from = parsed_date(params[:date_from], Date.today.beginning_of_month)
-    @date_to = parsed_date(params[:date_to], Date.today.at_beginning_of_month.next_month)
+    @date_to = parsed_date(params[:date_to], Date.today.end_of_month)
   end
 
   def show

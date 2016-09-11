@@ -116,8 +116,6 @@ ActiveRecord::Schema.define(version: 20160909154229) do
     t.string   "ticket_reference"
     t.date     "date"
     t.integer  "agent_id"
-    t.integer  "qa_id"
-    t.integer  "met_id"
     t.integer  "score"
     t.text     "notes",            limit: 65535
     t.datetime "created_at",                     null: false
