@@ -23,7 +23,7 @@
           Not Set
         <% end %>
         <td>
-          <%= qa_average(user) %>
+          <%= number_with_precision(qa_average(user), precision: 2) %>
         </td>
         <td>
           <div class="btn-group">
@@ -49,5 +49,3 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
