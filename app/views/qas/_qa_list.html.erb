@@ -39,7 +39,7 @@
         <% end %>
         <td><strong><%= ticket.score %> %</strong></td>
         <td><%= ticket.date.to_s(:short) %></td>
-        <td>Actions</td>
+        <td><%= render 'button_group', ticket: ticket %></td>
       </tr>
       <% @c += 1 %>
     <% end %>

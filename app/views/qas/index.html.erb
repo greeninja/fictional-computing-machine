@@ -19,12 +19,12 @@
   </ul>
   <div class="tab-content">
     <div id="all" class="tab-pane active">
-        <%= render 'users', users: @users %>
+        <%= render 'qas', users: @users %>
     </div>
     <% @teams.each do |pane| %>
       <div id="<%= pane.team_id %>" class="tab-pane fade">
         <!-- TODO: Get this in the controller! -->
-        <%= render 'users', users: Agent.where(team_id: pane.team_id).sorted %>
+        <%= render 'qas', users: Agent.where(team_id: pane.team_id).sorted %>
       </div>
     <% end %>
   </div>
@@ -35,7 +35,7 @@
     <li class="active"><a href="#">All</a></li>
   </ul>
   <div id="All" class="tab-pane fade in active">
-    <%= render 'users', users: @users %>
+    <%= render 'qas', users: @users %>
   </div>
 
 <% end %>
