@@ -1,7 +1,7 @@
 class TicketsController < ApplicationController
 
-  before_action :set_user, only: [:show, :edit, :new, :destroy, :qa]
-  before_action :set_ticket, only: [:qa, :update]
+  before_action :set_user, only: [:show, :new, :qa]
+  before_action :set_ticket, only: [:edit, :qa, :update, :delete, :destroy]
   before_action :get_setting, only: [:show, :new, :qa]
 
   def new
@@ -10,6 +10,7 @@ class TicketsController < ApplicationController
 
   def create
     @ticket = Ticket.new(ticket_params)
+    @user = Agent.find(@ticket.agent_id)
     if @ticket.save
     # If save succeeds, redirect to the index action
       flash[:notice] = "Ticket '#{@ticket.ticket_reference}' successfully added"
@@ -22,6 +23,10 @@ class TicketsController < ApplicationController
 
   def qa
     @ticket.qas.new
+  end
+
+  def edit
+    @user = Agent.find(@ticket.agent_id)
   end
 
   def update
@@ -46,8 +51,15 @@ class TicketsController < ApplicationController
 
   end
 
-
   def delete
+  end
+
+  def destroy
+    @user = Agent.find(@ticket.agent_id)
+    @ticket.qas.each do |d| d.destroy end
+    @ticket.destroy
+    flash[:notice] = "Ticket '#{@ticket.ticket_reference}' deleted successfully"
+    redirect_to qa_path(@user.id), agent_id: @ticket.agent_id
   end
 
   private
