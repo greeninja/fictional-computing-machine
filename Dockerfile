@@ -1,9 +1,8 @@
-FROM alpine:latest
-RUN apk update && \
-    apk add mariadb gcc make build-base ruby ruby-rdoc ruby-dev ruby-rake ruby-bundler git libffi mariadb-dev sqlite libxml2 sqlite-dev libffi-dev openjdk8 nodejs ruby-irb tzdata ruby-bigdecimal bash && \
-    rm -rf /var/cache/apk/*
+FROM ubuntu:latest
+RUN apt-get update && \
+    apt-get install -y mariadb ruby ruby-rdoc ruby-devel git mariadb-devel sqlite libxml2 sqlite-devel libffi-devel
 WORKDIR /home
-ADD . /home
+ADD /home/personal_git/fictional-computing-machine/ /home
 RUN chown 10000:100000 /home -R && \
     bundle install
 

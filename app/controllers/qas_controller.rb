@@ -1,6 +1,6 @@
 class QasController < ApplicationController
 
-  before_action :set_user, only: [:show, :edit, :new, :update, :destroy, :get_setting]
+  before_action :set_user, only: [:show, :new, :destroy, :get_setting]
   before_action :get_setting, only: [:show, :new, :create]
   before_action :set_dates
 
@@ -11,6 +11,25 @@ class QasController < ApplicationController
   end
 
   def show
+  end
+
+  def edit
+    @ticket = Ticket.find(params[:ticket_id])
+    @qas = @ticket.qas
+    @user = Agent.find(@ticket.agent_id)
+    @qa_settings = QaSetting.where("qa_settings.team_id = #{@user.team_id}").or(QaSetting.where("qa_settings.team_id is null")).sorted
+  end
+
+  def update
+    @ticket = Ticket.find(params[:ticket_id])
+    @user = Agent.find(@ticket.agent_id)
+    @qa_settings = QaSetting.where("qa_settings.team_id = #{@user.team_id}").or(QaSetting.where("qa_settings.team_id is null")).sorted
+
+    @ticket.qas.each do |qa|
+      qa.update_attributes!(params[:qas].reject { |k,v| v.blank? })
+    end
+    flash[:notice] = "Updated QA Criteria"
+    redirect_to(:action => 'show', :id => @user.id)
   end
 
   def new

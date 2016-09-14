@@ -1,0 +1,13 @@
+<td><%= @ticket.ticket_reference %></td>
+<% @qa_settings.each do |criteria| %>
+  <%= f.fields_for :qas, @ticket.qas.where(:qa_setting_id => criteria.id) do |u| %>
+    <td>
+      <div class="form-group form-group-sm">
+        <%= u.select :score, (0..criteria.out_of), {:include_blank => true}, {:class => "form-control", :id => "score"} %>
+      </div>
+    </td>
+    <%= u.hidden_field :qa_setting_id, :value => criteria.id %>
+    <%= u.hidden_field :ticket_id, :value => @ticket.id %>
+    <%= u.hidden_field :out_of, :value => criteria.out_of %>
+  <% end %>
+<% end %>
