@@ -1,0 +1,20 @@
+<%# form_for :ticket, :action => "update_qas", :html => { :method => :put } do |f| %>
+<%= form_for(ticket) do |f| %>
+  <% if ticket.errors.any? %>
+    <%= render "form_error", form: ticket %>
+  <% end %>
+  <table class="table table-hover table-condensed table-bordered table-responsive">
+    <thead>
+      <tr>
+        <th>Ticket Ref</th>
+        <% @qa_settings.each do |type| %>
+          <th><%= type.qa %> <a id="modal-<%= type.id %>" href="#modal-container-<%= type.id %>" data-toggle="modal"><span class="glyphicon glyphicon-info-sign"></span></a></th>
+          <%= render "modal", t: type %>
+        <% end %>
+      </thead>
+      <tr>
+        <%= render "criteria", f: f %>
+      </tr>
+    </table>
+    <%= f.submit :Submit, :class => "btn btn-success" %>
+<% end %>
