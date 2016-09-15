@@ -6,11 +6,14 @@ class TicketsController < ApplicationController
 
   def new
     @ticket = Ticket.new
+    @user = Agent.find(params[:agent_id])
+    @qa_settings = QaSetting.where("qa_settings.team_id = #{@user.team_id}").or(QaSetting.where("qa_settings.team_id is null")).sorted
   end
 
   def create
     @ticket = Ticket.new(ticket_params)
     @user = Agent.find(@ticket.agent_id)
+    @qa_settings = QaSetting.where("qa_settings.team_id = #{@user.team_id}").or(QaSetting.where("qa_settings.team_id is null")).sorted
     if @ticket.save
     # If save succeeds, redirect to the index action
       flash[:notice] = "Ticket '#{@ticket.ticket_reference}' successfully added"
