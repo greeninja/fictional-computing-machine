@@ -3,7 +3,11 @@
     <h3>QA for <%= @ticket.ticket_reference %></h3>
   </div>
   <div class="panel-body">
-      <%= render 'qa', ticket: @ticket, qa: @qas %>
+    <% @qas.each do |qa| %>
+      <% form_for(qa) do |f| %>
+        <%= render 'criteria', f: f %>
+      <% end %>
+    <% end %>
   </div>
   <div class="panel-footer">
     <%= render "back" %>

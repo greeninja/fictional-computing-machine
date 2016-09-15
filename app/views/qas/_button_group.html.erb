@@ -6,7 +6,7 @@
   <ul class="dropdown-menu">
     <li>
       <%= link_to "Edit Ticket Reference", edit_ticket_path(ticket), :class => "dropdown-item" %>
-      <%= link_to("Edit Criteria Scores", :controller => "qas", :action => "edit", :ticket_id => ticket, :class => "dropdown-item") %>
+      <%= link_to("Edit Criteria Scores", {:controller => "qas", :action => "edit", :ticket_id => ticket}, :class => "dropdown-item") %>
     </li>
     <li class="divider"></li>
     <li>

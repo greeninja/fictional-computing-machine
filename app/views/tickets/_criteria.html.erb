@@ -1,6 +1,6 @@
 <td><%= @ticket.ticket_reference %></td>
 <% @qa_settings.each do |criteria| %>
-  <%= f.fields_for :qas, @ticket.qas.new do |u| %>
+  <%= f.fields_for :qas do |u| %>
     <td>
       <div class="form-group form-group-sm">
         <%= u.select :score, (0..criteria.out_of), {:include_blank => true}, {:class => "form-control", :id => "score"} %>

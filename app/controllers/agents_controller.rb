@@ -9,7 +9,7 @@ class AgentsController < ApplicationController
 
   # Rescue from Not Found error
   rescue_from ActiveRecord::RecordNotFound, with: :not_found_message
-  rescue_from ActionView::Template::Error, with: :template_error
+#  rescue_from ActionView::Template::Error, with: :template_error
 
   def index
     if @current_user.team_id?
