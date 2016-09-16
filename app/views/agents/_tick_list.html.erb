@@ -50,7 +50,7 @@
               <% if policy(Tick).destroy? %>
                 <li class="divider"></li>
                 <li>
-                  <%= link_to "Delete", agent_rat_path(@user, tick), data: {:confirm => "Are you sure?"}, :class => "dropdown-item", :method => :delete %>
+                  <%= link_to "Delete", agent_tick_path(@user, tick), data: {:confirm => "Are you sure?"}, :class => "dropdown-item", :method => :delete %>
                 </li>
               <% end %>
             </ul>
