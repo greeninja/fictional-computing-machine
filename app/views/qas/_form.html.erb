@@ -5,7 +5,7 @@
   <div class="panel-body">
     <% @qas.each do |qa| %>
       <% form_for(qa) do |f| %>
-        <%= render 'criteria', f: f %>
+        <%= render 'test', f: f %>
       <% end %>
     <% end %>
   </div>
