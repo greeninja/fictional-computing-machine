@@ -15,12 +15,15 @@ class QasController < ApplicationController
 
   def edit_individual
     @ticket = Ticket.find(params[:id])
+    @user = Agent.find(@ticket.agent_id)
+    @qa_settings = QaSetting.where("qa_settings.team_id = #{@user.team_id}").or(QaSetting.where("qa_settings.team_id is null")).sorted
     @qas = @ticket.qas
   end
 
   def update_individual
     @ticket = Ticket.find(params[:id])
-    @user = @ticket.agent_id
+    @user = Agent.find(@ticket.agent_id)
+    @qa_settings = QaSetting.where("qa_settings.team_id = #{@user.team_id}").or(QaSetting.where("qa_settings.team_id is null")).sorted
 
     if Qa.update(params[:qas].keys, params[:qas].values)
     # Update score total

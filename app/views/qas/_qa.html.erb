@@ -1,4 +1,3 @@
-<%# form_for :ticket, :action => "update_qas", :html => { :method => :put } do |f| %>
 <% @qas.each do |qa| %>
   <%= form_for(qa) do |f| %>
     <% if qa.errors.any? %>
