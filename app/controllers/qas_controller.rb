@@ -13,43 +13,26 @@ class QasController < ApplicationController
   def show
   end
 
-  def edit
-    @ticket = Ticket.find(params[:ticket_id])
+  def edit_individual
+    @ticket = Ticket.find(params[:id])
     @qas = @ticket.qas
-    @user = Agent.find(@ticket.agent_id)
-    @qa_settings = QaSetting.where("qa_settings.team_id = #{@user.team_id}").or(QaSetting.where("qa_settings.team_id is null")).sorted
   end
 
-  def update
-    @ticket = Ticket.find(params[:ticket_id])
-    @user = Agent.find(@ticket.agent_id)
-    @qa_settings = QaSetting.where("qa_settings.team_id = #{@user.team_id}").or(QaSetting.where("qa_settings.team_id is null")).sorted
+  def update_individual
+    @ticket = Ticket.find(params[:id])
+    @user = @ticket.agent_id
 
-    @ticket.qas.each do |qa|
-      qa.update_attributes!(params[:qas].reject { |k,v| v.blank? })
-    end
-    flash[:notice] = "Updated QA Criteria"
-    redirect_to(:action => 'show', :id => @user.id)
-  end
-
-  def new
-    @qa = Qa.new
-    @ticket = Ticket.new
-  end
-
-  def create
-    @qa = Qa.new(qa_params)
-    if @qa.save
-    # If save succeeds, redirect to the index action
-      flash[:notice] = "Qa created successfully"
-      redirect_to(:action => 'show', :id => @user.id )
-    else
-    # If save fails, redisplay the form so user can fix problems
-      render 'new', user: @user
+    if Qa.update(params[:qas].keys, params[:qas].values)
+    # Update score total
+      score = @ticket.qas.sum(:score)
+      total_available = @ticket.qas.sum(:out_of)
+      total_score = (score.to_f / total_available.to_f) * 100
+      update_score = @ticket.update(:score => total_score)
+    # If update succeeds, redirect to the index action
+      flash[:notice] = "QA for #{ @ticket.ticket_reference } updated successfully"
+      redirect_to(:controller => "qas", :action => 'show', :id => @user)
     end
   end
-
-
 
   private
 
@@ -68,7 +51,7 @@ class QasController < ApplicationController
   end
 
   def qa_params
-    params.require(:qa).permit()
+    params.require(:qa).permit(:score)
   end
 
 end

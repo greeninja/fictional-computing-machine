@@ -54,18 +54,6 @@ class TicketsController < ApplicationController
 
   end
 
-  def update_qas
-    @ticket = Ticket.find(params[:ticket_id])
-    @user = Agent.find(@ticket.agent_id)
-    @qa_settings = QaSetting.where("qa_settings.team_id = #{@user.team_id}").or(QaSetting.where("qa_settings.team_id is null")).sorted
-
-    @ticket.qas.each do |qa|
-      qa.update_attributes!(params[:qas].reject { |k,v| v.blank? })
-    end
-    flash[:notice] = "Updated QA Criteria"
-    redirect_to(:action => 'show', :id => @user.id)
-  end
-
   def delete
   end
 
