@@ -15,5 +15,7 @@
         <%= render "criteria", f: f %>
       </tr>
     </table>
+    <%= hidden_field_tag(:date_from, @date_from) %>
+    <%= hidden_field_tag(:date_to, @date_to) %>
     <%= f.submit :Submit, :class => "btn btn-success" %>
 <% end %>
