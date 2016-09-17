@@ -51,9 +51,7 @@ class QasController < ApplicationController
 
   def set_dates
     @date_from = parsed_date(params[:date_from], Date.today.beginning_of_month)
-    puts "###### I AM THE PARAMS DATE: #{ params[:date_from]} ###############"
     @date_to = parsed_date(params[:date_to], Date.today.end_of_month)
-    puts "###### I AM THE PARAMS DATE: #{ params[:date_to]} ###############"
   end
 
   def qa_params
