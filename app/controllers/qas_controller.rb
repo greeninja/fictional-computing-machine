@@ -3,6 +3,7 @@ class QasController < ApplicationController
   before_action :set_user, only: [:show, :new, :destroy, :get_setting]
   before_action :get_setting, only: [:show, :new, :create]
   before_action :set_dates
+  before_action :confirm_logged_in
 
   def index
     @users = Agent.sorted
@@ -33,7 +34,7 @@ class QasController < ApplicationController
       update_score = @ticket.update(:score => total_score)
     # If update succeeds, redirect to the index action
       flash[:notice] = "QA for #{ @ticket.ticket_reference } updated successfully"
-      redirect_to(:controller => "qas", :action => 'show', :id => @user)
+      redirect_to(:controller => "qas", :action => 'show', :id => @user, :date_from => @date_from, :date_to => @date_to)
     end
   end
 
@@ -50,7 +51,9 @@ class QasController < ApplicationController
 
   def set_dates
     @date_from = parsed_date(params[:date_from], Date.today.beginning_of_month)
+    puts "###### I AM THE PARAMS DATE: #{ params[:date_from]} ###############"
     @date_to = parsed_date(params[:date_to], Date.today.end_of_month)
+    puts "###### I AM THE PARAMS DATE: #{ params[:date_to]} ###############"
   end
 
   def qa_params

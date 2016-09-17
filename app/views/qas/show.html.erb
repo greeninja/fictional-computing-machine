@@ -9,7 +9,7 @@
   <div class="panel-body">
     <%= render 'daterange' %>
     <%= render 'show', date_from: @date_from, date_to: @date_to %>
-    <%= link_to 'New QA', new_ticket_path(:agent_id => @user.id), :class => "btn btn-default" %>
+    <%= link_to 'New QA', new_ticket_path(:agent_id => @user.id, :date_from => @date_from, :date_to => @date_to), :class => "btn btn-default" %>
   </div>
   <div class="panel-footer">
     <%= render 'back_local' %>

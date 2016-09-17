@@ -5,8 +5,8 @@
   </button>
   <ul class="dropdown-menu">
     <li>
-      <%= link_to "Edit Ticket Reference", edit_ticket_path(ticket), :class => "dropdown-item" %>
-      <%= link_to "Edit Criteria Scores", edit_individual_qas_path(ticket), :class => "dropdown-item" %>
+      <%= link_to "Edit Ticket Reference", edit_ticket_path(ticket, :date_from => @date_from, :date_to => @date_to), :class => "dropdown-item" %>
+      <%= link_to "Edit Criteria Scores", edit_individual_qas_path(ticket, :date_from => @date_from, :date_to => @date_to), :class => "dropdown-item" %>
     </li>
     <li class="divider"></li>
     <li>

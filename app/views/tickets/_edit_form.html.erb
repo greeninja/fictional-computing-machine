@@ -25,6 +25,8 @@
           <%= f.hidden_field :agent_id, :value => @user.id %>
         </tr>
       </table>
+      <%= hidden_field_tag(:date_from, @date_from) %>
+      <%= hidden_field_tag(:date_to, @date_to) %>
       <%= f.submit :Update, :class => "btn btn-success" %>
     <% end %>
   </div>
