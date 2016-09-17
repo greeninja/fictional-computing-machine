@@ -15,12 +15,6 @@ Rails.application.routes.draw do
   resources :ticks
   resources :broadcasts
   resources :qa_settings
-#  resources :qas do
-#    collection do
-#      post "edit_individual"
-#      put "update_individual"
-#    end
-#  end
   get 'qas/:id/edit_individual' => 'qas#edit_individual', :as => 'edit_individual_qas'
   put 'qas/:id/update_individual' => 'qas#update_individual', :as => 'update_individual_qas'
   resources :qas
