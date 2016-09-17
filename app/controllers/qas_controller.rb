@@ -4,14 +4,25 @@ class QasController < ApplicationController
   before_action :get_setting, only: [:show, :new, :create]
   before_action :set_dates
   before_action :confirm_logged_in
+  after_action :verify_authorized
 
   def index
-    @users = Agent.sorted
-    @teams = Agent.uniq_team_id.where.not(:team_id => nil)
-    @teamcount = Team.count
+    @setting = Setting.where(:name => "qa_settings").first
+    unless @setting.enabled?
+      authorize Qa
+      flash[:warning] = "This model is not enabled yet."
+      redirect_to(request.referrer || root_path)
+    else
+      @users = Agent.sorted
+      @teams = Agent.uniq_team_id.where.not(:team_id => nil)
+      @teamcount = Team.count
+      authorize Qa
+    end
   end
 
   def show
+    # This uses the Agent policy to determin show.
+    authorize @user
   end
 
   def edit_individual
@@ -19,12 +30,15 @@ class QasController < ApplicationController
     @user = Agent.find(@ticket.agent_id)
     @qa_settings = QaSetting.where("qa_settings.team_id = #{@user.team_id}").or(QaSetting.where("qa_settings.team_id is null")).sorted
     @qas = @ticket.qas
+    # This uses the ticket policy to edit records
+    authorize @ticket
   end
 
   def update_individual
     @ticket = Ticket.find(params[:id])
     @user = Agent.find(@ticket.agent_id)
     @qa_settings = QaSetting.where("qa_settings.team_id = #{@user.team_id}").or(QaSetting.where("qa_settings.team_id is null")).sorted
+    authorize @ticket
 
     if Qa.update(params[:qas].keys, params[:qas].values)
     # Update score total

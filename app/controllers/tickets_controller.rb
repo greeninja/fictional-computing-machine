@@ -5,17 +5,20 @@ class TicketsController < ApplicationController
   before_action :get_setting, only: [:show, :new, :qa]
   before_action :set_dates
   before_action :confirm_logged_in
+  after_action :verify_authorized
 
   def new
     @ticket = Ticket.new
     @user = Agent.find(params[:agent_id])
     @qa_settings = QaSetting.where("qa_settings.team_id = #{@user.team_id}").or(QaSetting.where("qa_settings.team_id is null")).sorted
+    authorize Ticket
   end
 
   def create
     @ticket = Ticket.new(ticket_params)
     @user = Agent.find(@ticket.agent_id)
     @qa_settings = QaSetting.where("qa_settings.team_id = #{@user.team_id}").or(QaSetting.where("qa_settings.team_id is null")).sorted
+    authorize @ticket
     if @ticket.save
     # If save succeeds, redirect to the index action
       flash[:notice] = "Ticket '#{@ticket.ticket_reference}' successfully added"
@@ -27,16 +30,20 @@ class TicketsController < ApplicationController
   end
 
   def qa
+    authorize @ticket
     @ticket.qas.new
   end
 
   def edit
     @user = Agent.find(@ticket.agent_id)
+    authorize @ticket
   end
 
   def update
     @user = Agent.find(@ticket.agent_id)
     @qa_settings = QaSetting.where("qa_settings.team_id = #{@user.team_id}").or(QaSetting.where("qa_settings.team_id is null")).sorted
+    authorize @ticket
+
     if @ticket.update(ticket_params)
     # Update score total
       score = @ticket.qas.sum(:score)
@@ -57,14 +64,17 @@ class TicketsController < ApplicationController
   end
 
   def delete
+    @user = Agent.find(@ticket.agent_id)
+    authorize @ticket
   end
 
   def destroy
     @user = Agent.find(@ticket.agent_id)
+    authorize @ticket
     @ticket.qas.each do |d| d.destroy end
     @ticket.destroy
     flash[:notice] = "Ticket '#{@ticket.ticket_reference}' deleted successfully"
-    redirect_to qa_path(@user.id), agent_id: @ticket.agent_id, date_from: @date_from, date_to: @date_to
+    redirect_to qa_path(@user.id, date_from: @date_from, date_to: @date_to)
   end
 
   private

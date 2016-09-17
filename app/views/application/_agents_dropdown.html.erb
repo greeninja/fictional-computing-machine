@@ -10,8 +10,14 @@
       <%= link_to("Rats & Ticks", :controller => 'agents', :action => "show", :id => @current_user.agent_id) %>
     </li>
   <% end %>
+  <% if policy(Qa).index? %>
     <li class="<%= 'active' if params[:controller] == 'qas' %>">
       <%= link_to("QA", :controller => 'qas') %>
     </li>
+  <% else %>
+    <li class="<%= 'active' if params[:controller] == 'qas' %>">
+      <%= link_to("QA", :controller => 'qas', :action => "show", :id => @current_user.agent_id ) %>
+    </li>
+  <% end %>
   </ul>
 </li>

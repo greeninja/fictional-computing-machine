@@ -1,3 +1,5 @@
+<% if policy(ticket).edit_individual? %>
+
 <div class="btn-group">
   <button type="button" data-toggle="dropdown" class="btn btn-xs btn-default dropdown-toggle">
     Action
@@ -10,7 +12,9 @@
     </li>
     <li class="divider"></li>
     <li>
-    <%= link_to "Delete", ticket_path(ticket), data: {:confirm => "Are you sure?"}, :class => "dropdown-item", :method => :delete %>
+    <%= link_to "Delete", ticket_path(ticket, :date_from => @date_from, :date_to => @date_to), data: {:confirm => "Are you sure?"}, :class => "dropdown-item", :method => :delete %>
     </li>
   </ul>
 </div>
+
+<% end %>
