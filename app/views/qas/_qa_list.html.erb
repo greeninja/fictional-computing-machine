@@ -53,10 +53,10 @@
           <% score += t.qas.where(:qa_setting_id => criteria.id).sum(:score) %>
         <% end %>
         <% total_available = criteria.out_of * @c %>
-        <td><strong><%= number_with_precision(((score.to_f / total_available.to_f) * 100), precision: 2) %> %</strong></td>
+        <td><strong><%= number_with_precision(((score.to_f / total_available.to_f) * 100), precision: 0) %> %</strong></td>
       <% end %>
       <td>
-        <strong><%= number_with_precision((tickets.sum(:score).to_f / @c), precision: 2) %> %</strong>
+        <strong><%= number_with_precision((tickets.sum(:score).to_f / @c), precision: 0) %> %</strong>
       </td>
       <% 2.times do |td| %>
         <td></td>
