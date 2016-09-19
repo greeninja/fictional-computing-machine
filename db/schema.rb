@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160909154229) do
+ActiveRecord::Schema.define(version: 20160919105603) do
 
   create_table "agents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
@@ -116,10 +116,10 @@ ActiveRecord::Schema.define(version: 20160909154229) do
     t.string   "ticket_reference"
     t.date     "date"
     t.integer  "agent_id"
-    t.integer  "score"
+    t.decimal  "score",                          precision: 10, scale: 3
     t.text     "notes",            limit: 65535
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",                                              null: false
+    t.datetime "updated_at",                                              null: false
   end
 
   create_table "ticks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
