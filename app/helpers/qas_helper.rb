@@ -19,6 +19,6 @@ module QasHelper
     tickets = user.tickets.where('tickets.date BETWEEN ? AND ?', @date_from, @date_to)
     total = tickets.sum(:score)
     result = total.to_f / tickets.count
-    result.nan? ? "No Results for Time range" : result
+    result.nan? ? "No Results for Time range" : result.round
   end
 end
