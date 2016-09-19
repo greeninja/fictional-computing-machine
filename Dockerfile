@@ -1,12 +1,14 @@
 FROM ubuntu:latest
 RUN apt update && \
-    apt install -y mysql-client ruby ruby-dev gcc make automake libxml2 libmysqlclient-dev libsqlite3-dev openjdk-8-jdk ruby-execjs vim && \
+    apt install -y mysql-client ruby ruby-dev gcc make automake libxml2 libmysqlclient-dev libsqlite3-dev openjdk-8-jdk ruby-execjs && \
     rm -rf /var/lib/apt/lists/*
 WORKDIR /home
-ADD . /home
+# Add a new layer to make builds quicker
+ADD Gemfile /home/Gemfile
 RUN gem install bundler && \
-    /usr/local/bin/bundle install && \
-    chown 100000:100000 /home -R
+    /usr/local/bin/bundle install
+ADD . /home
+RUN chown 100000:100000 /home -R
 
 EXPOSE 8080
 

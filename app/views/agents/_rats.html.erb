@@ -7,7 +7,7 @@
             <div class="form-group">
               <%= u.label :rat_type_id, t.name %>
               <%= u.radio_button :rat_type_id, t.id %>
-              <a id="modal-<%= t.id %>" href="#modal-container-<%= t.id %>" data-toggle="modal"><span class="glyphicon glyphicon-info-sign"></span></a>
+              <a id="modal-rat-<%= t.id %>" href="#modal-container-rat-<%= t.id %>" data-toggle="modal"><span class="glyphicon glyphicon-info-sign"></span></a>
               <%= render(:partial => "modal", :locals => {:t => t, :model => "rat"}) %>
             </div>
           <% end %>

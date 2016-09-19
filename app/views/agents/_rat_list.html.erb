@@ -3,8 +3,7 @@
     <thead>
       <tr>
       <% @rat_types.each do |type| %>
-        <th><%= type.name %> <a id="modal-rat-<%= type.id %>" href="#modal-container-rat-<%= type.id %>" data-toggle="modal"><span class="glyphicon glyphicon-info-sign"></span></a></th>
-        <%= render "modal", t: type, model: "rat" %>
+        <th><%= type.name %></th>
       <% end %>
         <th>Notes</th>
         <th>Request</th>
