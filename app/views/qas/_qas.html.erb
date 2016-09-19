@@ -23,7 +23,7 @@
           Not Set
         <% end %>
         <td>
-          <%= number_with_precision(qa_average(user), precision: 2) %>
+          <%= number_with_precision(qa_average(user), precision: 0) %>
         </td>
         <td>
           <%= link_to 'Show', {:action => "show", :id => user.id, :date_from => @date_from, :date_to => @date_to}, :class => "btn btn-sm btn-default" %>
