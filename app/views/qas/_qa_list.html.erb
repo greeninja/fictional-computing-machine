@@ -37,7 +37,7 @@
           <% end %>
           </td>
         <% end %>
-        <td><strong><%= ticket.score %> %</strong></td>
+        <td><strong><%= number_with_precision((ticket.score.to_f), precision: 0) %> %</strong></td>
         <td><%= ticket.date.to_s(:short) %></td>
         <td><%= render 'button_group', ticket: ticket %></td>
       </tr>
