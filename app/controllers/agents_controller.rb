@@ -147,10 +147,6 @@ class AgentsController < ApplicationController
     Agent.column_names.include?(params[:sort]) ? params[:sort] : "name"
   end
 
-#  def sort_direction
-#    %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
-#  end
-
   def get_settings
     @rat_enabled = Setting.find_by(name: "rat_types")
     @tick_enabled = Setting.find_by(name: "tick_types")

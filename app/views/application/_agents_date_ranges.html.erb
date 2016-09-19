@@ -1,0 +1,6 @@
+<div class="btn-group btn-group pull-right" role="group" aria  -label="...">
+  <%= link_to "This Week", params.merge(:date_from => Date.today.beginning_of_week, :date_to => Date.today.end_of_week).permit!, :class => "btn btn-sm btn-default #{ 'active' if params[:date_from] == Date.today.beginning_of_week.to_s }" %>
+  <%= link_to "1 Week", params.merge(:date_from => 1.week.ago.beginning_of_week.to_date, :date_to => Date.today.end_of_week).permit!, :class => "btn btn-sm btn-default #{ 'active' if params[:date_from] == 1.week.ago.beginning_of_week.to_date.to_s }" %>
+  <%= link_to "1 Month", params.merge(:date_from => 1.month.ago.beginning_of_month.to_date, :date_to => Date.today.end_of_month).permit!, :class => "btn btn-sm btn-default #{ 'active' if params[:date_from] == 1.months.ago.beginning_of_month.to_date.to_s }" %>
+  <%= link_to "3 Months", params.merge(:date_from => 3.months.ago.beginning_of_month.to_date, :date_to => Date.today.end_of_month).permit!, :class => "btn btn-sm btn-default #{ 'active' if params[:date_from] == 3.months.ago.beginning_of_month.to_date.to_s }" %>
+</div>
