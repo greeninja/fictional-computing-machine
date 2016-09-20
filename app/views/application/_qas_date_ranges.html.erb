@@ -1,5 +1,5 @@
 <div class="btn-group btn-group pull-right" role="group" aria  -label="...">
-  <%= link_to "1 Month", params.merge(:date_from => 1.month.ago.beginning_of_month.to_date, :date_to => Date.today.end_of_month).permit!, :class => "btn btn-sm btn-default #{ 'active' if params[:date_from] == 1.months.ago.beginning_of_month.to_date.to_s }" %>
-  <%= link_to "3 Months", params.merge(:date_from => 3.months.ago.beginning_of_month.to_date, :date_to => Date.today.end_of_month).permit!, :class => "btn btn-sm btn-default #{ 'active' if params[:date_from] == 3.months.ago.beginning_of_month.to_date.to_s }" %>
-  <%= link_to "6 Months", params.merge(:date_from => 6.months.ago.beginning_of_month.to_date, :date_to => Date.today.end_of_month).permit!, :class => "btn btn-sm btn-default #{ 'active' if params[:date_from] == 6.months.ago.beginning_of_month.to_date.to_s }" %>
+  <%= link_to "Last Month", params.merge(:date_from => 1.month.ago.beginning_of_month.to_date, :date_to => 1.month.ago.end_of_month.to_date.to_s).permit!, :class => "btn btn-sm btn-default #{ 'active' if params[:date_from] == 1.months.ago.beginning_of_month.to_date.to_s }" %>
+  <%= link_to "Last 3 Months", params.merge(:date_from => 3.months.ago.beginning_of_month.to_date, :date_to => 1.month.ago.end_of_month.to_date.to_s).permit!, :class => "btn btn-sm btn-default #{ 'active' if params[:date_from] == 3.months.ago.beginning_of_month.to_date.to_s }" %>
+  <%= link_to "Last 6 Months", params.merge(:date_from => 6.months.ago.beginning_of_month.to_date, :date_to => 1.month.ago.end_of_month.to_date.to_s).permit!, :class => "btn btn-sm btn-default #{ 'active' if params[:date_from] == 6.months.ago.beginning_of_month.to_date.to_s }" %>
 </div>

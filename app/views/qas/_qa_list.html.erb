@@ -20,7 +20,7 @@
     </thead>
     <% date = parse_months(mons.to_s) %>
     <% @c = 0 %>
-    <% @user.tickets.where('tickets.date BETWEEN ? AND ?', date, date.end_of_month).order('tickets.date asc').each_with_index do |ticket, index| %>
+    <% @user.tickets.where('tickets.date BETWEEN ? AND ?', date, date.end_of_month).order('tickets.created_at asc').each_with_index do |ticket, index| %>
       <% if params[:highlight_qa] == "#{ ticket.id }" %>
         <tr class="info">
       <% else %>
