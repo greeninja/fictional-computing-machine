@@ -11,7 +11,11 @@
 </div>
 </form>
 
-<%= render "#{params[:controller]}_date_ranges" %>
+<% if params[:controller] == 'agents' %>
+  <%= render "agents_date_ranges" %>
+<% elsif params[:controller] == 'qas' %>
+  <%= render "qas_date_ranges" %>
+<% end %>
 
 <script type="text/javascript">
   $('[data-behaviour~=datepicker]').datepicker({
