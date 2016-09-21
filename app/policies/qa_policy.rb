@@ -14,4 +14,16 @@ class QaPolicy < ApplicationPolicy
     @current_user.supervisor?
   end
 
+  def all_teams?
+    @current_user.admin? or
+    @current_user.junior_admin? or
+    @current_user.team_leader?
+  end
+
+  def team?
+    @current_user.admin? or
+    @current_user.junior_admin? or
+    @current_user.team_leader?
+  end
+
 end

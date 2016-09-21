@@ -1,0 +1,11 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>Agent</th>
+      <% get_months.each do |mon| %>
+        <th><%= parse_months(mon.to_s).strftime("%B, %Y") %></th>
+      <% end %>
+    </tr>
+  </thead>
+</table>
+

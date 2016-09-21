@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<!-- <div class="container"> -->
   <div class="row">
     <div class="col-md-12">
       <nav class="navbar navbar-default" role="navigation">
@@ -15,11 +15,7 @@
             <% else %>
               <%= render "agents_dropdown" %>
             <% end %>
-            <% if policy(Team).index? %>
-              <li class="<%= 'active' if params[:controller] == 'teams' %>">
-                <%= link_to("Teams", :controller => 'teams') %>
-              </li>
-            <% end %>
+            <%= render "team_dropdown" %>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <%= render "broadcasts" %>
@@ -59,4 +55,4 @@
       </nav>
     </div>
   </div>
-</div>
+  <!-- </div> -->

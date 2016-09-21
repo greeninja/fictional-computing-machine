@@ -25,6 +25,18 @@ class QasController < ApplicationController
     authorize @user
   end
 
+  def all_teams
+    @teams = Team.all
+    authorize Qa
+  end
+
+  def team
+    @team = Team.find(params[:id])
+    @date_from = 12.months.ago.beginning_of_month
+    @date_to = 1.month.ago.end_of_month.to_date
+    authorize Qa
+  end
+
   def edit_individual
     @ticket = Ticket.find(params[:id])
     @user = Agent.find(@ticket.agent_id)

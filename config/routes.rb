@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   resources :broadcasts
   resources :qa_settings
   get 'qas/:id/edit_individual' => 'qas#edit_individual', :as => 'edit_individual_qas'
+  get 'qas/teams' => 'qas#all_teams', :as => 'teams_qa'
+  get 'qas/:id/team' => 'qas#team', :as => 'team_qas'
   put 'qas/:id/update_individual' => 'qas#update_individual', :as => 'update_individual_qas'
   resources :qas
   resources :tickets

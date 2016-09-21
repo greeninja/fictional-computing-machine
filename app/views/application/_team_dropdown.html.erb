@@ -1,0 +1,19 @@
+<li class="dropdown <%= 'active' if params[:controller] == 'teams' or params[:action] == 'team' or params[:action] == 'teams' %>">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown">Team</a> <!-- <strong class="caret"></strong></a> -->
+  <ul class="dropdown-menu">
+    <% if policy(Team).index? %>
+      <li class="<%= 'active' if params[:controller] == 'teams' %>">
+        <%= link_to("Rats & Ticks", :controller => 'teams') %>
+      </li>
+    <% end %>
+    <% if policy(Qa).team? %>
+      <li class="<%= 'active' if params[:action] == 'team' %>">
+      <% if @current_user.team_id? %>
+        <%= link_to "QA", team_qas_path(@current_user.team_id) %>
+      <% else %>
+        <%= link_to "QA", teams_qa_path %>
+      <% end %>
+      </li>
+    <% end %>
+  </ul>
+</li>
