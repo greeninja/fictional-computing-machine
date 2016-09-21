@@ -1,0 +1,26 @@
+<%= form_tag update_individual_qas_path, :method => :put do %>
+
+  <table class="table table-hover table-condensed table-bordered table-responsive">
+    <thead>
+      <tr>
+        <th>Ticket Ref</th>
+        <% @qa_settings.each do |type| %>
+          <th><%= type.qa %> <a id="modal-<%= type.id %>" href="#modal-container-<%= type.id %>" data-toggle="modal"><span class="glyphicon glyphicon-info-sign"></span></a></th>
+          <%= render "modal", t: type %>
+        <% end %>
+      </tr>
+    </thead>
+
+    <tr>
+    <td><%= @ticket.ticket_reference %></td>
+      <% for qa in @qas %>
+        <%= fields_for "qas[]", qa do |f| %>
+          <td><%= f.select :score, (0..qa.out_of), {}, {:class => "form-control"} %></td>
+        <% end %>
+      <% end %>
+    </tr>
+  </table>
+  <%= hidden_field_tag(:date_from, @date_from) %>
+  <%= hidden_field_tag(:date_to, @date_to) %>
+<p><%= submit_tag :Submit, :class => "btn btn-success" %></p>
+<% end %>

@@ -4,6 +4,8 @@ class Agent < ApplicationRecord
   has_many :users
   has_many :rats
   has_many :ticks
+  has_many :tickets
+  has_many :qas, :through => :tickets
 
   has_paper_trail
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160828185646) do
+ActiveRecord::Schema.define(version: 20160919105603) do
 
   create_table "agents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
@@ -45,6 +45,25 @@ ActiveRecord::Schema.define(version: 20160828185646) do
     t.boolean  "team_leader"
     t.boolean  "junior_admin"
     t.boolean  "admin"
+  end
+
+  create_table "qa_settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer  "setting_id"
+    t.integer  "team_id"
+    t.string   "qa"
+    t.text     "description", limit: 65535
+    t.integer  "out_of"
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  create_table "qas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer  "qa_setting_id"
+    t.integer  "ticket_id"
+    t.integer  "score"
+    t.integer  "out_of"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "rat_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -91,6 +110,16 @@ ActiveRecord::Schema.define(version: 20160828185646) do
     t.datetime "updated_at",                null: false
     t.integer  "setting_id"
     t.index ["setting_id"], name: "index_tick_types_on_setting_id", using: :btree
+  end
+
+  create_table "tickets", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string   "ticket_reference"
+    t.date     "date"
+    t.integer  "agent_id"
+    t.decimal  "score",                          precision: 10, scale: 3
+    t.text     "notes",            limit: 65535
+    t.datetime "created_at",                                              null: false
+    t.datetime "updated_at",                                              null: false
   end
 
   create_table "ticks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|

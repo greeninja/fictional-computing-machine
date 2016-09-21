@@ -7,8 +7,8 @@
             <div class="form-group">
               <%= u.label :tick_type_id, t.name %>
               <%= u.radio_button :tick_type_id, t.id %>
-              <a id="modal-<%= t.id %>" href="#modal-container-<%= t.id %>" data-toggle="modal"><span class="glyphicon glyphicon-info-sign"></span></a>
-              <%= render(:partial => "modal", :locals => {:t => t}) %>
+              <a id="modal-tick-<%= t.id %>" href="#modal-container-tick-<%= t.id %>" data-toggle="modal"><span class="glyphicon glyphicon-info-sign"></span></a>
+              <%= render(:partial => "modal", :locals => {:t => t, :model => "tick"}) %>
             </div>
           <% end %>
         <div class="form-group">

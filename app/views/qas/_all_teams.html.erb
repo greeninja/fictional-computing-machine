@@ -1,0 +1,32 @@
+<% if @teams.count >= 1 %>
+<table class="table table-hover table-responsive" data-sort-name="Name" data-sort-order="desc">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Users</th>
+      <th>Description</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @teams.each do |team| %>
+      <tr>
+        <td><%= team.id %></td>
+        <td><%= team.name %></td>
+        <td><span class="label label-info"><%= team.agents.count %></span></td>
+        <td><%=h truncate(team.description, :length => 100) %></td>
+        <td><%= link_to 'Show QA', team_qas_path(team.id), :class => "btn btn-sm btn-default" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<% else %>
+
+<h4>You have no teams configured</h4>
+<p>Click below to add teams</p>
+<% end %>

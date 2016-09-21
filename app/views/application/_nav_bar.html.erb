@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<!-- <div class="container"> -->
   <div class="row">
     <div class="col-md-12">
       <nav class="navbar navbar-default" role="navigation">
@@ -10,20 +10,12 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <% if policy(Agent).index? %>
-              <li class="<%= 'active' if params[:controller] == 'agents' %>">
-                <%= link_to("Agents", :controller => 'agents') %>
-              </li>
-            <% elsif @current_user.user? and @current_user.agent_id? %>
-              <li class="<%= 'active' if params[:controller] == 'agents' %>">
-                <%= link_to("Agents", :controller => 'agents', :action => "show", :id => @current_user.agent_id) %>
-              </li>
+            <% if @current_user.user? or @current_user.supervisor? %>
+              <%= render "agents_nav" %>
+            <% else %>
+              <%= render "agents_dropdown" %>
             <% end %>
-            <% if policy(Team).index? %>
-              <li class="<%= 'active' if params[:controller] == 'teams' %>">
-                <%= link_to("Teams", :controller => 'teams') %>
-              </li>
-            <% end %>
+            <%= render "team_dropdown" %>
           </ul>
           <ul class="nav navbar-nav navbar-right">
             <%= render "broadcasts" %>
@@ -63,4 +55,4 @@
       </nav>
     </div>
   </div>
-</div>
+  <!-- </div> -->

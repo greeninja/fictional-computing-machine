@@ -1,0 +1,34 @@
+<table class="table table-hover table-responsive" data-sort-name="Name" data-sort-order="desc">
+  <thead>
+    <tr>
+      <th data-field="Custom ID" data-sortable="true">ID</th>
+      <th data-field="Name"data-sortable="true">Name</th>
+      <th data-field="Last Name" data-sortable="true">Last Name</th>
+      <th data-field="Team" data-sortable="true">Team</th>
+      <th data-field="Average" data-sortable="true">Average</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% users.each do |user| %>
+      <tr>
+        <td><%= user.customid %></td>
+        <td><%= user.name %></td>
+        <td><%= user.last_name %></td>
+        <td>
+          <% if user.team_id.present? %>
+            <%= user.team.name %></td>
+        <% else %>
+          Not Set
+        <% end %>
+        <td>
+          <strong><%= qa_average(user) %> % </strong>
+        </td>
+        <td>
+          <%= link_to 'Show', {:action => "show", :id => user.id, :date_from => @date_from, :date_to => @date_to}, :class => "btn btn-sm btn-default" %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,0 +1,19 @@
+<%= f.fields_for :qa_settings, @setting.qa_settings.new do |u| %>
+  <div class="form-group">
+    <label for="name">Team</label>
+    <%= u.select(:team_id, @teams.map {|p| [p.name, p.id]}, {:include_blank => true}, {:class => "form-control", :id => "name"}) %>
+  </div>
+  <div class="form-group">
+    <label for="name">QA Criteria</label>
+    <%= u.text_field :qa, :class => "form-control", :id => "name" %>
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <%= u.text_field :description, :class => "form-control", :id => "description" %>
+  </div>
+  <div class="form-group">
+    <label for="outof">Out Of</label>
+    <%= u.select :out_of, (1..10), {}, {:class => "form-control", :id => "outof"} %>
+  </div>
+<% end %>
+

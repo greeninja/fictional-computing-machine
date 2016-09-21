@@ -1,11 +1,14 @@
-FROM alpine:latest
-RUN apk update && \
-    apk add mariadb gcc make build-base ruby ruby-rdoc ruby-dev ruby-rake ruby-bundler git libffi mariadb-dev sqlite libxml2 sqlite-dev libffi-dev openjdk8 nodejs ruby-irb tzdata ruby-bigdecimal bash && \
-    rm -rf /var/cache/apk/*
+FROM ubuntu:latest
+RUN apt update && \
+    apt install -y mysql-client ruby ruby-dev gcc make automake libxml2 libmysqlclient-dev libsqlite3-dev openjdk-8-jdk ruby-execjs && \
+    rm -rf /var/lib/apt/lists/*
 WORKDIR /home
+# Add a new layer to make builds quicker
+ADD Gemfile /home/Gemfile
+RUN gem install bundler && \
+    /usr/local/bin/bundle install
 ADD . /home
-RUN chown 10000:100000 /home -R && \
-    bundle install
+RUN chown 100000:100000 /home -R
 
 EXPOSE 8080
 

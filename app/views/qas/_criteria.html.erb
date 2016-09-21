@@ -1,0 +1,7 @@
+<%= f.fields_for :qa do |u| %>
+  <td>
+    <div class="form-group form-group-sm">
+      <%= u.label "#{ u.qa_setting_id }" %>
+      <%= u.select :score, (0..10), {:include_blank => true}, {:class => "form-control", :id => "score"} %>
+    </div>
+<% end %>

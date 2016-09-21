@@ -3,6 +3,8 @@
   <head>
     <title>RaTs</title>
     <meta http-equiv="Content-Language" content="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <meta http-equiv="refresh" content="60" /> -->
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
@@ -20,14 +22,16 @@
       <%= render "warning", message: flash[:warning] %>
     <% end %>
     <div class="row">
-      <div class="col-md-1">
-      </div>
-    <div class="col-md-10">
+<!--      <div class="col-sm-1">
+      </div> -->
+  <div class="container-fluid">
+    <div class="col-sm-12">
   <% end %>
     <%= yield %>
     </div>
-    <div class="col-md-1">
-    </div>
+  </div>
+<!--    <div class="col-sm-1">
+    </div> -->
   </div>
   </body>
 </html>

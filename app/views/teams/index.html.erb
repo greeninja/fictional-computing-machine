@@ -11,8 +11,9 @@
       </div>
       <div class="panel-body">
         <%= render "teams" %>
-
-        <%= button_to 'New Team', new_team_path, :class => "btn btn-default" %>
+        <% if policy(Team).create? %>
+          <%= button_to 'New Team', new_team_path, :class => "btn btn-default" %>
+        <% end %>
         <% unless @current_user.team_id? %>
         <h3 class="text-center">Overview</h3>
           <ul class="nav nav-tabs">

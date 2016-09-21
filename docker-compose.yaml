@@ -1,26 +1,24 @@
-version: '2'
-services:
-  db:
-    image: mariadb
-    environment:
-      - MYSQL_ROOT_PASSWORD=SuperSecurePassword
-      - MYSQL_DATABASE=fictional_computing_machine
-      - MYSQL_USER=fictional
-      - MYSQL_PASSWORD=Password1
+db:
+  image: mariadb
+  environment:
+    - MYSQL_ROOT_PASSWORD=SuperSecurePassword
+    - MYSQL_DATABASE=fictional_computing_machine
+    - MYSQL_USER=fictional
+    - MYSQL_PASSWORD=Password1
 #    volumes:
 #      - /opt/data:/var/lib/mysql
-  web:
-    # image: greeninja/fictional-computing-machine
-    build: .
-    user: "10000"
-    ports:
-      - "8080:8080"
-    environment:
-      - DB_HOST=db
-      - DB_USER=fictional
-      - DB_DATABASE=fictional_computing_machine
-      - DB_PASSWORD=Password1
-      - SECRET_KEY_BASE=SuperSecretKeyForProduction
-      - RAILS_ENV=development
-    depends_on:
-      - db
+web:
+  # image: greeninja/fictional-computing-machine
+  build: .
+  # user: "10000"
+  ports:
+    - "8080:8080"
+  environment:
+    - DB_HOST=db
+    - DB_USER=fictional
+    - DB_DATABASE=fictional_computing_machine
+    - DB_PASSWORD=Password1
+    - SECRET_KEY_BASE=SuperSecretKeyForProduction
+    - RAILS_ENV=development
+  links:
+    - db

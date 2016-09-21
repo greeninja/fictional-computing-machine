@@ -73,4 +73,10 @@ class AgentPolicy < ApplicationPolicy
     @current_user.team_leader?
   end
 
+  def make_changes?
+    @current_user.admin? or
+    @current_user.junior_admin? or
+    @current_user.team_leader?
+  end
+
 end
