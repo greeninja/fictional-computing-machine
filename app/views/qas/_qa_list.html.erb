@@ -51,7 +51,7 @@
       <% @qa_settings.each do |criteria| %>
         <% score = 0 %>
         <% tickets.each do |t| %>
-          <%= score = t.qas.where(:qa_setting_id => criteria.id).map {|s| s['score']}.reduce(0, :+) %>
+          <% score = t.qas.where(:qa_setting_id => criteria.id).map {|s| s['score']}.reduce(0, :+) %>
         <% end %>
         <% total_available = criteria.out_of * @c %>
         <td><strong><%= ((score.to_f / total_available.to_f) * 100).round %> %</strong></td>
