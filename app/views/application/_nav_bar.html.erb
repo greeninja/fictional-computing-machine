@@ -10,7 +10,11 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <%= render "agents_dropdown" %>
+            <% if @current_user.user? or @current_user.supervisor? %>
+              <%= render "agents_nav" %>
+            <% else %>
+              <%= render "agents_dropdown" %>
+            <% end %>
             <% if policy(Team).index? %>
               <li class="<%= 'active' if params[:controller] == 'teams' %>">
                 <%= link_to("Teams", :controller => 'teams') %>
