@@ -1,0 +1,25 @@
+<ul class="nav nav-tabs">
+  <li class="active"><a data-toggle="tab" href="#unread">Unread</a></li>
+  <li><a data-toggle="tab" href="#read">Read</a></li>
+</ul>
+<div class="tab-content">
+  <div id="unread" class="tab-pane active">
+    <% if @notifications.count >= 1 %>
+      <% @notifications.each do |notification| %>
+        <%= render 'notification', notification: notification %>
+      <% end %>
+    <% else %>
+      <%= render "success", message: "No unread notifications" %>
+    <% end %>
+  </div>
+  <div id="read" class="tab-pane">
+    <% if @read_notifications.count >= 1 %>
+      <% @read_notifications.each do |notification| %>
+        <%= render "notification", notification: notification %>
+      <% end %>
+    <% else %>
+      <%= render "success", message: "No unread notifications" %>
+    <% end %>
+  </div>
+</div>
+
