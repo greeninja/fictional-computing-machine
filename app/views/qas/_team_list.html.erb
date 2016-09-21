@@ -1,11 +1,28 @@
-<table class="table table-hover">
+<table class="table table-bordered table-hover">
   <thead>
     <tr>
       <th>Agent</th>
       <% get_months.each do |mon| %>
         <th><%= parse_months(mon.to_s).strftime("%B, %Y") %></th>
       <% end %>
+      <th>Actions</th>
     </tr>
   </thead>
+  <% @team.agents.each do |agent| %>
+    <tr>
+      <td><%= agent.name %> <%= agent.last_name %></td>
+      <% get_months.each do |mon| %>
+        <td>
+          <% tickets_by_month(agent).each do |score| %>
+          <% if score[:month].to_date === mon.to_s.to_date %>
+            <%= (score[:score]).round %> %
+          <% end %>
+        <% end %>
+        </td>
+      <% end %>
+      <td><%= link_to "Show", qa_path(agent), :class => "btn btn-sm btn-default"%></td>
+    </tr>
+  <% end %>
+
 </table>
 

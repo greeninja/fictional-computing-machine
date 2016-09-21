@@ -13,9 +13,15 @@ class QasController < ApplicationController
       flash[:warning] = "This model is not enabled yet."
       redirect_to(request.referrer || root_path)
     else
-      @users = Agent.sorted
-      @teams = Agent.uniq_team_id.where.not(:team_id => nil)
-      @teamcount = Team.count
+      if @current_user.team_id?
+        @users = Agent.where(:team_id => @current_user.team_id).sorted
+        @teams = Agent.uniq_team_id.where(:team_id => @current_user.team_id) 
+        @teamcount = Team.where(:id => @current_user.team_id).count
+      else
+        @users = Agent.sorted
+        @teams = Agent.uniq_team_id.where.not(:team_id => nil)
+        @teamcount = Team.count
+      end
       authorize Qa
     end
   end
@@ -76,8 +82,8 @@ class QasController < ApplicationController
   end
 
   def set_dates
-    @date_from = parsed_date(params[:date_from], Date.today.beginning_of_month)
-    @date_to = parsed_date(params[:date_to], Date.today.end_of_month)
+    @date_from = parsed_date(params[:date_from], 1.month.ago.beginning_of_month.to_date)
+    @date_to = parsed_date(params[:date_to], 1.month.ago.end_of_month.to_date)
   end
 
   def qa_params
