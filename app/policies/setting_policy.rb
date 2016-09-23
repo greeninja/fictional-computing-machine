@@ -47,4 +47,9 @@ class SettingPolicy < ApplicationPolicy
     @current_user.junior_admin?
   end
 
+  def qa_general_settings?
+    @current_user.admin? or
+    @current_user.junior_admin?
+  end
+
 end

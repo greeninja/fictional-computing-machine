@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160923133056) do
+ActiveRecord::Schema.define(version: 20160923142917) do
 
   create_table "agents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
@@ -45,6 +45,15 @@ ActiveRecord::Schema.define(version: 20160923133056) do
     t.boolean  "team_leader"
     t.boolean  "junior_admin"
     t.boolean  "admin"
+  end
+
+  create_table "qa_general_settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string   "name"
+    t.string   "value"
+    t.integer  "setting_id"
+    t.boolean  "disabled"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "qa_settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|

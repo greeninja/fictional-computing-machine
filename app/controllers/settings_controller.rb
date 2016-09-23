@@ -1,5 +1,5 @@
 class SettingsController < ApplicationController
-  before_action :set_setting, only: [:show, :edit, :update, :destroy, :tick_types, :rat_types, :qa_settings]
+  before_action :set_setting, only: [:show, :edit, :update, :destroy, :tick_types, :rat_types, :qa_settings, :qa_general_settings]
   before_action :confirm_logged_in
   after_action :verify_authorized
 
@@ -92,6 +92,11 @@ class SettingsController < ApplicationController
     authorize Setting
   end
 
+  def qa_general_settings
+    @setting.qa_general_settings.new
+    authorize Setting
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_setting
@@ -103,7 +108,8 @@ class SettingsController < ApplicationController
       params.require(:setting).permit(:name, :description, :enabled,
         :tick_types_attributes => [:name, :description, :setting_id],
         :rat_types_attributes => [:name, :description, :setting_id],
-        :qa_settings_attributes => [:name, :setting_id, :team_id, :description, :out_of, :qa, :position]
+        :qa_settings_attributes => [:name, :setting_id, :team_id, :description, :out_of, :qa, :position],
+        :qa_general_settings_attributes => [:name, :value, :disabled]
       )
     end
 end
