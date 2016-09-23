@@ -5,14 +5,16 @@ class QaSettingsController < ApplicationController
 
   def edit
     @teams = Team.sorted
+    @position = QaSetting.count
     authorize QaSetting
   end
 
   def update
     authorize QaSetting
+    @setting = Setting.where(:name => "qa_settings").first
     respond_to do |format|
       if @qa_setting.update(qa_setting_params)
-        format.html { redirect_to settings_path(params[:id => :setting_id]), notice: 'Qa setting was successfully updated.' }
+        format.html { redirect_to setting_path(@setting.id), notice: 'Qa setting was successfully updated.' }
         format.json { render :show, status: :ok, location: @qa_setting }
       else
         format.html { render :edit }
@@ -38,6 +40,6 @@ class QaSettingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def qa_setting_params
-      params.require(:qa_setting).permit(:name, :setting_id, :team_id, :description, :out_of, :qa)
+      params.require(:qa_setting).permit(:name, :setting_id, :team_id, :description, :out_of, :qa, :position)
     end
 end
