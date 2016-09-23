@@ -6,6 +6,8 @@ class Setting < ApplicationRecord
 
   has_paper_trail
 
+  validates_uniqueness_of :name
+
   accepts_nested_attributes_for :tick_types, allow_destroy: true, reject_if: :all_blank
   accepts_nested_attributes_for :rat_types, allow_destroy: true, reject_if: :all_blank
   accepts_nested_attributes_for :qa_settings, allow_destroy: true, reject_if: :all_blank

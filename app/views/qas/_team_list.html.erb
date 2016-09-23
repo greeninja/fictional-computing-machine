@@ -15,7 +15,7 @@
         <td>
           <% tickets_by_month(agent).each do |score| %>
           <% if score[:month].to_date === mon.to_s.to_date %>
-            <%= (score[:score]).round %> %
+            <%= badge_it((score[:score]).round) %>
           <% end %>
         <% end %>
         </td>

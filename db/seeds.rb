@@ -18,4 +18,13 @@ ticksetting = Setting.create :name => "rat_types", :description => "This is wher
 puts "Creating Broadcast setting"
 broadcast = Setting.create :name => "broadcast_settings", :description => "This defines if the broadcasts section of rats is enabled and what sections generate a broadcast message to all users.", :enabled => "0"
 puts "Creating QA setting"
-broadcast = Setting.create :name => "qa_settings", :description => "This is where the QA options are configured per team. If it is a generic QA, then leave the team field blank.", :enabled => "0"
+qa_setting = Setting.create :name => "qa_settings", :description => "This is where the QA options are configured per team. If it is a generic QA, then leave the team field blank.", :enabled => "0"
+puts "Creating QA General Setting"
+qa_general_setting = Setting.create :name => "qa_general_settings", :description => "This is where the general options for QA are stored. There should be changed to suit, but not removed as it will break the overview", :enabled => "1"
+puts "Creating standard QA General settings"
+qa_general_colours = ["yellow", "green", "red"]
+setting = Setting.where(:name => "qa_general_settings").first
+qa_general_colours.each do |c|
+  puts "  - Creating #{c} for badges"
+  QaGeneralSetting.create :name => "year_view_#{c}_badge", :value => "0", :disabled => "1", :setting_id => setting.id
+end

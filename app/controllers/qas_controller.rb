@@ -2,6 +2,7 @@ class QasController < ApplicationController
 
   before_action :set_user, only: [:show, :new, :destroy, :get_setting]
   before_action :get_setting, only: [:show, :new, :create]
+  before_action :get_general_settings, only: [:team, :all_teams]
   before_action :set_dates
   before_action :confirm_logged_in
   after_action :verify_authorized
@@ -15,7 +16,7 @@ class QasController < ApplicationController
     else
       if @current_user.team_id?
         @users = Agent.where(:team_id => @current_user.team_id).sorted
-        @teams = Agent.uniq_team_id.where(:team_id => @current_user.team_id) 
+        @teams = Agent.uniq_team_id.where(:team_id => @current_user.team_id)
         @teamcount = Team.where(:id => @current_user.team_id).count
       else
         @users = Agent.sorted
@@ -88,6 +89,10 @@ class QasController < ApplicationController
 
   def qa_params
     params.require(:qa).permit(:score)
+  end
+
+  def get_general_settings
+    @general_settings = QaGeneralSetting.where(:disabled => false)
   end
 
 end
