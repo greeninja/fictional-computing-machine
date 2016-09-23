@@ -13,8 +13,12 @@
   </thead>
 
   <tbody>
-    <% users.each do |user| %>
+  <% users.each do |user| %>
+    <% if user.disabled? %>
+      <tr class="danger" >
+    <% else %>
       <tr>
+    <% end %>
         <td><%= user.customid %></td>
         <td><%= user.name %></td>
         <td><%= user.last_name %></td>
@@ -34,8 +38,13 @@
         <% else %>
           <td></td>
         <% end %>
-        <td><%= button_to("New RaT", {:action => 'rat', :id => user.id}, :class => "btn btn-sm btn-warning") %></td>
-        <td><%= button_to("New TiCK", {:action => 'tick', :id => user.id}, :class => "btn btn-sm btn-success") %></td>
+        <% unless user.disabled? %>
+          <td><%= button_to("New RaT", {:action => 'rat', :id => user.id}, :class => "btn btn-sm btn-warning") %></td>
+          <td><%= button_to("New TiCK", {:action => 'tick', :id => user.id}, :class => "btn btn-sm btn-success") %></td>
+        <% else %>
+          <td></td>
+          <td></td>
+        <% end %>
         <td>
           <% if policy(Agent).make_changes? %>
           <div class="btn-group">

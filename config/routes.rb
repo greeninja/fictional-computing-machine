@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   resources :ticks
   resources :broadcasts
   resources :qa_settings
+  resources :qa_general_settings
   get 'qas/:id/edit_individual' => 'qas#edit_individual', :as => 'edit_individual_qas'
   get 'qas/teams' => 'qas#all_teams', :as => 'teams_qa'
   get 'qas/:id/team' => 'qas#team', :as => 'team_qas'
@@ -34,6 +35,7 @@ Rails.application.routes.draw do
     resources :tick_types
     resources :rat_types
     resources :qa_settings
+    resources :qa_general_settings
   end
 
   resources :tickets do

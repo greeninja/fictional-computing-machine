@@ -35,4 +35,35 @@ module QasHelper
     end
     result
   end
+
+  def badge_it(score)
+    unless @general_settings.empty?
+      unless @general_settings.where(:name => "year_view_yellow_badge").empty?
+        yellow_score = @general_settings.where(:name => "year_view_yellow_badge").first
+      end
+      unless @general_settings.where(:name => "year_view_green_badge").empty?
+        green_score = @general_settings.where(:name => "year_view_green_badge").first
+      end
+      unless @general_settings.where(:name => "year_view_red_badge").empty?
+        red_score = @general_settings.where(:name => "year_view_red_badge").first
+      end
+
+      if score >= green_score.value.to_f
+        badge = "success"
+      elsif score >= yellow_score.value.to_f and score < green_score.value.to_f
+        badge = "warning"
+      elsif score <= red_score.value.to_f
+        badge = "danger"
+      else
+        badge = "default"
+      end
+
+      result = "<h4><span class=\"label label-#{badge}\">#{ score } %</span></h4>"
+      result.html_safe
+
+    else
+      score
+    end
+  end
+
 end

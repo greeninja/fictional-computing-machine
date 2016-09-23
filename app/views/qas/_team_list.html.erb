@@ -9,13 +9,17 @@
     </tr>
   </thead>
   <% @team.agents.each do |agent| %>
-    <tr>
+    <% if agent.disabled? %>
+      <tr class="danger">
+    <% else %>
+      </tr>
+    <% end %>
       <td><%= agent.name %> <%= agent.last_name %></td>
       <% get_months.each do |mon| %>
         <td>
           <% tickets_by_month(agent).each do |score| %>
           <% if score[:month].to_date === mon.to_s.to_date %>
-            <%= (score[:score]).round %> %
+            <%= badge_it((score[:score]).round) %>
           <% end %>
         <% end %>
         </td>

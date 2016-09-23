@@ -76,10 +76,15 @@ class TeamsController < ApplicationController
 
   def destroy
     authorize Team
-    @team.destroy
-    respond_to do |format|
-      format.html { redirect_to teams_url, notice: 'Team was successfully deleted.' }
-      format.json { head :no_content }
+    if @team.agents.count == 0
+      @team.destroy
+      respond_to do |format|
+        format.html { redirect_to teams_url, notice: 'Team was successfully deleted.' }
+        format.json { head :no_content }
+      end
+    else
+      flash[:warning] = "Agents still assigned to this team, so cannot be removed"
+      redirect_to(request.referrer || root_path)
     end
   end
 
