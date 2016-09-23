@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160923142917) do
+ActiveRecord::Schema.define(version: 20160923212039) do
 
   create_table "agents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
@@ -19,6 +19,7 @@ ActiveRecord::Schema.define(version: 20160923142917) do
     t.datetime "updated_at", null: false
     t.integer  "team_id"
     t.bigint   "customid"
+    t.boolean  "disabled"
     t.index ["team_id"], name: "index_agents_on_team_id", using: :btree
   end
 

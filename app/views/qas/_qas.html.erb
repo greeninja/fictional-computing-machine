@@ -11,8 +11,12 @@
   </thead>
 
   <tbody>
-    <% users.each do |user| %>
+  <% users.each do |user| %>
+    <% if user.disabled? %>
+      <tr class="danger">
+    <% else %>
       <tr>
+    <% end %>
         <td><%= user.customid %></td>
         <td><%= user.name %></td>
         <td><%= user.last_name %></td>

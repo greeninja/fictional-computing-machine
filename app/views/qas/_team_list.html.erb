@@ -9,7 +9,11 @@
     </tr>
   </thead>
   <% @team.agents.each do |agent| %>
-    <tr>
+    <% if agent.disabled? %>
+      <tr class="danger">
+    <% else %>
+      </tr>
+    <% end %>
       <td><%= agent.name %> <%= agent.last_name %></td>
       <% get_months.each do |mon| %>
         <td>

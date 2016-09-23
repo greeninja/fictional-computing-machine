@@ -138,7 +138,7 @@ class AgentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:agent).permit(:name, :last_name, :team, :manual_team, :team_id, :customid,
+      params.require(:agent).permit(:name, :last_name, :team, :manual_team, :team_id, :customid, :disabled,
                                    :rats_attributes => [:rat_type_id, :longbreak, :latebreak, :offtask, :notes, :_destroy],
                                    :ticks_attributes => [:tick_type_id, :ab, :late, :dynamic, :initiative, :void, :notes, :_destroy])
     end
