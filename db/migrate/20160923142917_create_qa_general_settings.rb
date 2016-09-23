@@ -4,6 +4,7 @@ class CreateQaGeneralSettings < ActiveRecord::Migration[5.0]
       t.string :name
       t.string :value
       t.integer :setting_id
+      t.integer :team_id
       t.boolean :disabled
       t.timestamps
     end

@@ -8,6 +8,10 @@
     <%= u.text_field :value, :class => "form-control", :id => "value" %>
   </div>
   <div class="form-group">
+    <label for="team">Team</label>
+    <%= u.select(:team_id, @teams.map {|p| [p.name, p.id]}, {:include_blank => true}, {:class => "form-control", :id => "team"}) %>
+  </div>
+  <div class="form-group">
     <label for="disabled">Disabled</label>
     <%= u.check_box :disabled, {}, {:class => "form-control", :id => "disabled"} %>
   </div>

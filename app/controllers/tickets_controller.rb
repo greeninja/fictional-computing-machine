@@ -25,7 +25,7 @@ class TicketsController < ApplicationController
       redirect_to(:action => "qa", :id => @ticket.id, agent_id: @ticket.agent_id, date_from: @date_from, date_to: @date_to)
     else
     # If save fails, redisplay the form so user can fix problems
-      render 'new', ticket: @ticket
+      render 'new'
     end
   end
 

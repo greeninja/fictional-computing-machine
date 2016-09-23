@@ -4,11 +4,13 @@ class QaGeneralSettingsController < ApplicationController
   after_action :verify_authorized
 
   def edit
+    @teams = Team.sorted
     authorize QaGeneralSetting
   end
 
   def update
     authorize QaGeneralSetting
+    @teams = Team.sorted
     @setting = Setting.where(:name => "qa_general_settings").first
     respond_to do |format|
       if @qa_general_setting.update(qa_general_setting_params)
@@ -39,6 +41,6 @@ class QaGeneralSettingsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def qa_general_setting_params
-      params.require(:qa_general_setting).permit(:name, :setting_id, :value, :disabled)
+      params.require(:qa_general_setting).permit(:name, :setting_id, :team_id, :value, :disabled)
     end
 end

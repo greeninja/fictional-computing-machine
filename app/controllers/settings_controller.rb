@@ -93,6 +93,7 @@ class SettingsController < ApplicationController
   end
 
   def qa_general_settings
+    @teams = Team.sorted
     @setting.qa_general_settings.new
     authorize Setting
   end
@@ -109,7 +110,7 @@ class SettingsController < ApplicationController
         :tick_types_attributes => [:name, :description, :setting_id],
         :rat_types_attributes => [:name, :description, :setting_id],
         :qa_settings_attributes => [:name, :setting_id, :team_id, :description, :out_of, :qa, :position],
-        :qa_general_settings_attributes => [:name, :value, :disabled]
+        :qa_general_settings_attributes => [:name, :value, :team_id, :disabled]
       )
     end
 end

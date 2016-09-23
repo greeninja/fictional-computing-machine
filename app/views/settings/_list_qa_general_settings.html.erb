@@ -4,6 +4,7 @@
     <tr>
       <th>Name</th>
       <th>Value</th>
+      <th>Team</th>
       <th>Disabled</th>
       <th>Actions</th>
     </tr>
@@ -12,6 +13,7 @@
       <tr>
         <td><%= qa.name %></td>
         <td><%= qa.value %></td>
+        <td><%= qa.team_id? ? qa.team.name : "All teams" %></td>
         <td><%= qa.disabled? ? ('<span class="glyphicon glyphicon-ok"></span>').html_safe : "" %></td>
         <td>
           <div class="btn-group">

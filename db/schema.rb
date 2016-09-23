@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20160923142917) do
     t.string   "name"
     t.string   "value"
     t.integer  "setting_id"
+    t.integer  "team_id"
     t.boolean  "disabled"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

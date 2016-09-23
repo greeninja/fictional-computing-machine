@@ -2,7 +2,7 @@ class QasController < ApplicationController
 
   before_action :set_user, only: [:show, :new, :destroy, :get_setting]
   before_action :get_setting, only: [:show, :new, :create]
-  before_action :get_general_settings, only: [:team, :all_teams]
+  before_action :get_general_settings, only: [:team]
   before_action :set_dates
   before_action :confirm_logged_in
   after_action :verify_authorized
@@ -38,7 +38,6 @@ class QasController < ApplicationController
   end
 
   def team
-    @team = Team.find(params[:id])
     @date_from = 12.months.ago.beginning_of_month
     @date_to = 1.month.ago.end_of_month.to_date
     authorize Qa
@@ -92,7 +91,8 @@ class QasController < ApplicationController
   end
 
   def get_general_settings
-    @general_settings = QaGeneralSetting.where(:disabled => false)
+    @team = Team.find(params[:id])
+    @general_settings = QaGeneralSetting.where("qa_general_settings.disabled = false and qa_general_settings.team_id = #{ @team.id }").or(QaGeneralSetting.where("qa_general_settings.disabled = false and qa_general_settings.team_id = #{ @team.id }"))
   end
 
 end
