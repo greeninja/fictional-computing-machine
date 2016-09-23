@@ -4,6 +4,6 @@ class QaSetting < ApplicationRecord
 
   has_paper_trail
 
-  scope :sorted, lambda { order("qa_settings.created_at ASC") }
+  scope :sorted, lambda { order("qa_settings.position ASC") }
 
 end

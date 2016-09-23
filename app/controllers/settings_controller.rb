@@ -88,6 +88,7 @@ class SettingsController < ApplicationController
   def qa_settings
     @setting.qa_settings.new
     @teams = Team.sorted
+    @position = QaSetting.count + 1
     authorize Setting
   end
 
@@ -102,7 +103,7 @@ class SettingsController < ApplicationController
       params.require(:setting).permit(:name, :description, :enabled,
         :tick_types_attributes => [:name, :description, :setting_id],
         :rat_types_attributes => [:name, :description, :setting_id],
-        :qa_settings_attributes => [:name, :setting_id, :team_id, :description, :out_of, :qa]
+        :qa_settings_attributes => [:name, :setting_id, :team_id, :description, :out_of, :qa, :position]
       )
     end
 end
