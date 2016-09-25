@@ -1,6 +1,7 @@
-<li class="dropdown <%= 'active' if params[:controller] == 'agents' or params[:controller] == 'qas' and params[:action] != 'team' or params[:action] == 'teams' %>">
+<li class="dropdown <%= 'active' if params[:controller] == 'agents' or params[:controller] == 'qas' and params[:action] != 'team' or params[:action] == 'teams' or params[:action] == 'feedback' %>">
 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Agent</a> <!-- <strong class="caret"></strong></a> -->
   <ul class="dropdown-menu">
+<% if enabled_models("rats") or enabled_models("ticks") %>
   <% if policy(Agent).index? %>
     <li class="<%= 'active' if params[:controller] == 'agents' %>">
       <%= link_to("Rats & Ticks", :controller => 'agents') %>
@@ -10,14 +11,20 @@
       <%= link_to("Rats & Ticks", :controller => 'agents', :action => "show", :id => @current_user.agent_id) %>
     </li>
   <% end %>
+<% end %>
+<% if enabled_models("qa") %>
   <% if policy(Qa).index? %>
     <li class="<%= 'active' if params[:controller] == 'qas' and params[:action] != 'team' %>">
       <%= link_to("QA", :controller => 'qas') %>
+    </li>
+    <li class="<%= 'active' if params[:controller] == 'tickets' and params[:action] == 'feedback' %>">
+    <%= link_to("QA Feedback  <span class=\"badge\">#{ ticket_feedback }</span>".html_safe, :controller => "tickets", :action => "feedback") %>
     </li>
   <% else %>
     <li class="<%= 'active' if params[:controller] == 'qas' %>">
       <%= link_to("QA", :controller => 'qas', :action => "show", :id => @current_user.agent_id ) %>
     </li>
   <% end %>
+<% end %>
   </ul>
 </li>

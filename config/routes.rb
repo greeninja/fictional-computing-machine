@@ -21,6 +21,9 @@ Rails.application.routes.draw do
   get 'qas/:id/team' => 'qas#team', :as => 'team_qas'
   put 'qas/:id/update_individual' => 'qas#update_individual', :as => 'update_individual_qas'
   resources :qas
+  get 'tickets/feedback' => 'tickets#feedback', :as =>'tickets_feedback'
+  post 'ticket/:id/req_feedback' => 'tickets#req_feedback', :as => 'ticket_request_feedback'
+  post 'ticket/:id/clear_feedback' => 'tickets#clear_feedback', :as => 'ticket_clear_feedback'
   resources :tickets
 
   resources :agents do

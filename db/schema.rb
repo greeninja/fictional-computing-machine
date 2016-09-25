@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160923212039) do
+ActiveRecord::Schema.define(version: 20160925174907) do
 
   create_table "agents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
@@ -110,9 +110,12 @@ ActiveRecord::Schema.define(version: 20160923212039) do
 
   create_table "teams", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
-    t.text     "description", limit: 65535
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.text     "description",   limit: 65535
+    t.datetime "created_at",                                 null: false
+    t.datetime "updated_at",                                 null: false
+    t.boolean  "rats_enabled",                default: true
+    t.boolean  "ticks_enabled",               default: true
+    t.boolean  "qa_enabled",                  default: true
   end
 
   create_table "tick_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -130,8 +133,9 @@ ActiveRecord::Schema.define(version: 20160923212039) do
     t.integer  "agent_id"
     t.decimal  "score",                          precision: 10, scale: 3
     t.text     "notes",            limit: 65535
-    t.datetime "created_at",                                              null: false
-    t.datetime "updated_at",                                              null: false
+    t.datetime "created_at",                                                              null: false
+    t.datetime "updated_at",                                                              null: false
+    t.boolean  "feedback",                                                default: false
   end
 
   create_table "ticks", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|

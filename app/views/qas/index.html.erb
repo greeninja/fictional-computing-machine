@@ -19,7 +19,7 @@
   </ul>
   <div class="tab-content">
     <div id="all" class="tab-pane active">
-        <%= render 'qas', users: @users %>
+      <%= render 'qas', users: @users %>
     </div>
     <% @teams.each do |pane| %>
       <div id="<%= pane.team_id %>" class="tab-pane fade">

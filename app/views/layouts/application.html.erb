@@ -22,16 +22,14 @@
       <%= render "warning", message: flash[:warning] %>
     <% end %>
     <div class="row">
-<!--      <div class="col-sm-1">
-      </div> -->
-  <div class="container-fluid">
-    <div class="col-sm-12">
+      <div class="col-sm-1">
+      </div>
+      <div class="col-sm-10">
   <% end %>
-    <%= yield %>
+        <%= yield %>
+      </div>
+    <div class="col-sm-1">
     </div>
-  </div>
-<!--    <div class="col-sm-1">
-    </div> -->
   </div>
   </body>
 </html>

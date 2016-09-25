@@ -1,7 +1,7 @@
 class TicketsController < ApplicationController
 
   before_action :set_user, only: [:show, :new, :qa]
-  before_action :set_ticket, only: [:edit, :qa, :update, :delete, :destroy]
+  before_action :set_ticket, only: [:edit, :qa, :update, :delete, :destroy, :req_feedback, :clear_feedback]
   before_action :get_setting, only: [:show, :new, :qa]
   before_action :set_dates
   before_action :confirm_logged_in
@@ -63,6 +63,47 @@ class TicketsController < ApplicationController
 
   end
 
+  def feedback
+    authorize Ticket
+    @tickets = Ticket.where(:feedback => true)
+  end
+
+  def req_feedback
+    @user = Agent.find(@ticket.agent_id)
+    authorize @ticket
+    if @ticket.update(:feedback => true)
+      # @notify = Notification.new(:controller => "ticket", :item => "#{ @ticket.id }", :creator => "#{ @current_user.id }", :message => "has requested feedback on #{@ticket.ticket_reference}", :team_leader => true, :supervisor => true)
+      # if @notify.save
+        flash[:notice] = "Feedback requested for #{@ticket.ticket_reference}"
+        redirect_to(request.referrer || root_path)
+      # end
+    else
+      flash[:warning] = "Something went wrong requesting feedback"
+    end
+  end
+
+  def clear_feedback
+    authorize @ticket
+    user = User.where(:agent_id => @ticket.agent_id).first
+    if @ticket.update(:feedback => false)
+      if @current_user.agent_id != @ticket.agent_id
+        @notify = Notification.new(:controller => "ticket", :item => "#{ @ticket.id }", :creator => "#{ @current_user.id }", :message => "has marked feedback complete on #{@ticket.ticket_reference}", :recipient => user.id)
+        if @notify.save
+          flash[:notice] = "Feedback marked complete for #{@ticket.ticket_reference}"
+          redirect_to tickets_feedback_path
+        else
+          flash[:warning] = "Something went wrong marking feedback complete."
+          redirect_to(request.referrer || root_path)
+        end
+      else
+        redirect_to(request.referrer || root_path)
+      end
+    else
+      flash[:warning] = "Something went wrong marking feedback complete."
+      redirect_to(request.referrer || root_path)
+    end
+  end
+
   def delete
     @user = Agent.find(@ticket.agent_id)
     authorize @ticket
@@ -98,7 +139,7 @@ class TicketsController < ApplicationController
   end
 
   def ticket_params
-    params.require(:ticket).permit(:ticket_reference, :date, :agent_id, :score, :notes,
+    params.require(:ticket).permit(:ticket_reference, :date, :agent_id, :score, :notes, :feedback,
                                    :qas_attributes => [:qa_setting_id, :score, :out_of])
   end
 

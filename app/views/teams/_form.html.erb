@@ -3,31 +3,25 @@
     <%= render "form_error", form: team %>
   <% end %>
 
-<div class="row">
-  <div class="col-md-12">
-    <form class="form-horizontal" role="form">
-      <div class="form-group">
-        <label for="inputFirstName" class="col-sm-2 control-label">
-          <%= f.label "Team Name" %>
-        </label>
-        <div class="col-sm-10">
-          <%= f.text_field :name, :class => "form-control", :id => "inputTeamName" %>
-        </div>
-      </div>
-      <div class="form-group">
-        <label for="inputLastName" class="col-sm-2 control-label">
-          <%= f.label "Team Description" %>
-        </label>
-        <div class="col-sm-10">
-          <%= f.text_area :description, :class => "form-control", :id => "inputTeamDescription", :size => "1x4" %>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
-            <%= f.submit :Submit, :class => "btn btn-success pull-right"  %>
-        </div>
-      </div>
-    </form>
+  <div class="form-group">
+    <label>Team Name</label>
+    <%= f.text_field :name, :class => "form-control", :id => "inputTeamName" %>
   </div>
-</div>
+  <div class="form-group">
+    <label>Team Description</label>
+    <%= f.text_area :description, :class => "form-control", :id => "inputTeamDescription", :size => "1x4" %>
+  </div>
+  <div class="form-group">
+    <label>Enable Rats?</label>
+    <%= f.check_box :rats_enabled %>
+  </div>
+  <div class="form-group">
+    <label>Enable Ticks?</label>
+    <%= f.check_box :ticks_enabled %>
+  </div>
+  <div class="form-group">
+    <label>Enable QA?</label>
+    <%= f.check_box :qa_enabled %>
+  </div>
+  <%= f.submit :Submit, :class => "btn btn-success"  %>
 <% end %>
