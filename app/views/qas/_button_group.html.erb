@@ -7,6 +7,11 @@
   </button>
   <ul class="dropdown-menu">
     <li>
+      <% if ticket.feedback? %>
+        <%= link_to "Remove Feedback Request", ticket_clear_feedback_path(ticket, :date_from => @date_from, :date_to => @date_to), :class => "dropdown-item", :method => "post" %>
+      <% elsif @current_user.agent_id == ticket.agent_id %>
+        <%= link_to "Request Feedback", ticket_request_feedback_path(ticket, :date_from => @date_from, :date_to => @date_to), :class => "dropdown-item", :method => "post" %>
+      <% end %>
       <%= link_to "Edit Ticket Reference", edit_ticket_path(ticket, :date_from => @date_from, :date_to => @date_to), :class => "dropdown-item" %>
       <%= link_to "Edit Criteria Scores", edit_individual_qas_path(ticket, :date_from => @date_from, :date_to => @date_to), :class => "dropdown-item" %>
     </li>
@@ -16,5 +21,12 @@
     </li>
   </ul>
 </div>
+
+<% else %>
+  <% unless ticket.feedback? %>
+    <%= button_to "Request Feedback", ticket_request_feedback_path(ticket, :date_from => @date_from, :date_to => @date_to), :class => "btn btn-xs btn-default" %>
+  <% else %>
+    <%= button_to "Remove Feedback Request", ticket_clear_feedback_path(ticket, :date_from => @date_from, :date_to => @date_to), :class => "btn btn-xs btn-success" %>
+  <% end %>
 
 <% end %>

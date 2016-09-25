@@ -23,6 +23,8 @@
     <% @user.tickets.where('tickets.date BETWEEN ? AND ?', date, date.end_of_month).order('tickets.created_at asc').each_with_index do |ticket, index| %>
       <% if params[:highlight_qa] == "#{ ticket.id }" %>
         <tr class="info">
+      <% elsif ticket.feedback? %>
+        <tr class="info">
       <% else %>
         <tr>
       <% end %>

@@ -1,18 +1,28 @@
-<% if policy(Agent).index? %>
-  <li class="<%= 'active' if params[:controller] == 'agents' %>">
-    <%= link_to("Rats & Ticks", :controller => 'agents') %>
-  </li>
-<% elsif @current_user.user? and @current_user.agent_id? %>
-  <li class="<%= 'active' if params[:controller] == 'agents' %>">
-    <%= link_to("Rats & Ticks", :controller => 'agents', :action => "show", :id => @current_user.agent_id) %>
-  </li>
+<% if enabled_models("rats") or enabled_models("ticks") %>
+  <% if policy(Agent).index? %>
+    <li class="<%= 'active' if params[:controller] == 'agents' %>">
+      <%= link_to("Rats & Ticks", :controller => 'agents') %>
+    </li>
+  <% elsif @current_user.user? and @current_user.agent_id? %>
+    <li class="<%= 'active' if params[:controller] == 'agents' %>">
+      <%= link_to("Rats & Ticks", :controller => 'agents', :action => "show", :id => @current_user.agent_id) %>
+    </li>
+  <% end %>
 <% end %>
-<% if policy(Qa).index? %>
-  <li class="<%= 'active' if params[:controller] == 'qas' %>">
-    <%= link_to("QA", :controller => 'qas') %>
-  </li>
-<% else %>
-  <li class="<%= 'active' if params[:controller] == 'qas' %>">
-    <%= link_to("QA", :controller => 'qas', :action => "show", :id => @current_user.agent_id ) %>
-  </li>
+
+<% if enabled_models("qa") %>
+  <% if policy(Qa).index? %>
+    <li class="<%= 'active' if params[:controller] == 'qas' %>">
+      <%= link_to("QA", :controller => 'qas') %>
+    </li>
+  <% else %>
+    <li class="<%= 'active' if params[:controller] == 'qas' %>">
+      <%= link_to("QA", :controller => 'qas', :action => "show", :id => @current_user.agent_id ) %>
+    </li>
+  <% end %>
+  <% if policy(Ticket).feedback? %>
+    <li class="<%= 'active' if params[:controller] == 'tickets' and params[:action] == 'feedback' %>">
+      <%= link_to("QA Feedback  <span class=\"badge\">#{ ticket_feedback }</span>".html_safe, :controller => "tickets", :action => "feedback") %>
+    </li>
+  <% end %>
 <% end %>

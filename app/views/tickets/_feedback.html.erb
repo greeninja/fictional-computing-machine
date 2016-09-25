@@ -1,0 +1,7 @@
+<div class="col-sm-6">
+  <div class="list-group">
+    <% @tickets.each do |ticket| %>
+      <%= link_to "Feedback requested for: #{ ticket.ticket_reference }", qa_path(ticket.agent_id, :date_from => ticket.date.beginning_of_month.to_s, :date_to => ticket.date.end_of_month.to_s, :highlight_qa => ticket.id ), :class => "list-group-item" %>
+    <% end %>
+  </div>
+</div>

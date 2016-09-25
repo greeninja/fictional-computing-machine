@@ -78,4 +78,25 @@ class TicketPolicy < ApplicationPolicy
     @current_user.supervisor?
   end
 
+  def feedback?
+    @current_user.admin? or
+    @current_user.junior_admin? or
+    @current_user.team_leader? or
+    @current_user.supervisor?
+  end
+
+  def req_feedback?
+    return true if @current_user.agent_id == @ticket.agent_id
+    @current_user.admin? or
+    @current_user.junior_admin?
+  end
+
+  def clear_feedback?
+    return true if @current_user.agent_id == @ticket.agent_id
+    @current_user.admin? or
+    @current_user.junior_admin? or
+    @current_user.team_leader? or
+    @current_user.supervisor?
+  end
+
 end
