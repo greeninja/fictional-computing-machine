@@ -14,6 +14,11 @@ class AgentPolicy < ApplicationPolicy
     @current_user.supervisor?
   end
 
+  def manage_agents?
+    @current_user.admin? or
+    @current_user.junior_admin?
+  end
+
   def show?
     return true if @current_user.agent_id == @agent.id
     @current_user.admin? or
@@ -77,6 +82,13 @@ class AgentPolicy < ApplicationPolicy
     @current_user.admin? or
     @current_user.junior_admin? or
     @current_user.team_leader?
+  end
+
+  def actions?
+    @current_user.admin? or
+    @current_user.junior_admin? or
+    @current_user.team_leader? or
+    @current_user.supervisor?
   end
 
 end

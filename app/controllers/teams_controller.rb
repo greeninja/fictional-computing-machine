@@ -20,6 +20,11 @@ class TeamsController < ApplicationController
     authorize Team
   end
 
+  def manage_teams
+    @teams = Team.all
+    authorize Team
+  end
+
   def show
     if @current_user.team_id?
       @team = Team.where(:id => @current_user.team_id).find(params[:id])

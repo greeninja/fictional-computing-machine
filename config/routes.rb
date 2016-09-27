@@ -4,7 +4,9 @@ Rails.application.routes.draw do
 
   root :to => "overview#index"
 
+  get 'agents/manage_agents' => 'agents#manage_agents', :as => 'manage_agents'
   resources :agents
+  get 'manage_teams' => 'teams#manage_teams', :as => 'manage_teams'
   resources :teams
   resources :settings
   resources :tick_types

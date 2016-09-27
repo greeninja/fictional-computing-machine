@@ -1,0 +1,54 @@
+<% if @teams.count >= 1 %>
+<table class="table table-hover table-responsive" data-sort-name="Name" data-sort-order="desc">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Users</th>
+      <th>Description</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @teams.each do |team| %>
+      <tr>
+        <td><%= team.id %></td>
+        <td><%= team.name %></td>
+        <td><span class="label label-info"><%= team.agents.count %></span></td>
+        <td><%=h truncate(team.description, :length => 100) %></td>
+        <td>
+          <div class="btn-group">
+            <button type="button" data-toggle="dropdown" class="btn btn-sm btn-default dropdown-toggle">
+              Actions
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <%= link_to 'Edit Team', edit_team_path(team) %>
+              </li>
+              <li>
+              <%= link_to 'Show Rats & Ticks', {:action => "show", :id => team.id, :date_from => @date_from, :date_to => @date_to} %>
+              </li>
+              <li>
+              <%= link_to 'Show QA', {:controller => "qas", :action => "team", :id => team.id, :date_from => @date_from, :date_to => @date_to} %>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <%= link_to 'Delete', team, method: :delete, data: { confirm: 'Are you sure?' } %>
+              </li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<% else %>
+
+<h4>You have no teams configured</h4>
+<p>Click below to add teams</p>
+<% end %>

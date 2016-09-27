@@ -1,6 +1,5 @@
-<form class="form-inline" role="form">
 <div class="pull-right">
-  <%= form_tag root_path, method: :get do %>
+  <%= form_tag root_path, :class => "form-inline", method: :get do %>
   <div class="input-daterange input-group" id="datepicker">
     <%= text_field_tag :date_from, @date_from, :class => "input-sm form-control", :name => "date_from", "data-behaviour" => "datepicker" %>
     <span class="input-group-addon">to</span>
@@ -9,7 +8,6 @@
     <%= submit_tag "Search", :class => "btn btn-sm btn-default" %>
   <% end %>
 </div>
-</form>
 
 <% if params[:controller] == 'agents' %>
   <%= render "agents_date_ranges" %>
