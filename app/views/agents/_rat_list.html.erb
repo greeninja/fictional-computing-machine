@@ -8,7 +8,9 @@
         <th>Notes</th>
         <th>Request</th>
         <th>Date</th>
-        <th>Actions</th>
+        <% if policy(Agent).actions? %>
+          <th>Actions</th>
+        <% end %>
       </tr>
     </thead>
 
@@ -30,9 +32,9 @@
       <td><%= rat.notes %></td>
       <td><%= rat.req_reason %></td>
       <td><%= rat.created_at.to_s(:short) %></td>
+      <% if policy(Agent).actions? %>
       <td>
           <div class="btn-group">
-            <!-- <button type="button" class="btn btn-xs btn-default">Action</button> -->
             <button type="button" data-toggle="dropdown" class="btn btn-xs btn-default dropdown-toggle">
               Action
               <span class="caret"></span>
@@ -56,6 +58,7 @@
             </ul>
           </div>
       </td>
+      <% end %>
     </tr>
     <% end %>
   </table>

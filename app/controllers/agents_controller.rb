@@ -8,8 +8,8 @@ class AgentsController < ApplicationController
   # helper_method :sort_column, :sort_direction
 
   # Rescue from Not Found error
-  rescue_from ActiveRecord::RecordNotFound, with: :not_found_message
-  rescue_from ActionView::Template::Error, with: :template_error
+  # rescue_from ActiveRecord::RecordNotFound, with: :not_found_message
+  # rescue_from ActionView::Template::Error, with: :template_error
 
   def index
     if @current_user.team_id?
@@ -26,6 +26,14 @@ class AgentsController < ApplicationController
     @date_from = parsed_date(params[:date_from], Date.today.beginning_of_week)
     @date_to = parsed_date(params[:date_to], Date.today.next_week)
     @search = Search.new(params[:search])
+    authorize Agent
+  end
+
+  def manage_agents
+    @users = Agent.sorted
+    @teams = Agent.uniq_team_id.where.not(:team_id => nil)
+    @byteam = Agent.where(team_id: params[:team_id])
+    @teamcount = Team.count
     authorize Agent
   end
 

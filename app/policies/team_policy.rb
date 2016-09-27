@@ -13,6 +13,11 @@ class TeamPolicy < ApplicationPolicy
     @current_user.team_leader?
   end
 
+  def manage_teams?
+    @current_user.admin? or
+    @current_user.junior_admin?
+  end
+
   def show?
     @current_user.admin? or
     @current_user.junior_admin? or

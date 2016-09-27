@@ -19,11 +19,11 @@
   </ul>
   <div class="tab-content">
     <div id="all" class="tab-pane active">
-        <%= render 'users', users: @users %>
+        <%= render 'manage_agents', users: @users %>
     </div>
     <% @teams.each do |pane| %>
       <div id="<%= pane.team_id %>" class="tab-pane fade">
-        <%= render 'users', users: get_agent_pane(pane) %>
+        <%= render 'manage_agents', users: get_agent_pane(pane) %>
       </div>
     <% end %>
   </div>
@@ -38,3 +38,5 @@
   </div>
 
 <% end %>
+
+<%= button_to 'New User', new_agent_path, :class => "btn btn-default" %>

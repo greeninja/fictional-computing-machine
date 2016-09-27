@@ -1,0 +1,60 @@
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Last Name</th>
+      <th>Team</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <% users.each do |user| %>
+    <% if user.disabled? %>
+      <tr class="danger" >
+    <% else %>
+      <tr>
+    <% end %>
+        <td><%= user.customid %></td>
+        <td><%= user.name %></td>
+        <td><%= user.last_name %></td>
+        <td>
+          <% if user.team_id.present? %>
+            <%= user.team.name %></td>
+        <% else %>
+          Not Set
+        <% end %>
+        <td>
+          <% if policy(Agent).make_changes? %>
+          <div class="btn-group">
+            <button data-toggle="dropdown" class="btn btn-sm btn-default dropdown-toggle">
+              Actions
+              <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu">
+              <li>
+                <%= link_to 'Edit User', edit_agent_path(user) %>
+              </li>
+              <li>
+                <%= link_to 'Show RaTs / Ticks', {:action => "show", :id => user.id, :date_from => @date_from, :date_to => @date_to} %>
+              </li>
+              <li>
+                <%= link_to 'Show QA', :controller => "qas", :action => "show", :id => user.id %>
+              </li>
+              <li class="divider"></li>
+              <li>
+                <%= link_to 'Delete User', user, method: :delete, data: { confirm: 'Are you sure?' } %>
+              </li>
+            </ul>
+          </div>
+        <% else %>
+            <%= link_to 'Show', {:action => "show", :id => user.id, :date_from => @date_from, :date_to => @date_to}, :class => "btn btn-sm btn-default" %>
+        <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
