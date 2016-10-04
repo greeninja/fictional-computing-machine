@@ -1,0 +1,23 @@
+<%= f.fields_for :crosses, @user.crosses.new do |u| %>
+
+  <div class="row">
+    <div class="col-md-6">
+      <form class="form-horizontal" role="form">
+          <% @cross_types.each do |t| %>
+            <div class="form-group">
+              <%= u.label :cross_type_id, t.name %>
+              <%= u.radio_button :cross_type_id, t.id %>
+              <a id="modal-cross-<%= t.id %>" href="#modal-container-cross-<%= t.id %>" data-toggle="modal"><span class="glyphicon glyphicon-info-sign"></span></a>
+              <%= render(:partial => "modal", :locals => {:t => t, :model => "cross"}) %>
+            </div>
+          <% end %>
+        <div class="form-group">
+          <label for="Notes">
+            Notes
+          </label>
+        <%= u.text_area :notes, :class => "form-control", :id => "Notes", :size => "1x4" %>
+        </div>
+    </div>
+  </div>
+
+<% end %>

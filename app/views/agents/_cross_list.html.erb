@@ -1,8 +1,8 @@
-<h3 class="text-center text-muted">RaTs</h3>
+<h3 class="text-center text-muted">Crosses</h3>
   <table class="table table-hover table-condensed table-bordered table-responsive">
     <thead>
       <tr>
-      <% @rat_types.each do |type| %>
+      <% @cross_types.each do |type| %>
         <th><%= type.name %></th>
       <% end %>
         <th>Notes</th>
@@ -14,24 +14,24 @@
       </tr>
     </thead>
 
-    <% @user.rats.sorted.where('rats.created_at BETWEEN ? AND ?', @date_from, @date_to).each do |rat| %>
-      <% if params[:highlight_rat] == "#{ rat.id }" %>
+    <% @user.crosses.sorted.where('crosses.created_at BETWEEN ? AND ?', @date_from, @date_to).each do |cross| %>
+      <% if params[:highlight_cross] == "#{ cross.id }" %>
         <tr class="info">
-      <% elsif rat.req_delete? %>
+      <% elsif cross.req_delete? %>
         <tr class="danger">
       <% else %>
         <tr>
       <% end %>
-      <% @rat_types.sorted.each do |type| %>
-        <% if rat.rat_type_id == type.id %>
+      <% @cross_types.sorted.each do |type| %>
+        <% if cross.cross_type_id == type.id %>
           <td><span class="glyphicon glyphicon-ok" aria-hidden="true"></td>
         <% else %>
           <td></td>
         <% end %>
       <% end %>
-      <td><%= rat.notes %></td>
-      <td><%= rat.req_reason %></td>
-      <td><%= rat.created_at.to_s(:short) %></td>
+      <td><%= cross.notes %></td>
+      <td><%= cross.req_reason %></td>
+      <td><%= cross.created_at.to_s(:short) %></td>
       <% if policy(Agent).actions? %>
       <td>
           <div class="btn-group">
@@ -41,18 +41,18 @@
             </button>
             <ul class="dropdown-menu">
             <li>
-            <% unless rat.req_delete? %>
-              <% unless policy(Rat).destroy? %>
-                <%= link_to("Request Deletion", {:controller => "rats", :action => "edit", :id => rat.id}, :class => "dropdown-item") %>
+            <% unless cross.req_delete? %>
+              <% unless policy(Cross).destroy? %>
+                <%= link_to("Request Deletion", {:controller => "crosses", :action => "edit", :id => cross.id}, :class => "dropdown-item") %>
               <% end %>
               <% else %>
-                <%= link_to("Remove Request", {:controller => "rats", :action => "remove_req", :id => rat.id}, :class => "dropdown-item") %>
+                <%= link_to("Remove Request", {:controller => "crosses", :action => "remove_req", :id => cross.id}, :class => "dropdown-item") %>
               <% end %>
             </li>
-              <% if policy(Rat).destroy? %>
+              <% if policy(Cross).destroy? %>
                 <li class="divider"></li>
                 <li>
-                  <%= link_to "Delete", agent_rat_path(@user, rat), data: {:confirm => "Are you sure?"}, :class => "dropdown-item", :method => :delete %>
+                  <%= link_to "Delete", agent_cross_path(@user, cross), data: {:confirm => "Are you sure?"}, :class => "dropdown-item", :method => :delete %>
                 </li>
               <% end %>
             </ul>

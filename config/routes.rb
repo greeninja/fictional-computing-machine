@@ -10,10 +10,10 @@ Rails.application.routes.draw do
   resources :teams
   resources :settings
   resources :tick_types
-  resources :rat_types
+  resources :cross_types
   resources :users
   resources :notification
-  resources :rats
+  resources :crosses
   resources :ticks
   resources :broadcasts
   resources :qa_settings
@@ -29,7 +29,7 @@ Rails.application.routes.draw do
   resources :tickets
 
   resources :agents do
-    resources :rats
+    resources :crosses
   end
 
   resources :agents do
@@ -38,7 +38,7 @@ Rails.application.routes.draw do
 
   resources :settings do
     resources :tick_types
-    resources :rat_types
+    resources :cross_types
     resources :qa_settings
     resources :qa_general_settings
   end

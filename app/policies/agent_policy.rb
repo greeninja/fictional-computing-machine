@@ -40,7 +40,7 @@ class AgentPolicy < ApplicationPolicy
     @current_user.supervisor?
   end
 
-  def rat?
+  def cross?
     return false if @current_user.agent_id == @agent.id
     @current_user.admin? or
     @current_user.junior_admin? or

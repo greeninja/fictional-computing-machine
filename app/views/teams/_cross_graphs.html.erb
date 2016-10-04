@@ -1,0 +1,10 @@
+<div class="row">
+  <% @cross_types.sorted.each do |t| %>
+    <div class="col-md-6">
+      <h3 class="text-muted text-center">
+      <%= t.name %>
+      </h3>
+      <%= bar_chart graph.joins(:crosses).where("crosses.cross_type_id = #{t.id} and crosses.created_at BETWEEN ? AND ?", @date_from, @date_to).group(:name).count, :library => {:colors => ["orange"]}, height: "450px" %>
+    </div>
+  <% end %>
+</div>

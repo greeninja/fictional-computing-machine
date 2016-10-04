@@ -6,10 +6,9 @@
 
 <div class="media">
   <!-- <a href="#" class="pull-left"><img alt="Bootstrap Media Preview" src="http://lorempixel.com/64/64/" class="media-object" /></a> -->
-  <%= image_tag("rat.png", :alt => "cross", :class => "pull-left") %>
+  <%= image_tag("cross.png", :alt => "cross", :class => "pull-left") %>
     <div class="media-body">
       <h4 class="media-heading">
-        <strong>Legacy item - will be removed in a future release.</strong><br />
         <%= user.name %> <%= notification.message %>
       </h4>
       <% if Cross.exists?(notification.item) %>

@@ -1,11 +1,11 @@
-<% if enabled_models("rats") or enabled_models("ticks") %>
+<% if enabled_models("crosses") or enabled_models("ticks") %>
   <% if policy(Agent).index? %>
     <li class="<%= 'active' if params[:controller] == 'agents' %>">
-      <%= link_to("Rats & Ticks", :controller => 'agents') %>
+      <%= link_to("Ticks & Crosses", :controller => 'agents') %>
     </li>
   <% elsif @current_user.user? and @current_user.agent_id? %>
     <li class="<%= 'active' if params[:controller] == 'agents' %>">
-      <%= link_to("Rats & Ticks", :controller => 'agents', :action => "show", :id => @current_user.agent_id) %>
+      <%= link_to("Ticks & Crosses", :controller => 'agents', :action => "show", :id => @current_user.agent_id) %>
     </li>
   <% end %>
 <% end %>

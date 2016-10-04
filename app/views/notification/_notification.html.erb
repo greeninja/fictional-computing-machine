@@ -1,10 +1,13 @@
 <li class="list-group-item">
-  <% if notification.controller == "rat" %>
-    <%= render "rat", notification: notification %>
+  <% if notification.controller == "cross" %>
+    <%= render "cross", notification: notification %>
   <% elsif notification.controller == "tick" %>
     <%= render "tick", notification: notification %>
   <% elsif notification.controller == "ticket" %>
     <%= render "ticket", notification: notification %>
+  <% elsif notification.controller == "rat" %>
+    <%= render "rat", notification: notification %>
+
   <% else %>
     <h3>Error matching partial</h3>
     <p>Found notification <%= notification.id %></p>

@@ -1,12 +1,11 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3>Add Setting for <%= @setting.name %></h3>
+    <h3>Request Cross Deletion - <%= @cross.id %></h3>
   </div>
   <div class="panel-body">
-    <%= render 'rat_types', setting: @setting %>
+    <%= render 'form', cross: @cross %>
   </div>
   <div class="panel-footer">
     <%= render "back" %>
   </div>
 </div>
-

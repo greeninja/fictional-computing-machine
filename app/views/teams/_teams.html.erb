@@ -1,13 +1,13 @@
 <% if @teams.count >= 1 %>
-<table class="table table-hover table-responsive" data-sort-name="Name" data-sort-order="desc">
+<table class="table table-hover">
   <thead>
     <tr>
-      <th data-field="ID" data-sortable="true">ID</th>
-      <th data-field="Name"data-sortable="true">Name</th>
-      <th>Users</th>
-      <th>Rats</th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Agents</th>
+      <th>Crosses</th>
       <th>Ticks</th>
-      <th data-field="Descrition" data-sortable="true">Description</th>
+      <th>Description</th>
       <th colspan="2">Actions</th>
     </tr>
   </thead>
@@ -18,7 +18,7 @@
         <td><%= team.id %></td>
         <td><%= team.name %></td>
         <td><span class="label label-info"><%= team.agents.count %></span></td>
-        <td><span class="label label-warning"><%= team.rats.where('rats.created_at BETWEEN ? AND ?', @date_from, @date_to).count %></span></td>
+        <td><span class="label label-warning"><%= team.crosses.where('crosses.created_at BETWEEN ? AND ?', @date_from, @date_to).count %></span></td>
         <td><span class="label label-success"><%= team.ticks.where('ticks.created_at BETWEEN ? AND ?', @date_from, @date_to).count %></span></td>
         <td><%=h truncate(team.description, :length => 100) %></td>
         <td><%= link_to 'Show', {:action => "show", :id => team.id, :date_from => @date_from, :date_to => @date_to}, :class => "btn btn-sm btn-default" %></td>

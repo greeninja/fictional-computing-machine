@@ -2,6 +2,6 @@
   <% if user.errors.any? %>
     <%= render "form_error", form: user %>
   <% end %>
-    <%= render(:partial => "rats", :locals => {:f => f}) %>
+    <%= render(:partial => "crosses", :locals => {:f => f}) %>
     <%= f.submit :Submit, :class => "btn btn-success" %>
 <% end %>

@@ -37,7 +37,7 @@ class SettingPolicy < ApplicationPolicy
     @current_user.junior_admin?
   end
 
-  def rat_types?
+  def cross_types?
     @current_user.admin? or
     @current_user.junior_admin?
   end

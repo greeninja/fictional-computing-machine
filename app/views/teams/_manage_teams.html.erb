@@ -28,7 +28,7 @@
                 <%= link_to 'Edit Team', edit_team_path(team) %>
               </li>
               <li>
-              <%= link_to 'Show Rats & Ticks', {:action => "show", :id => team.id, :date_from => @date_from, :date_to => @date_to} %>
+              <%= link_to 'Show Ticks & Crosses', {:action => "show", :id => team.id, :date_from => @date_from, :date_to => @date_to} %>
               </li>
               <li>
               <%= link_to 'Show QA', {:controller => "qas", :action => "team", :id => team.id, :date_from => @date_from, :date_to => @date_to} %>

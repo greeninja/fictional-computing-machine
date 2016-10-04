@@ -2,6 +2,6 @@
   <% if setting.errors.any? %>
     <%= render "form_error", form: setting %>
   <% end %>
-  <%= render(:partial => "rat_types_form", :locals => {:f => f}) %>
+  <%= render(:partial => "cross_types_form", :locals => {:f => f}) %>
   <%= f.submit :Submit, :class => "btn btn-success" %>
 <% end %>
