@@ -1,4 +1,4 @@
-class RatPolicy < ApplicationPolicy
+class CrossPolicy < ApplicationPolicy
 
   def initialize(current_user, model)
     @current_user = current_user

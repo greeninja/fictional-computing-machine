@@ -110,12 +110,12 @@ ActiveRecord::Schema.define(version: 20161004163848) do
 
   create_table "teams", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
-    t.text     "description",   limit: 65535
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
-    t.boolean  "cross_enabled",               default: true
-    t.boolean  "ticks_enabled",               default: true
-    t.boolean  "qa_enabled",                  default: true
+    t.text     "description",     limit: 65535
+    t.datetime "created_at",                                   null: false
+    t.datetime "updated_at",                                   null: false
+    t.boolean  "crosses_enabled",               default: true
+    t.boolean  "ticks_enabled",                 default: true
+    t.boolean  "qa_enabled",                    default: true
   end
 
   create_table "tick_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|

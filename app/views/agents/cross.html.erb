@@ -1,10 +1,10 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-    <h3>Add RaT for <%= @user.name %> <%= @user.last_name %></h3>
+    <h3>Add Cross for <%= @user.name %> <%= @user.last_name %></h3>
   </div>
   <div class="panel-body">
-    <% if @rat_enabled.enabled %>
-      <%= render 'rat', user: @user %>
+    <% if @cross_enabled.enabled %>
+      <%= render 'cross', user: @user %>
     <% else %>
       <%= render 'warning', message: "This is using the old setup without dynamic settings!" %>
     <% end %>

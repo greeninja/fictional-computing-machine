@@ -1,5 +1,5 @@
 class SettingsController < ApplicationController
-  before_action :set_setting, only: [:show, :edit, :update, :destroy, :tick_types, :rat_types, :qa_settings, :qa_general_settings]
+  before_action :set_setting, only: [:show, :edit, :update, :destroy, :tick_types, :cross_types, :qa_settings, :qa_general_settings]
   before_action :confirm_logged_in
   after_action :verify_authorized
 
@@ -14,14 +14,14 @@ class SettingsController < ApplicationController
     # TODO
     # This is UBER inificient - there has to be a better way!
     @tick_types = TickType.where(setting_id: params[:id])
-    @rat_types = RatType.where(setting_id: params[:id])
+    @cross_types = CrossType.where(setting_id: params[:id])
     @qa_settings = QaSetting.all
     @teams = Team.sorted
   end
 
-  def show_rat_types
+  def show_cross_types
     authorize Setting
-    @rat_types = RatType.sorted
+    @cross_types = CrossType.sorted
   end
 
   def show_tick_types
@@ -80,8 +80,8 @@ class SettingsController < ApplicationController
     authorize Setting
   end
 
-  def rat_types
-    @setting.rat_types.new
+  def cross_types
+    @setting.cross_types.new
     authorize Setting
   end
 
@@ -108,7 +108,7 @@ class SettingsController < ApplicationController
     def setting_params
       params.require(:setting).permit(:name, :description, :enabled,
         :tick_types_attributes => [:name, :description, :setting_id],
-        :rat_types_attributes => [:name, :description, :setting_id],
+        :cross_types_attributes => [:name, :description, :setting_id],
         :qa_settings_attributes => [:name, :setting_id, :team_id, :description, :out_of, :qa, :position],
         :qa_general_settings_attributes => [:name, :value, :team_id, :disabled]
       )

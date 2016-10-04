@@ -8,7 +8,7 @@ class Search
   end
 
   def scope
-    Rat.where('created_at BETWEEN ? AND ?', @date_from, @date_to)
+    Cross.where('created_at BETWEEN ? AND ?', @date_from, @date_to)
   end
 
   private
