@@ -2,9 +2,9 @@
   <div class="row">
     <div class="col-md-6">
       <h3 class="text-muted text-center">
-        Rats
+        Crosses
       </h3>
-      <%= bar_chart Agent.joins(:rats).group(:name).where('rats.created_at BETWEEN ? AND ?', @date_from, @date_to).count, :library => {:colors => ["orange"]}, height: "600px" %>
+      <%= bar_chart Agent.joins(:crosses).group(:name).where('crosses.created_at BETWEEN ? AND ?', @date_from, @date_to).count, :library => {:colors => ["orange"]}, height: "600px" %>
     </div>
     <div class="col-md-6">
       <h3 class="text-muted text-center">Ticks</h3>

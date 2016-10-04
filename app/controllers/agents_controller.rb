@@ -114,7 +114,7 @@ class AgentsController < ApplicationController
     end
   end
 
-  def rat
+  def cross
     # authorize Agent
     if @current_user.team_id?
       @user = Agent.where(:team_id => @current_user.team_id).find(params[:id])
@@ -122,8 +122,8 @@ class AgentsController < ApplicationController
       @user = Agent.find(params[:id])
     end
     authorize @user
-    @rat_types = RatType.sorted
-    @user.rats.new
+    @cross_types = CrossType.sorted
+    @user.crosses.new
   end
 
   def tick
@@ -147,7 +147,7 @@ class AgentsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:agent).permit(:name, :last_name, :team, :manual_team, :team_id, :customid, :disabled,
-                                   :rats_attributes => [:rat_type_id, :longbreak, :latebreak, :offtask, :notes, :_destroy],
+                                   :crosses_attributes => [:crosses_type_id, :longbreak, :latebreak, :offtask, :notes, :_destroy],
                                    :ticks_attributes => [:tick_type_id, :ab, :late, :dynamic, :initiative, :void, :notes, :_destroy])
     end
 

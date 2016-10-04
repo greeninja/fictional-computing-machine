@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160925174907) do
+ActiveRecord::Schema.define(version: 20161004163848) do
 
   create_table "agents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.string   "name"
@@ -30,6 +30,28 @@ ActiveRecord::Schema.define(version: 20160925174907) do
     t.boolean  "read",       default: false
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+  end
+
+  create_table "cross_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.string   "name"
+    t.text     "description", limit: 65535
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "setting_id"
+    t.index ["setting_id"], name: "index_cross_types_on_setting_id", using: :btree
+  end
+
+  create_table "crosses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+    t.integer  "agent_id"
+    t.string   "notes"
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "cross_type_id"
+    t.integer  "admin_user_id"
+    t.boolean  "req_delete"
+    t.text     "req_reason",    limit: 65535
+    t.index ["admin_user_id"], name: "index_crosses_on_admin_user_id", using: :btree
+    t.index ["cross_type_id"], name: "index_crosses_on_cross_type_id", using: :btree
   end
 
   create_table "notifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
@@ -78,28 +100,6 @@ ActiveRecord::Schema.define(version: 20160925174907) do
     t.datetime "updated_at",    null: false
   end
 
-  create_table "rat_types", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.string   "name"
-    t.text     "description", limit: 65535
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
-    t.integer  "setting_id"
-    t.index ["setting_id"], name: "index_rat_types_on_setting_id", using: :btree
-  end
-
-  create_table "rats", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.integer  "agent_id"
-    t.string   "notes"
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.integer  "rat_type_id"
-    t.integer  "admin_user_id"
-    t.boolean  "req_delete"
-    t.text     "req_reason",    limit: 65535
-    t.index ["admin_user_id"], name: "index_rats_on_admin_user_id", using: :btree
-    t.index ["rat_type_id"], name: "index_rats_on_rat_type_id", using: :btree
-  end
-
   create_table "settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
@@ -113,7 +113,7 @@ ActiveRecord::Schema.define(version: 20160925174907) do
     t.text     "description",   limit: 65535
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
-    t.boolean  "rats_enabled",                default: true
+    t.boolean  "cross_enabled",               default: true
     t.boolean  "ticks_enabled",               default: true
     t.boolean  "qa_enabled",                  default: true
   end

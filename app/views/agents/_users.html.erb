@@ -1,12 +1,12 @@
-<table class="table table-hover table-responsive" data-sort-name="Name" data-sort-order="desc">
+<table class="table table-hover">
   <thead>
     <tr>
-      <th data-field="Custom ID" data-sortable="true">ID</th>
-      <th data-field="Name"data-sortable="true">Name</th>
-      <th data-field="Last Name" data-sortable="true">Last Name</th>
-      <th data-field="Team" data-sortable="true">Team</th>
-      <th data-field="Rats" data-sortable="true">RaTs</th>
-      <th data-field="Tick" data-sortable="true">TiCKs</th>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Last Name</th>
+      <th>Team</th>
+      <th>Crosses</th>
+      <th>Ticks</th>
       <th colspan="3">Actions</th>
     </tr>
   </thead>
@@ -27,8 +27,8 @@
         <% else %>
           Not Set
         <% end %>
-        <% if user.rats.where('rats.created_at BETWEEN ? AND ?', @date_from, @date_to).count >= 1 %>
-          <td><span class="label label-warning"><%= user.rats.where('rats.created_at BETWEEN ? AND ?', @date_from, @date_to).count %></span></td>
+        <% if user.crosses.where('crosses.created_at BETWEEN ? AND ?', @date_from, @date_to).count >= 1 %>
+          <td><span class="label label-warning"><%= user.crosses.where('crosses.created_at BETWEEN ? AND ?', @date_from, @date_to).count %></span></td>
         <% else %>
           <td></td>
         <% end %>
@@ -38,8 +38,8 @@
           <td></td>
         <% end %>
         <% unless user.disabled? %>
-          <td><%= button_to("New RaT", {:action => 'rat', :id => user.id}, :class => "btn btn-sm btn-warning") %></td>
-          <td><%= button_to("New TiCK", {:action => 'tick', :id => user.id}, :class => "btn btn-sm btn-success") %></td>
+          <td><%= button_to("New Cross", {:action => 'cross', :id => user.id}, :class => "btn btn-sm btn-warning") %></td>
+          <td><%= button_to("New Tick", {:action => 'tick', :id => user.id}, :class => "btn btn-sm btn-success") %></td>
         <% else %>
           <td></td>
           <td></td>

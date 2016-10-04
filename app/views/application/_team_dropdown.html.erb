@@ -2,10 +2,10 @@
   <li class="dropdown <%= 'active' if params[:controller] == 'teams' or params[:action] == 'team' or params[:action] == 'teams' %>">
   <a href="#" class="dropdown-toggle" data-toggle="dropdown">Team</a> <!-- <strong class="caret"></strong></a> -->
     <ul class="dropdown-menu">
-      <% if enabled_models("rats") or enabled_models("ticks") %>
+      <% if enabled_models("crosses") or enabled_models("ticks") %>
         <% if policy(Team).index? %>
           <li class="<%= 'active' if params[:controller] == 'teams' %>">
-            <%= link_to("Rats & Ticks", :controller => 'teams') %>
+            <%= link_to("Ticks & Crosses", :controller => 'teams') %>
           </li>
         <% end %>
       <% end %>

@@ -37,7 +37,7 @@
                 <%= link_to 'Edit User', edit_agent_path(user) %>
               </li>
               <li>
-                <%= link_to 'Show RaTs / Ticks', {:action => "show", :id => user.id, :date_from => @date_from, :date_to => @date_to} %>
+                <%= link_to 'Show Ticks & Crosses', {:action => "show", :id => user.id, :date_from => @date_from, :date_to => @date_to} %>
               </li>
               <li>
                 <%= link_to 'Show QA', :controller => "qas", :action => "show", :id => user.id %>

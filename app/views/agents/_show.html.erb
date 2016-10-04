@@ -1,18 +1,18 @@
-<% if @user.rats.count < 1 and @user.ticks.count < 1 %>
-  <%= render "success", message: "User #{@user.name} #{@user.last_name} has No TiCKs or RaTs" %>
+<% if @user.crosses.count < 1 and @user.ticks.count < 1 %>
+  <%= render "success", message: "User #{@user.name} #{@user.last_name} has No Ticks or Crosses" %>
 <% else %>
 
   <%= render "daterange" %>
 
-  <% if params[:highlight_rat].present? %>
-    <%= render 'info', message: "The Rat you selected should be highlighted below" %>
+  <% if params[:highlight_cross].present? %>
+    <%= render 'info', message: "The Cross you selected should be highlighted below" %>
   <% elsif params[:highlight_tick].present? %>
     <%= render 'info', message: "The Tick you selected should be highlighted below" %>
   <% end %>
 
-  <% if @user.rats.count >= 1 %>
-    <% if @rat_enabled.enabled %>
-      <%= render "rat_list", date_from: @date_from, date_to: @date_to %>
+  <% if @user.crosses.count >= 1 %>
+    <% if @cross_enabled.enabled %>
+      <%= render "cross_list", date_from: @date_from, date_to: @date_to %>
     <% else %>
       <%= render "warning", message: "This is using the old model without dynamic settings!" %>
     <% end %>

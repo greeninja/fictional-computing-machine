@@ -14,16 +14,16 @@
   </div>
   <ul class="nav nav-tabs">
     <li class="active"><a data-toggle="tab" href="#overview">Overview</a></li>
-    <li><a data-toggle="tab" href="#rats">Rats</a></li>
+    <li><a data-toggle="tab" href="#crosses">Crosses</a></li>
     <li><a data-toggle="tab" href="#ticks">Ticks</a></li>
   </ul>
   <div class="tab-content">
     <div id="overview" class="tab-pane active">
       <%= render 'graphs', graph: Agent.where(team_id: @team.id), team_name: @team.name %>
     </div>
-    <div id="rats" class="tab-pane">
+    <div id="crosses" class="tab-pane">
       <%# render "warning", message: 'This section is still under development. See Github for more information.' %>
-      <%= render "rat_graphs", graph: Agent.where(team_id: @team.id) %>
+      <%= render "cross_graphs", graph: Agent.where(team_id: @team.id) %>
     </div>
     <div id="ticks" class="tab-pane">
       <%# render "warning", message: 'This section is still under development. See Github for more information.' %>
