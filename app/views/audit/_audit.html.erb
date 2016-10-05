@@ -26,7 +26,7 @@
           <td><%= audit.event %></td>
         <% end %>
         <td>
-          <% if audit.item_type == "Cross" and audit.event == "create" %>
+          <% if audit.item_type == "Cross" or audit.item_type == "Rat" and audit.event == "create" %>
             <% if Cross.exists?(audit.item_id) %>
               <%  agent_id = Cross.find(audit.item_id).agent_id %>
               <% if Agent.exists?(agent_id) %>
@@ -44,7 +44,7 @@
         </td>
         <td><%= audit.created_at.to_s(:short) %></td>
         <td>
-          <% if audit.item_type == "Cross" and audit.event == "create" %>
+          <% if audit.item_type == "Cross" or audit.item_type == "Rat" and audit.event == "create" %>
             <% if Cross.exists?(audit.item_id) %>
               <%= link_to "Show", {:controller => "agents", :action => "show", :id => Cross.find(audit.item_id).agent_id, :date_from => audit.created_at - 3.days, :date_to => audit.created_at + 3.days, :highlight_cross => audit.item_id}, :class => "btn btn-sm btn-default" %>
             <% end %>
