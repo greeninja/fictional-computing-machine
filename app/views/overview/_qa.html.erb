@@ -2,6 +2,19 @@
   <%= image_tag("ticket.png", :alt => "ticket QA", :class => "pull-left") %>
   <div class="media-body">
     <h4 class="text-center text-muted">QA</h4>
-    Test of things.
+    <% if defined?(just_agent) %>
+        <p>Your QA Average from <%= @qa_date_from.to_s(:long) %> to <%= @qa_date_to.to_s(:long) %><br />
+        <div class="progress">
+          <%= ov_badge_it(ov_qa_average(@agent)) %>
+          <%= ov_qa_average(@agent) %>%
+        </div>
+    <% else %>
+        <p>Team QA Average from <%= @qa_date_from.to_s(:long) %> and <%= @qa_date_to.to_s(:long) %> for <%= @team.name %><br />
+        <div class="progress">
+          <%= ov_badge_it(ov_qa_team_average(@team)) %>
+          <%= ov_qa_team_average(@team) %>%
+        </div>
+    <% end %>
+    </div>
   </div>
 </div>

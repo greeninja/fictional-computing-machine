@@ -1,3 +1,7 @@
+<% if @user.id == @current_user.agent_id %>
+  <%= render "agent_view" %>
+  <%# render "team_view" %>
+<% else %>
 <div class="panel panel-default">
   <div class="panel-heading">
   <% if @user.team_id.present? %>
@@ -13,3 +17,4 @@
     <%= render "back_local" %>
   </div>
 </div>
+<% end %>
