@@ -16,11 +16,7 @@ module AgentsHelper
     else
       full_percent = count / @team_crosses.count * 100
     end
-    if full_percent.nan?
-      result = 0
-    else
-      result = full_percent.nil? ? "0" : full_percent.round
-    end
+    result = full_percent.round
   end
 
   def agent_get_tick_percentages(agent)
@@ -35,11 +31,7 @@ module AgentsHelper
     else
       full_percent = count / @team_ticks.count * 100
     end
-    if full_percent.nan?
-      result = 0
-    else
-      result = full_percent.nil? ? "0" : full_percent.round
-    end
+    result = full_percent.nil? ? "0" : full_percent.round
   end
 
 end

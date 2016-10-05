@@ -49,6 +49,15 @@ class AgentsController < ApplicationController
         @users = Agent.find(@current_user.agent_id)
         @user_ticks = @user.ticks.where('ticks.created_at BETWEEN ? AND ?', @date_from, @date_to)
         @user_crosses = @user.crosses.where('crosses.created_at BETWEEN ? AND ?', @date_from, @date_to)
+        @team = Team.find(@user.team_id)
+        @team_ticks = @team.ticks.where('ticks.created_at BETWEEN ? AND ?', @date_from, @date_to)
+        @team_crosses = @team.crosses.where('crosses.created_at BETWEEN ? AND ?', @date_from, @date_to)
+      end
+    elsif @current_user.supervisor?
+      if Agent.exists?(@current_user.agent_id)
+        @users = Agent.find(params[:id])
+        @user_ticks = @user.ticks.where('ticks.created_at BETWEEN ? AND ?', @date_from, @date_to)
+        @user_crosses = @user.crosses.where('crosses.created_at BETWEEN ? AND ?', @date_from, @date_to)
         @team = Team.find(@users.team_id)
         @team_ticks = @team.ticks.where('ticks.created_at BETWEEN ? AND ?', @date_from, @date_to)
         @team_crosses = @team.crosses.where('crosses.created_at BETWEEN ? AND ?', @date_from, @date_to)
