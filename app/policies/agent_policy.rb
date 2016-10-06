@@ -27,6 +27,10 @@ class AgentPolicy < ApplicationPolicy
     @current_user.supervisor?
   end
 
+  def show_qa?
+    return true if @current_user.agent_id == @agent.id
+  end
+
   def create?
     @current_user.admin? or
     @current_user.junior_admin? or

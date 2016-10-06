@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   resources :broadcasts
   resources :qa_settings
   resources :qa_general_settings
+  get 'qas/:id/show_qa' => 'qas#show_qa', :as => 'show_qa'
   get 'qas/:id/edit_individual' => 'qas#edit_individual', :as => 'edit_individual_qas'
   get 'qas/teams' => 'qas#all_teams', :as => 'teams_qa'
   get 'qas/:id/team' => 'qas#team', :as => 'team_qas'

@@ -1,0 +1,47 @@
+<% user_tickets = @user.tickets.where('tickets.date BETWEEN ? AND ?', parse_months(mons.to_s), parse_months(mons.to_s).end_of_month).order('tickets.created_at asc') %>
+<% if user_tickets.nil? %>
+  <%= render "info", message: "You have no QA for this date range" %>
+<% else %>
+  <% user_tickets.each do |ticket| %>
+    <div class="col-sm-12">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="text-center text-muted"><%= ticket.ticket_reference %> - <%= ticket.date.to_s(:long) %></h4>
+        </div>
+        <div class="panel-body">
+        <% @qa_settings.each do |type| %>
+          <div class="col-sm-4">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <h4 class="text-center text-muted"><%= type.qa.titleize %></h4>
+                <div class="progress">
+                  <%= ov_badge_it(itemised_ticket(ticket, type)) %>
+                  <%= itemised_ticket(ticket, type) %>%
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+          <div class="col-sm-12">
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <h4 class="text-center text-muted">Overall</h4>
+                <div class="progress">
+                  <%= ov_badge_it(ticket.score) %>
+                  <%= ticket.score %>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <% unless ticket.feedback? %>
+              <%= button_to "Request Feedback", ticket_request_feedback_path(ticket, :date_from => @date_from, :date_to => @date_to), :class => "btn btn-default pull-right" %>
+            <% else %>
+              <%= button_to "Remove Feedback Request", ticket_clear_feedback_path(ticket, :date_from => @date_from, :date_to => @date_to), :class => "btn btn-success pull-right" %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

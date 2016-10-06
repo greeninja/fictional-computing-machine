@@ -84,7 +84,8 @@ module OverviewHelper
       result.html_safe
 
     else
-      score
+      result = "<div class=\"progress-bar\" role=\"progressbar\" aria-valuenow=\"#{ score }\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"min-width: 2em; width: #{ score }%;\">"
+      result.html_safe
     end
   end
 

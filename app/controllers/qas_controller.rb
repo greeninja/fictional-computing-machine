@@ -1,7 +1,7 @@
 class QasController < ApplicationController
 
-  before_action :set_user, only: [:show, :new, :destroy, :get_setting]
-  before_action :get_setting, only: [:show, :new, :create]
+  before_action :set_user, only: [:show, :show_qa, :new, :destroy, :get_setting]
+  before_action :get_setting, only: [:show, :show_qa, :new, :create]
   before_action :get_general_settings, only: [:team]
   before_action :set_dates
   before_action :confirm_logged_in
@@ -30,6 +30,19 @@ class QasController < ApplicationController
   def show
     # This uses the Agent policy to determin show.
     authorize @user
+    @team = Team.find(@user.team_id)
+    @qa_date_from = parsed_date(params[:date_from], 1.month.ago.beginning_of_month.to_date)
+    @qa_date_to = parsed_date(params[:date_to], 1.month.ago.end_of_month.to_date)
+    @general_settings = QaGeneralSetting.where("qa_general_settings.disabled = false and qa_general_settings.team_id = #{ @team.id }").or(QaGeneralSetting.where("qa_general_settings.disabled = false and qa_general_settings.team_id = #{ @team.id }"))
+  end
+
+  def show_qa
+    # This uses the Agent policy to determin show.
+    authorize @user
+    @team = Team.find(@user.team_id)
+    @qa_date_from = parsed_date(params[:date_from], 1.month.ago.beginning_of_month.to_date)
+    @qa_date_to = parsed_date(params[:date_to], 1.month.ago.end_of_month.to_date)
+    @general_settings = QaGeneralSetting.where("qa_general_settings.disabled = false and qa_general_settings.team_id = #{ @team.id }").or(QaGeneralSetting.where("qa_general_settings.disabled = false and qa_general_settings.team_id = #{ @team.id }"))
   end
 
   def all_teams
