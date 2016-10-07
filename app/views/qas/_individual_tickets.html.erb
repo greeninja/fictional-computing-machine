@@ -1,12 +1,12 @@
-<% user_tickets = @user.tickets.where('tickets.date BETWEEN ? AND ?', parse_months(mons.to_s), parse_months(mons.to_s).end_of_month).order('tickets.created_at asc') %>
+<% user_tickets = @user.tickets.where('tickets.date BETWEEN ? AND ?', parse_months(mons.to_s), parse_months(mons.to_s).end_of_month).order('tickets.date asc') %>
 <% if user_tickets.nil? %>
   <%= render "info", message: "You have no QA for this date range" %>
 <% else %>
   <% user_tickets.each do |ticket| %>
     <div class="col-sm-12">
-      <div class="panel panel-default">
+      <div class="panel panel-info">
         <div class="panel-heading">
-          <h4 class="text-center text-muted"><%= ticket.ticket_reference %> - <%= ticket.date.to_s(:long) %></h4>
+          <h4 class="text-center"><%= ticket.ticket_reference %> - <%= ticket.date.to_s(:long) %></h4>
         </div>
         <div class="panel-body">
         <% @qa_settings.each do |type| %>
@@ -29,7 +29,7 @@
                 <h4 class="text-center text-muted">Overall</h4>
                 <div class="progress">
                   <%= ov_badge_it(ticket.score) %>
-                  <%= ticket.score %>
+                  <%= (ticket.score.to_f).round %> %
                   </div>
                 </div>
               </div>
