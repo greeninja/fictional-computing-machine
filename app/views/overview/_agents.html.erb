@@ -4,15 +4,21 @@
       <h3 class="panel-title text-center text-muted">My Overview</h3>
     </div>
     <div class="panel-body">
-      <div class="col-sm-12">
-        <%= render "ticks", just_agent: true %>
-      </div>
-      <div class="col-sm-12">
-        <%= render "crosses", just_agent: true %>
-      </div>
-      <div class="col-sm-12">
-        <%= render "qa", just_agent: true %>
-      </div>
+      <% if @team.ticks_enabled? %>
+        <div class="col-sm-12">
+          <%= render "ticks", just_agent: true %>
+        </div>
+      <% end %>
+      <% if @team.crosses_enabled? %>
+        <div class="col-sm-12">
+          <%= render "crosses", just_agent: true %>
+        </div>
+      <% end %>
+      <% if @team.qa_enabled? %>
+        <div class="col-sm-12">
+          <%= render "qa", just_agent: true %>
+        </div>
+      <% end %>
       <div class="col-sm-12">
         <%= render "surveys" %>
       </div>
