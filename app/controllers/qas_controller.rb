@@ -15,11 +15,11 @@ class QasController < ApplicationController
       redirect_to(request.referrer || root_path)
     else
       if @current_user.team_id?
-        @users = Agent.where(:team_id => @current_user.team_id).sorted
+        @users = Agent.where(:team_id => @current_user.team_id).where(:disabled => false).sorted
         @teams = Agent.uniq_team_id.where(:team_id => @current_user.team_id)
         @teamcount = Team.where(:id => @current_user.team_id).count
       else
-        @users = Agent.sorted
+        @users = Agent.where(:disabled => false).sorted
         @teams = Agent.uniq_team_id.where.not(:team_id => nil)
         @teamcount = Team.count
       end

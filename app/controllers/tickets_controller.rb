@@ -1,7 +1,7 @@
 class TicketsController < ApplicationController
 
-  before_action :set_user, only: [:show, :new, :qa]
   before_action :set_ticket, only: [:edit, :qa, :update, :delete, :destroy, :req_feedback, :clear_feedback]
+  before_action :set_user, only: [:show, :new, :qa]
   before_action :get_setting, only: [:show, :new, :qa]
   before_action :set_dates
   before_action :confirm_logged_in
@@ -58,7 +58,7 @@ class TicketsController < ApplicationController
       @ticket = Ticket.find(params[:id])
       @user = Agent.find(@ticket.agent_id)
       flash[:warning] = "All QA Items need to be filled out"
-      render 'qa', ticket: @ticket
+      redirect_to(:action => "qa", id: @ticket, :agent_id => @ticket.agent_id, date_from: @date_from, date_to: @date_to)
     end
 
   end

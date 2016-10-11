@@ -14,12 +14,12 @@ class AgentsController < ApplicationController
 
   def index
     if @current_user.team_id?
-      @users = Agent.where(:team_id => @current_user.team_id).sorted
+      @users = Agent.where(:team_id => @current_user.team_id).where(:disabled => false).sorted
       @teams = Agent.uniq_team_id.where(:team_id => @current_user.team_id)
       @byteam = Agent.where(:team_id => @current_user.team_id)
       @teamcount = Team.where(:id => @current_user.team_id).count
     else
-      @users = Agent.sorted
+      @users = Agent.where(:disabled => false).sorted
       @teams = Agent.uniq_team_id.where.not(:team_id => nil)
       @byteam = Agent.where(team_id: params[:team_id])
       @teamcount = Team.count

@@ -1,7 +1,7 @@
 module AgentsHelper
 
   def get_agent_pane(pane)
-    result = Agent.where(team_id: pane.team_id).sorted
+    result = Agent.where(team_id: pane.team_id).where(:disabled => false).sorted
   end
 
   def agent_get_cross_percentages(agent)

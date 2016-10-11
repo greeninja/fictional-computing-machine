@@ -24,7 +24,7 @@
     <% @teams.each do |pane| %>
       <div id="<%= pane.team_id %>" class="tab-pane fade">
         <!-- TODO: Get this in the controller! -->
-        <%= render 'qas', users: Agent.where(team_id: pane.team_id).sorted %>
+        <%= render 'qas', users: get_agent_pane(pane) %>
       </div>
     <% end %>
   </div>
