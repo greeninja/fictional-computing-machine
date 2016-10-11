@@ -13,10 +13,10 @@
           <div class="col-sm-4">
             <div class="panel panel-default">
               <div class="panel-body">
-                <h4 class="text-center text-muted"><%= type.qa.titleize %></h4>
+                <h5 class="text-center text-muted"><%= type.qa.titleize %></h5>
                 <div class="progress">
                   <%= ov_badge_it(itemised_ticket(ticket, type)) %>
-                  <%= itemised_ticket(ticket, type) %>%
+                  <%= @itemised_ticket %>%
                   </div>
                 </div>
               </div>

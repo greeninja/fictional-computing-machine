@@ -11,7 +11,7 @@ module AgentsHelper
     else
       count = get_crosses.count.to_f
     end
-    if @team_crosses.nil?
+    if @team_crosses.nil? or @team_crosses.empty?
       full_percent = 0
     else
       full_percent = count / @team_crosses.count * 100
@@ -26,7 +26,7 @@ module AgentsHelper
     else
       count = get_ticks.count.to_f
     end
-    if @team_ticks.nil?
+    if @team_ticks.nil? or @team_ticks.empty?
       full_percent = 0
     else
       full_percent = count / @team_ticks.count * 100

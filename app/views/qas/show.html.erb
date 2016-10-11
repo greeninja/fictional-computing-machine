@@ -1,9 +1,13 @@
 <div class="panel panel-default">
   <div class="panel-heading">
-  <% if @user.team_id.present? %>
-    <h3>User: <%= @user.name %> <%= @user.last_name %></h3><h4>Team: <%= @user.team.name %></h4>
+  <% if @current_user.agent_id == @user.id %>
+    <h4 class="text-center text-muted">My QA</h4>
   <% else %>
-    <h3>User: <%= @user.name %> <%= @user.last_name %></h3><h4>Team: Not Set</h4>
+    <% if @user.team_id.present? %>
+      <h4 class="text-center text-muted"><%= @user.name %> <%= @user.last_name %> - QA</h4><h5 class="text-center text-muted">Team: <%= @user.team.name %></h5>
+    <% else %>
+      <h4 class="text-center text-muted">Agent: <%= @user.name %> <%= @user.last_name %> - QA</h4>
+    <% end %>
   <% end %>
   </div>
   <div class="panel-body">

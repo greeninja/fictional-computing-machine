@@ -9,7 +9,7 @@
           <%= ov_qa_average(@agent) %>%
         </div>
     <% else %>
-        <p>Team QA Average from <%= @qa_date_from.to_s(:long) %> and <%= @qa_date_to.to_s(:long) %> for <%= @team.name %><br />
+        <p>Team QA Average from <%= @qa_date_from.to_s(:long) %> and <%= @qa_date_to.to_s(:long) %><br />
         <div class="progress">
           <%= ov_badge_it(ov_qa_team_average(@team)) %>
           <%= ov_qa_team_average(@team) %>%

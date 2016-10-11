@@ -1,7 +1,7 @@
 <% date = parse_months(mons.to_s) %>
 <% team_qa = @team.tickets.where('tickets.date BETWEEN ? AND ?', date, date.end_of_month).order('tickets.created_at asc') %>
-<% if team_qa.nil? %>
-  <%= render "info", message: "Team has no Crosses" %>
+<% if team_qa.empty? %>
+  <%= render "info", message: "Team has no QA for this date range" %>
 <% else %>
   <% @qa_settings.each do |type| %>
     <div class="col-sm-12">
@@ -9,8 +9,8 @@
         <div class="panel-body">
           <h4 class="text-center text-muted"><%= type.qa.titleize %></h4>
           <div class="progress">
-            <%= ov_badge_it(itemised_tickets(@user, type, parse_months(mons.to_s))) %>
-            <%= itemised_tickets(@user, type, parse_months(mons.to_s)) %>%
+            <%= ov_badge_it(itemised_tickets(@team, type, parse_months(mons.to_s))) %>
+            <%= @itemised_tickets %>%
             </div>
           </div>
         </div>

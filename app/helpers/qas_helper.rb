@@ -67,15 +67,20 @@ module QasHelper
   end
 
   def itemised_tickets(group, criteria, date)
-    result = []
+    # result = []
     score = 0
-    tickets = @user.tickets.where('tickets.date BETWEEN ? AND ?', date, date.end_of_month).order('tickets.created_at asc')
+    tickets = group.tickets.where('tickets.date BETWEEN ? AND ?', date, date.end_of_month).order('tickets.created_at asc')
     group.tickets.where('tickets.date BETWEEN ? AND ?', date, date.end_of_month).order('tickets.created_at asc').each do |ticket|
       score += ticket.qas.where(:qa_setting_id => criteria.id).map {|s| s['score']}.reduce(0, :+)
     end
     total_available = criteria.out_of * tickets.count
-    result = ((score.to_f / total_available.to_f) * 100).round
-    result
+    if score == 0 and total_available == 0
+      result = 0
+    else
+      result = ((score.to_f / total_available.to_f) * 100).round
+    end
+    @itemised_tickets = result
+    @itemised_tickets
   end
 
   def itemised_ticket(ticket, criteria)
@@ -83,8 +88,13 @@ module QasHelper
     score = 0
     score = ticket.qas.where(:qa_setting_id => criteria.id).map {|s| s['score']}.reduce(0, :+)
     total_available = criteria.out_of
-    result = ((score.to_f / total_available.to_f) * 100).round
-    result
+    if score == 0 and total_available == 0
+      result = 0
+    else
+      result = ((score.to_f / total_available.to_f) * 100).round
+    end
+    @itemised_ticket = result
+    @itemised_ticket
   end
 
 end
