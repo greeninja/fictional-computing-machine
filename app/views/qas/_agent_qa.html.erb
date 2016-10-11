@@ -1,0 +1,20 @@
+<% date = parse_months(mons.to_s) %>
+<% user_tickets = @user.tickets.where('tickets.date BETWEEN ? AND ?', date, date.end_of_month).order('tickets.created_at asc') %>
+<% if user_tickets.empty? %>
+  <%= render "info", message: "You have no QA for this date range" %>
+<% else %>
+  <% @qa_settings.each do |type| %>
+    <div class="col-sm-12">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h4 class="text-center text-muted"><%= type.qa.titleize %></h4>
+          <div class="progress">
+            <%= ov_badge_it(itemised_tickets(@user, type, parse_months(mons.to_s))) %>
+            <%= @itemised_tickets %>%
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

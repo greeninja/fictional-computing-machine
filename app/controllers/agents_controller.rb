@@ -2,6 +2,7 @@ class AgentsController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :get_types, only: [:show]
   before_action :get_settings
+  before_action :set_date
   before_action :confirm_logged_in
   after_action :verify_authorized
 
@@ -23,9 +24,6 @@ class AgentsController < ApplicationController
       @byteam = Agent.where(team_id: params[:team_id])
       @teamcount = Team.count
     end
-    @date_from = parsed_date(params[:date_from], Date.today.beginning_of_week)
-    @date_to = parsed_date(params[:date_to], Date.today.next_week)
-    @search = Search.new(params[:search])
     authorize Agent
   end
 
@@ -49,15 +47,26 @@ class AgentsController < ApplicationController
     if @current_user.user?
       if Agent.exists?(@current_user.agent_id)
         @users = Agent.find(@current_user.agent_id)
+        @user_ticks = @user.ticks.where('ticks.created_at BETWEEN ? AND ?', @date_from, @date_to)
+        @user_crosses = @user.crosses.where('crosses.created_at BETWEEN ? AND ?', @date_from, @date_to)
+        @team = Team.find(@user.team_id)
+        @team_ticks = @team.ticks.where('ticks.created_at BETWEEN ? AND ?', @date_from, @date_to)
+        @team_crosses = @team.crosses.where('crosses.created_at BETWEEN ? AND ?', @date_from, @date_to)
+      end
+    elsif @current_user.supervisor?
+      if Agent.exists?(@current_user.agent_id)
+        @users = Agent.find(params[:id])
+        @user_ticks = @user.ticks.where('ticks.created_at BETWEEN ? AND ?', @date_from, @date_to)
+        @user_crosses = @user.crosses.where('crosses.created_at BETWEEN ? AND ?', @date_from, @date_to)
+        @team = Team.find(@users.team_id)
+        @team_ticks = @team.ticks.where('ticks.created_at BETWEEN ? AND ?', @date_from, @date_to)
+        @team_crosses = @team.crosses.where('crosses.created_at BETWEEN ? AND ?', @date_from, @date_to)
       end
     elsif @current_user.team_id?
       @users = Agent.where(:team_id => @current_user.team_id).find(params[:id])
     else
       @users = Agent.find(params[:id])
     end
-    @date_from = parsed_date(params[:date_from], Date.today.beginning_of_week)
-    @date_to = parsed_date(params[:date_to], Date.today.next_week)
-    @search = Search.new(params[:search])
     @agent = @user
     authorize @agent
   end
@@ -173,6 +182,11 @@ class AgentsController < ApplicationController
   def template_error
     flash[:warning] = "Something went wrong rendering the template. Have you selected an option?"
     redirect_to(request.referrer || root_path)
+  end
+
+  def set_date
+    @date_from = parsed_date(params[:date_from], Date.today.beginning_of_week)
+    @date_to = parsed_date(params[:date_to], Date.today.next_week)
   end
 
 end

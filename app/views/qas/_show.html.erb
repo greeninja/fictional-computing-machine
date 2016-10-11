@@ -1,5 +1,7 @@
 <% if @user.tickets.where('tickets.date BETWEEN ? AND ?', @date_from, @date_to).count == 0 %>
   <%= render "warning", message: "User #{@user.name} #{@user.last_name} has No QA items for this date range" %>
+<% elsif @current_user.agent_id == @user.id %>
+  <%= render "agent_view" %>
 <% else %>
 
   <% if params[:highlight_qa].present? %>

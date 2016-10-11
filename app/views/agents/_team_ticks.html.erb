@@ -1,0 +1,14 @@
+<% if @team_ticks.nil? %>
+  <%= render "success", message: "Team has no Ticks" %>
+<% else %>
+  <% @tick_types.each do |type| %>
+    <div class="col-sm-4">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h5 class="text-center text-muted"><%= type.name.titleize %></h5>
+          <h3 class="text-center"><span class="label label-<%= @team_ticks.where(:tick_type_id => type.id).count == 0 ? "info" : "success" %>"><%= @team_ticks.where(:tick_type_id => type.id).count %></span></h3>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

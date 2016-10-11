@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-md-10 col-md-offset-1 col1">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h4 class="text-center text-muted">My QA</h4>
+        <div class="progress">
+          <%= ov_badge_it(ov_qa_average(@user)) %>
+          <%= ov_qa_average(@user) %>%
+          </div>
+        </div>
+        <h4 class="text-center text-muted">My Team QA</h4>
+        <div class="progress">
+          <%= ov_badge_it(ov_qa_average(@team)) %>
+          <%= ov_qa_average(@team) %>%
+          </div>
+        </div>
+        <%= link_to("Show QA Breakdown", {:action => "show_qa", :date_from => @date_from, :date_to => @date_to}, class: "btn btn-default") %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% get_months.each do |mons| %>
+<div class="col-md-6">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title text-center text-muted">My QA - <%= parse_months(mons.to_s).strftime("%B, %Y") %></h3>
+    </div>
+    <div class="panel-body">
+      <div class="col-sm-12">
+        <%= render "agent_qa", mons: mons %>
+      </div>
+    </div>
+    <div class="panel-footer">
+    </div>
+  </div>
+</div>
+<div class="col-md-6">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title text-center text-muted">Team QA - <%= parse_months(mons.to_s).strftime("%B, %Y") %></h3>
+    </div>
+    <div class="panel-body">
+      <div class="col-sm-12">
+        <%= render "team_qa", mons: mons %>
+      </div>
+    </div>
+    <div class="panel-footer">
+    </div>
+  </div>
+</div>
+<% end %>

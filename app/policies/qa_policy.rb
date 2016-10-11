@@ -26,4 +26,8 @@ class QaPolicy < ApplicationPolicy
     @current_user.team_leader?
   end
 
+  def show_qa?
+    return true if @current_user.agent_id == @model.agent_id
+  end
+
 end
