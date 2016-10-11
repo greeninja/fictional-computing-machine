@@ -13,7 +13,11 @@
         <%= link_to "Request Feedback", ticket_request_feedback_path(ticket, :date_from => @date_from, :date_to => @date_to), :class => "dropdown-item", :method => "post" %>
       <% end %>
       <%= link_to "Edit Ticket Reference", edit_ticket_path(ticket, :date_from => @date_from, :date_to => @date_to), :class => "dropdown-item" %>
+      <% if ticket.qas.empty? or ticket.qas.nil? %>
+        <%= link_to "Add Missing Scores", {:controller => "tickets", :action => "qa", :id => ticket.id, agent_id: ticket.agent_id, date_from: @date_from, date_to: @date_to}, :class => "dropdown-item" %>
+    <% else %>
       <%= link_to "Edit Criteria Scores", edit_individual_qas_path(ticket, :date_from => @date_from, :date_to => @date_to), :class => "dropdown-item" %>
+    <% end %>
     </li>
     <li class="divider"></li>
     <li>
