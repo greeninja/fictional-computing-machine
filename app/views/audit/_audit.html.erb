@@ -26,7 +26,7 @@
           <td><%= audit.event %></td>
         <% end %>
         <td>
-          <% if audit.item_type == "Cross" or audit.item_type == "Rat" and audit.event == "create" %>
+          <% if audit.item_type == "Cross" or audit.item_type == "Rat" and audit.event == "create" or audit.event == "update" %>
             <% if Cross.exists?(audit.item_id) %>
               <%  agent_id = Cross.find(audit.item_id).agent_id %>
               <% if Agent.exists?(agent_id) %>
