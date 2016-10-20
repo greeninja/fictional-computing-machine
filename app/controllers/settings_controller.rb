@@ -1,5 +1,5 @@
 class SettingsController < ApplicationController
-  before_action :set_setting, only: [:show, :edit, :update, :destroy, :tick_types, :cross_types, :qa_settings, :qa_general_settings]
+  before_action :set_setting, only: [:show, :edit, :update, :destroy, :tick_types, :cross_types, :qa_settings, :qa_general_settings, :skills]
   before_action :confirm_logged_in
   after_action :verify_authorized
 
@@ -16,6 +16,7 @@ class SettingsController < ApplicationController
     @tick_types = TickType.where(setting_id: params[:id])
     @cross_types = CrossType.where(setting_id: params[:id])
     @qa_settings = QaSetting.all
+    @skills = Skill.all
     @teams = Team.sorted
   end
 
@@ -98,6 +99,11 @@ class SettingsController < ApplicationController
     authorize Setting
   end
 
+  def skills
+    @setting.skills.new
+    authorize Setting
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_setting
@@ -110,7 +116,8 @@ class SettingsController < ApplicationController
         :tick_types_attributes => [:name, :description, :setting_id],
         :cross_types_attributes => [:name, :description, :setting_id],
         :qa_settings_attributes => [:name, :setting_id, :team_id, :description, :out_of, :qa, :position],
-        :qa_general_settings_attributes => [:name, :value, :team_id, :disabled]
+        :qa_general_settings_attributes => [:name, :value, :team_id, :disabled],
+        :skills_attributes => [:name, :description ]
       )
     end
 end
