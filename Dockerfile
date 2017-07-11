@@ -8,7 +8,7 @@ ADD Gemfile /home/Gemfile
 RUN gem install bundler && \
     /usr/local/bin/bundle install
 ADD . /home
-RUN chown 100000:100000 /home -R
+RUN chown 1000190000:1000190000 /home -R
 
 EXPOSE 8080
 
