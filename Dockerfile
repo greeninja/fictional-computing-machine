@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 RUN apt update && \
-    apt install -y mysql-client ruby ruby-dev gcc make automake libxml2 libmysqlclient-dev libsqlite3-dev openjdk-8-jdk ruby-execjs && \
+    apt install -y mysql-client ruby ruby-dev gcc make automake libxml2 libmysqlclient-dev libsqlite3-dev openjdk-8-jdk ruby-execjs patch git && \
     rm -rf /var/lib/apt/lists/*
 WORKDIR /home
 # Add a new layer to make builds quicker
